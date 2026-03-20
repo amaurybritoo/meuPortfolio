@@ -1,0 +1,236 @@
+/* ===== HERO LAYOUT PRINCIPAL ===== */
+.hero {
+  height: 90vh; /* ocupa quase toda a tela */
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* 3 colunas: esquerda, foto, direita */
+  align-items: center;
+  padding: 0 80px;
+}
+
+/* ===== LADO ESQUERDO ===== */
+.left h1 {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+/* cargo (roxo destaque) */
+.cargo {
+  color: #a855f7;
+  margin-bottom: 10px;
+}
+
+/* descrição */
+.desc {
+  color: #aaa;
+  max-width: 350px;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+/* botão */
+button {
+  padding: 10px 20px;
+  border: 1px solid #a855f7;
+  background: transparent;
+  color: #a855f7;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* efeito hover botão */
+button:hover {
+  background: #a855f7;
+  color: black;
+  box-shadow: 0 0 15px #a855f7;
+}
+
+/* ===== CENTRO (FOTO) ===== */
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* necessário pro glow */
+}
+
+/* imagem */
+.center img {
+  height: 360px;
+  position: relative;
+  z-index: 2; /* fica na frente do glow */
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+/* efeito inflar */
+.center img:hover {
+  transform: scale(1.08);
+  filter: brightness(1.1);
+}
+
+/* glow roxo atrás */
+.center::before {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 420px;
+  background: radial-gradient(circle, #a855f7, transparent 70%);
+  filter: blur(70px);
+  opacity: 0.8;
+  z-index: 1;
+  transition: 0.4s;
+}
+
+/* glow mais forte no hover */
+.center:hover::before {
+  filter: blur(90px);
+  opacity: 1;
+}
+
+/* ===== LADO DIREITO ===== */
+.right {
+  max-width: 280px;
+  margin-left: 40px; /* espaço da foto */
+}
+
+.right h4 {
+  color: #a855f7;
+  margin-bottom: 10px;
+}
+
+.right p {
+  color: #aaa;
+  font-size: 14px;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+/* texto FOLLOW ME */
+.right span {
+  font-size: 12px;
+  color: #777;
+  display: block;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+/* linha roxa */
+.right span::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 2px;
+  background: #a855f7;
+  margin-top: 5px;
+}
+
+/* redes sociais */
+.social {
+  display: flex;
+  gap: 15px;
+  font-size: 18px;
+  color: #aaa;
+}
+
+.social svg {
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* hover icones */
+.social svg:hover {
+  color: #a855f7;
+  transform: scale(1.2);
+}
+
+/* ===================================== */
+/* 🔥 RESPONSIVO (SEM QUEBRAR O LAYOUT) */
+/* ===================================== */
+
+/* TABLET */
+@media (max-width: 1024px) {
+  .hero {
+    padding: 0 40px;
+  }
+
+  .center img {
+    height: 300px;
+  }
+}
+
+/* CELULAR */
+@media (max-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr; /* vira coluna única */
+    height: auto;
+    text-align: center;
+    padding: 40px 20px;
+    gap: 40px;
+  }
+
+  /* remove espaçamento lateral */
+  .right {
+    margin-left: 0;
+  }
+
+  /* centraliza tudo */
+  .left, .right {
+    align-items: center;
+  }
+
+  /* imagem menor */
+  .center img {
+    height: 250px;
+  }
+
+  /* glow ajustado */
+  .center::before {
+    width: 250px;
+    height: 300px;
+  }
+
+  /* redes centralizadas */
+  .social {
+    justify-content: center;
+  }
+}
+/* ============================= */
+/* AJUSTE SOBRE MIM (MOBILE) */
+/* ============================= */
+
+
+@media (max-width: 768px) {
+  .right {
+    margin: 0 auto; /* centraliza bloco */
+    text-align: center;
+  }
+
+  .right span::after {
+    margin: 5px auto 0; /* centraliza linha */
+  }
+
+  .social {
+    justify-content: center; /* centraliza icones */
+  }
+}
+/* ============================= */
+/* EFEITO MOBILE NA FOTO */
+/* ============================= */
+
+@media (max-width: 768px) {
+  .center img {
+    animation: flutuar 3s ease-in-out infinite;
+  }
+
+  /* animação leve de flutuação */
+  @keyframes flutuar {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+  }
+
+  /* glow mais forte no mobile */
+  .center::before {
+    filter: blur(90px);
+    opacity: 1;
+  }
+}

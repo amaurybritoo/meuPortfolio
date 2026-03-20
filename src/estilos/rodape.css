@@ -1,0 +1,76 @@
+footer {
+  margin-top: 120px;
+  padding: 40px 80px;
+  background: linear-gradient(to top, #050505, #000);
+}
+
+/* CONTAINER */
+.rodape-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* TOPO */
+.rodape-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rodape-top h3 {
+  margin: 0;
+}
+
+.rodape-top p {
+  color: #aaa;
+  font-size: 14px;
+}
+
+/* REDES */
+.rodape-social {
+  display: flex;
+  gap: 20px;
+  font-size: 18px;
+  color: #aaa;
+}
+
+.rodape-social svg:hover {
+  color: #a855f7;
+  cursor: pointer;
+}
+
+/* LINHA */
+.linha {
+  height: 1px;
+  background: linear-gradient(to right, transparent, #a855f7, transparent);
+  margin: 25px 0;
+}
+
+/* BAIXO */
+.rodape-bottom {
+  text-align: center;
+  color: #777;
+  font-size: 13px;
+}
+
+.rodape-bottom span {
+  display: block;
+  margin-top: 5px;
+  color: #a855f7;
+}
+
+/* ============================= */
+/* RESPONSIVO RODAPÉ */
+/* ============================= */
+
+@media (max-width: 768px) {
+  .rodape-top {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+
+  footer {
+    padding: 40px 20px;
+  }
+}

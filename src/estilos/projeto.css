@@ -1,0 +1,292 @@
+.projeto-container {
+  padding: 40px 80px;
+  color: white;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: "Inter", sans-serif;
+}
+
+/* HERO */
+.projeto-hero {
+  position: relative;
+  margin-bottom: 60px;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.projeto-hero img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.projeto-hero h1 {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  color: #a855f7;
+  font-size: 3rem;
+  text-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+/* SEÇÕES */
+section {
+  margin-bottom: 50px;
+}
+
+h2 {
+  color: #a855f7;
+  margin-bottom: 15px;
+  font-size: 2rem;
+}
+
+/* TECNOLOGIAS */
+.techs {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.techs span {
+  border: 1px solid #a855f7;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+/* TESTES */
+.testes {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.teste-card {
+  width: 200px;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.teste-card img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  display: block;
+}
+
+.teste-card p {
+  text-align: center;
+  padding: 8px 0;
+  font-weight: 500;
+}
+
+/* BOTÃO */
+.btn-github {
+  display: inline-block;
+  margin-top: 20px;
+  border: 2px solid #a855f7;
+  padding: 12px 24px;
+  color: #a855f7;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.btn-github:hover {
+  background-color: #a855f7;
+  color: #000;
+  transform: translateY(-3px) scale(1.05);
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 1024px) {
+  .projeto-container {
+    padding: 30px 40px;
+  }
+
+  .projeto-hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .techs span {
+    font-size: 0.9rem;
+    padding: 5px 10px;
+  }
+
+  .teste-card {
+    width: 48%;
+  }
+}
+
+@media (max-width: 480px) {
+  .projeto-container {
+    padding: 20px;
+  }
+
+  .projeto-hero h1 {
+    font-size: 2rem;
+  }
+
+  .teste-card {
+    width: 100%;
+  }
+}
+
+/* ===================================== */
+/* TABLET */
+/* ===================================== */
+
+@media (max-width: 1024px)
+
+
+{
+
+  .galeria {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .projeto-container {
+    padding: 40px 40px;
+  }
+
+  /* HERO */
+  .projeto-hero h1 {
+    font-size: 24px;
+    bottom: 15px;
+    left: 15px;
+  }
+
+  /* tecnologias */
+  .techs {
+    justify-content: center;
+  }
+
+  /* TESTES em 2 colunas */
+  .testes {
+    justify-content: center;
+  }
+
+  .teste-card {
+    width: 45%;
+  }
+
+}
+/* ===================================== */
+/* MOBILE */
+/* ===================================== */
+
+@media (max-width: 768px) {
+
+
+  .galeria {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+  }
+
+  .galeria img {
+    min-width: 250px;
+    flex: 0 0 auto;
+  }
+
+  /* scrollbar estilizada */
+  .galeria::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .galeria::-webkit-scrollbar-thumb {
+    background: #a855f7;
+    border-radius: 10px;
+  }
+  .projeto-container {
+    padding: 30px 20px;
+  }
+
+  /* HERO */
+  .projeto-hero h1 {
+    font-size: 20px;
+    bottom: 10px;
+    left: 10px;
+  }
+
+  /* textos */
+  section p {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  /* TECNOLOGIAS */
+  .techs {
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .techs span {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+
+  /* TESTES (coluna) */
+  .testes {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .teste-card {
+    width: 100%;
+    max-width: 300px;
+  }
+
+/* BOTÃO AJUSTADO */
+.btn-github {
+  display: block;
+  width: fit-content; /* tamanho do conteúdo */
+  margin: 20px auto 0; /* centraliza */
+  text-align: center;
+  padding: 10px 20px;
+}
+
+.btn-github {
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.btn-github:hover {
+  transform: scale(1.05);
+}
+
+}
+
+/* ===================================== */
+/* GALERIA DE PRINTS */
+/* ===================================== */
+
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.galeria img {
+  width: 100%;
+  border-radius: 10px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+/* hover */
+.galeria img:hover {
+  transform: scale(1.03);
+}

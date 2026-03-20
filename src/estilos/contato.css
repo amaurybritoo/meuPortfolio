@@ -1,0 +1,94 @@
+.contato {
+  padding: 100px 20px;
+  text-align: center;
+}
+
+.contato h2 {
+  color: #a855f7;
+  margin-bottom: 10px;
+}
+
+.contato-desc {
+  color: #aaa;
+  margin-bottom: 40px;
+}
+
+/* CARDS */
+.contato-cards {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+/* CARD */
+.contato-card {
+  width: 250px;
+  padding: 25px;
+  border-radius: 12px;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  text-align: center;
+  transition: 0.3s;
+  cursor: pointer;
+  color: white;
+}
+
+.contato-card svg {
+  font-size: 30px;
+  color: #a855f7;
+  margin-bottom: 10px;
+}
+
+.contato-card span {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.contato-card p {
+  color: #aaa;
+  font-size: 14px;
+}
+
+/* HOVER 🔥 */
+.contato-card:hover {
+  transform: translateY(-6px);
+  border-color: #a855f7;
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.6);
+}
+
+/* ============================= */
+/* RESPONSIVO CONTATO */
+/* ============================= */
+
+@media (max-width: 600px) {
+  .contato-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contato-card {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+/* ============================= */
+/* CONTATO MOBILE LADO A LADO */
+/* ============================= */
+
+
+@media (max-width: 768px) {
+  .contato-cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .contato-card {
+    flex: 1; /* divide espaço igual */
+    max-width: 160px;
+    padding: 15px;
+  }
+}

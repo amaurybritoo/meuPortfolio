@@ -1,0 +1,225 @@
+/* ===================================== */
+/* ===== SEÇÃO PROJETOS ===== */
+/* ===================================== */
+
+.projetos {
+  padding: 100px 80px;
+}
+
+/* ===== TÍTULO ===== */
+.projetos h2 {
+  text-align: center; /* centraliza */
+  color: #a855f7; /* roxo */
+  margin-bottom: 40px;
+  font-size: 28px;
+  letter-spacing: 1px;
+}
+
+/* ===================================== */
+/* ===== GRID DESKTOP ===== */
+/* ===================================== */
+
+.grid-projetos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 colunas */
+  gap: 25px;
+}
+
+/* ===================================== */
+/* ===== CARD ===== */
+/* ===================================== */
+
+.card-projeto {
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+
+  /* borda neon suave */
+  border: 1px solid rgba(168, 85, 247, 0.3);
+
+  transition: all 0.3s ease;
+}
+
+/* imagem do projeto */
+.card-projeto img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+/* conteúdo (texto) */
+.conteudo {
+  padding: 15px;
+}
+
+/* nome do projeto */
+.conteudo h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+/* descrição do projeto */
+.conteudo p {
+  color: #a855f7; /* roxo */
+  font-size: 14px;
+  margin-top: 5px;
+  opacity: 0.85; /* suaviza */
+}
+
+/* ===================================== */
+/* ===== HOVER (EFEITO NEON) ===== */
+/* ===================================== */
+
+.card-projeto:hover {
+  transform: translateY(-6px);
+  border-color: #a855f7;
+
+  /* glow */
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.6);
+}
+
+/* ===================================== */
+/* ===== MOBILE (SCROLL HORIZONTAL) ===== */
+/* ===================================== */
+
+@media (max-width: 768px) {
+  .projetos {
+    padding: 80px 20px;
+  }
+
+  .grid-projetos {
+    display: flex; /* vira linha */
+    overflow-x: auto; /* scroll lateral */
+    gap: 15px;
+    padding-bottom: 10px;
+  }
+
+  .card-projeto {
+    min-width: 260px; /* largura fixa */
+    flex: 0 0 auto; /* impede quebrar */
+  }
+
+  /* scrollbar estilizada */
+  .grid-projetos::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .grid-projetos::-webkit-scrollbar-thumb {
+    background: #a855f7;
+    border-radius: 10px;
+  }
+}
+
+/* ===================================== */
+/* ===== MODAL OVERLAY ===== */
+/* ===================================== */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+/* ===================================== */
+/* ===== MODAL BOX ===== */
+/* ===================================== */
+
+.modal {
+  background: #0a0a0a;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  overflow: hidden;
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  box-shadow: 0 0 25px rgba(168, 85, 247, 0.3);
+}
+
+/* ===================================== */
+/* ===== HEADER ===== */
+/* ===================================== */
+
+.modal-header {
+  position: relative;
+}
+
+.modal-header img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* overlay escuro na imagem */
+.modal-header::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, #0a0a0a, transparent);
+}
+
+/* título por cima da imagem */
+.modal-titulo {
+  position: absolute;
+  bottom: 10px;
+  left: 15px;
+  z-index: 2;
+}
+
+.modal-titulo h2 {
+  color: #a855f7;
+}
+
+/* ===================================== */
+/* ===== BODY ===== */
+/* ===================================== */
+
+.modal-body {
+  padding: 20px;
+}
+
+.modal-body p {
+  color: #aaa;
+  font-size: 14px;
+}
+
+/* ===================================== */
+/* ===== BOTÕES ===== */
+/* ===================================== */
+
+.modal-botoes {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  gap: 10px;
+}
+
+/* botão fechar */
+.btn-fechar {
+  flex: 1;
+  background: transparent;
+  border: 1px solid #555;
+  color: #aaa;
+  padding: 10px;
+  cursor: pointer;
+}
+
+/* botão detalhes */
+.btn-detalhes {
+  flex: 1;
+  background: transparent;
+  border: 1px solid #a855f7;
+  color: #a855f7;
+  padding: 10px;
+  cursor: pointer;
+}
+
+/* hover */
+.btn-detalhes:hover {
+  background: #a855f7;
+  color: black;
+  box-shadow: 0 0 10px #a855f7;
+}

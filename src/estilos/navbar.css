@@ -1,0 +1,44 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 80px;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 18px;
+  color: #a855f7;
+}
+
+.menu {
+  display: flex;
+  gap: 30px;
+}
+
+.menu a {
+  color: #ccc;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+.menu a:hover {
+  color: #a855f7;
+}
+
+/* ============================= */
+/* RESPONSIVO NAVBAR */
+/* ============================= */
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+  }
+
+  .menu {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}

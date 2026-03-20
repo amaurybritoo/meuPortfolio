@@ -1,11 +1,14 @@
 import { useParams } from "react-router-dom";
 import "../estilos/projeto.css";
 import { projetos } from "../data/projetos";
+import { useState } from "react";
+import GaleriaModal from "../componentes/GaleriaModal";
 
 
 
 export default function Projeto() {
   const { id } = useParams();
+  const [selecionado, setSelecionado] = useState<any>(null);
   const projetoId = parseInt(id || "0");
   const projeto = projetos.find(p => p.id === projetoId);
 
@@ -32,10 +35,24 @@ export default function Projeto() {
       <section>
         <h2>Galeria do Projeto</h2>
           <div className="galeria">
-            {projeto.prints.map((img, i) => (
-            <img key={i} src={img} alt={`print ${i}`} />
-          ))}
-        </div>
+  {projeto.prints.map((item, index) => (
+    <div
+      key={index}
+      onClick={() => setSelecionado(item)}
+      className="galeria-item"
+    >
+      {item.tipo === "img" ? (
+        <img src={item.src} />
+      ) : (
+        <video src={item.src} />
+      )}
+    </div>
+  ))}
+</div>
+<GaleriaModal
+      item={selecionado}
+      fechar={() => setSelecionado(null)}
+    />
       </section>
 
       {/* TECNOLOGIAS */}

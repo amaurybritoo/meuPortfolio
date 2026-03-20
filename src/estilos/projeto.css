@@ -290,3 +290,73 @@ h2 {
 .galeria img:hover {
   transform: scale(1.03);
 }
+
+/* ============================= */
+/* MODAL GALERIA */
+/* ============================= */
+
+/* overlay escuro */
+.galeria-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background: rgba(0, 0, 0, 0.9);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 999;
+}
+
+/* container da imagem */
+.galeria-modal {
+  max-width: 90%;
+  max-height: 90%;
+  overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* imagem */
+.galeria-modal img {
+  max-width: 100%;
+  max-height: 100%;
+  transition: transform 0.1s ease;
+  user-select: none;
+}
+
+/* botão fechar (CORRIGIDO) */
+.fechar-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+
+  padding: 8px 16px;
+
+  border: 1px solid #a855f7;
+  border-radius: 8px;
+
+  background: rgba(0, 0, 0, 0.6);
+  color: #a855f7;
+
+  cursor: pointer;
+  z-index: 1000;
+
+  transition: 0.3s;
+}
+
+.fechar-btn:hover {
+  background: #a855f7;
+  color: black;
+
+  box-shadow:
+    0 0 10px #a855f7,
+    0 0 25px #a855f7,
+    0 0 50px #a855f7;
+}

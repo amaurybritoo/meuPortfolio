@@ -6,7 +6,7 @@ export interface Projeto {
   cardImage: string;
   tecnologias: string[];
   testes: { nome: string; imagem: string }[];
-  prints: string[];
+  prints: { tipo: string; src: string }[];
   desafios: string;
   solucoes: string;
   github: string;
@@ -36,10 +36,16 @@ export const projetos: Projeto[] = [
       },
     ],
     prints: [
-  "https://picsum.photos/600/400?1",
-  "https://picsum.photos/600/400?2",
-  "https://picsum.photos/600/400?3",
-    ],
+    { 
+      tipo: "img", src: "https://picsum.photos/600/400?1" 
+    },
+    { 
+      tipo: "img", src: "https://picsum.photos/600/400?2" 
+    },
+    { 
+      tipo: "video", src: "https://www.w3schools.com/html/mov_bbb.mp4" 
+    },
+],
     desafios:
       "Garantir compatibilidade entre navegadores e manter performance alta mesmo com imagens e animações.",
     solucoes:
@@ -68,9 +74,9 @@ export const projetos: Projeto[] = [
       },
     ],
     prints: [
-  "https://picsum.photos/600/400?1",
-  "https://picsum.photos/600/400?2",
-  "https://picsum.photos/600/400?3",
+  { tipo: "img", src: "https://picsum.photos/600/400?1" },
+  { tipo: "img", src: "https://picsum.photos/600/400?2" },
+  { tipo: "img", src: "https://picsum.photos/600/400?3" },
     ],
     desafios: "Integrar gráficos dinâmicos e otimizar consultas de dados.",
     solucoes: "Uso de bibliotecas como D3.js e implementação de caching.",
@@ -99,9 +105,9 @@ export const projetos: Projeto[] = [
     ],
 
     prints: [
-  "https://picsum.photos/600/400?1",
-  "https://picsum.photos/600/400?2",
-  "https://picsum.photos/600/400?3",
+  { tipo: "img", src: "https://picsum.photos/600/400?1" },
+  { tipo: "img", src: "https://picsum.photos/600/400?2" },
+  { tipo: "img", src: "https://picsum.photos/600/400?3" },
 ],
     desafios: "Aumentar taxa de conversão e otimizar para motores de busca.",
     solucoes: "Design focado em CTA e implementação de SEO on-page.",

@@ -107,6 +107,7 @@ export default function Projeto() {
       <GaleriaModal
         item={selecionado}
         fechar={() => setSelecionado(null)}
+        
       />
 
     </div>

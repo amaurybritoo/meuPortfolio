@@ -1,5 +1,6 @@
 import { useState } from "react";
 import GaleriaModal from "./GaleriaModal";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   projeto: any;
@@ -7,6 +8,7 @@ type Props = {
 };
 
 export default function ProjetoModal({ projeto, fechar }: Props) {
+  const navigate = useNavigate();
   const [imagemSelecionada, setImagemSelecionada] = useState<any>(null);
 
   if (!projeto) return null;
@@ -44,7 +46,16 @@ export default function ProjetoModal({ projeto, fechar }: Props) {
             <button
               className="btn-detalhes"
             onClick={() => {
-  window.open(`/projeto/${projeto.slug}`, "_blank");
+  const isMobile = window.innerWidth <= 1024;
+
+  if (isMobile) {
+    // 📱 mobile / tablet → mesma aba
+    navigate(`/projeto/${projeto.slug}`);
+  } else {
+    // 💻 desktop → nova aba
+    window.open(`/projeto/${projeto.slug}`, "_blank");
+  }
+
   fechar();
 }}
             >

@@ -4,13 +4,13 @@ import { projetos } from "../data/projetos";
 import { useState } from "react";
 import GaleriaModal from "../componentes/GaleriaModal";
 
-
-
 export default function Projeto() {
-  const { id } = useParams();
+  const { slug } = useParams();
+
+  // ✅ estado CORRETO (só aqui)
   const [selecionado, setSelecionado] = useState<any>(null);
-  const projetoId = parseInt(id || "0");
-  const projeto = projetos.find(p => p.id === projetoId);
+
+  const projeto = projetos.find(p => p.slug === slug);
 
   if (!projeto) {
     return <div>Projeto não encontrado</div>;
@@ -34,25 +34,22 @@ export default function Projeto() {
       {/* GALERIA DE PRINTS */}
       <section>
         <h2>Galeria do Projeto</h2>
-          <div className="galeria">
-  {projeto.prints.map((item, index) => (
-    <div
-      key={index}
-      onClick={() => setSelecionado(item)}
-      className="galeria-item"
-    >
-      {item.tipo === "img" ? (
-        <img src={item.src} />
-      ) : (
-        <video src={item.src} />
-      )}
-    </div>
-  ))}
-</div>
-<GaleriaModal
-      item={selecionado}
-      fechar={() => setSelecionado(null)}
-    />
+
+        <div className="galeria">
+          {projeto.prints.map((item, index) => (
+            <div
+              key={index}
+              onClick={() => setSelecionado(item)}
+              className="galeria-item"
+            >
+              {item.tipo === "img" ? (
+                <img src={item.src} />
+              ) : (
+                <video src={item.src} />
+              )}
+            </div>
+          ))}
+        </div>
       </section>
 
       {/* TECNOLOGIAS */}
@@ -68,10 +65,21 @@ export default function Projeto() {
       {/* TESTES */}
       <section>
         <h2>Testes Realizados</h2>
+
         <div className="testes">
           {projeto.testes.map((teste, i) => (
             <div key={i} className="teste-card">
-              <img src={teste.imagem} alt={teste.nome} />
+              <img
+                src={teste.imagem}
+                onClick={() =>
+                  setSelecionado({
+                    tipo: "img",
+                    src: teste.imagem,
+                    titulo: teste.nome,
+                  })
+                }
+                style={{ cursor: "zoom-in" }}
+              />
               <p>{teste.nome}</p>
             </div>
           ))}
@@ -94,6 +102,12 @@ export default function Projeto() {
       <a href={projeto.github} target="_blank" className="btn-github">
         Ver no GitHub
       </a>
+
+      {/* 🔥 MODAL */}
+      <GaleriaModal
+        item={selecionado}
+        fechar={() => setSelecionado(null)}
+      />
 
     </div>
   );

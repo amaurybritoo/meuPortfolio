@@ -1,6 +1,7 @@
 export interface Projeto {
   id: number;
   nome: string;
+  slug: string;
   descricao: string;
   imagem: string;
   cardImage: string;
@@ -16,6 +17,7 @@ export const projetos: Projeto[] = [
   {
     id: 1,
     nome: "Projeto Andreia",
+    slug: "projeto-andreia",
     descricao:
       "Desenvolvimento de um site institucional com foco em experiência do usuário e testes de qualidade (QA).",
     imagem: "https://picsum.photos/900/400",
@@ -50,11 +52,12 @@ export const projetos: Projeto[] = [
       "Garantir compatibilidade entre navegadores e manter performance alta mesmo com imagens e animações.",
     solucoes:
       "Uso de lazy loading, otimização de imagens e testes em múltiplos navegadores.",
-    github: "https://github.com/"
+    github: "https://github.com/amaurybritoo/Dra.AndreiaAlmeida.git"
   },
   {
     id: 2,
     nome: "Dashboard",
+    slug: "dashboard",
     descricao: "Painel interativo com gráficos para análise de dados.",
     imagem: "https://picsum.photos/900/400?2",
     cardImage: "https://picsum.photos/500/300?2",
@@ -85,6 +88,7 @@ export const projetos: Projeto[] = [
   {
     id: 3,
     nome: "Landing Page",
+    slug: "landing-page",
     descricao: "Página otimizada para conversão de leads.",
     imagem: "https://picsum.photos/900/400?3",
     cardImage: "https://picsum.photos/500/300?3",

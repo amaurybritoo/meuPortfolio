@@ -1,4 +1,5 @@
-//import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import GaleriaModal from "./GaleriaModal";
 
 type Props = {
   projeto: any;
@@ -6,46 +7,59 @@ type Props = {
 };
 
 export default function ProjetoModal({ projeto, fechar }: Props) {
- // const navigate = useNavigate();
+  const [imagemSelecionada, setImagemSelecionada] = useState<any>(null);
 
   if (!projeto) return null;
 
   return (
-    <div className="modal-overlay" onClick={fechar}>
-      <div className="modal" onClick={(e) => e.stopPropagation()}>
+    <>
+      <div className="modal-overlay" onClick={fechar}>
+        <div className="modal" onClick={(e) => e.stopPropagation()}>
 
-        {/* HEADER */}
-        <div className="modal-header">
-          <img src={projeto.imagem} alt={projeto.nome} />
+          {/* HEADER */}
+          <div className="modal-header">
+            <img 
+              src={projeto.imagem} 
+              alt={projeto.nome}
+              onClick={() => setImagemSelecionada({ tipo: "img", src: projeto.imagem })}
+              style={{ cursor: "pointer" }}
+            />
 
-          <div className="modal-titulo">
-            <h2>{projeto.nome}</h2>
+            <div className="modal-titulo">
+              <h2>{projeto.nome}</h2>
+            </div>
           </div>
-        </div>
 
-        {/* DESCRIÇÃO */}
-        <div className="modal-body">
-          <p>{projeto.descricao}</p>
-        </div>
+          {/* DESCRIÇÃO */}
+          <div className="modal-body">
+            <p>{projeto.descricao}</p>
+          </div>
 
-        {/* BOTÕES */}
-        <div className="modal-botoes">
-          <button className="btn-fechar" onClick={fechar}>
-            Fechar
-          </button>
+          {/* BOTÕES */}
+          <div className="modal-botoes">
+            <button className="btn-fechar" onClick={fechar}>
+              Fechar
+            </button>
 
-          <button
-            className="btn-detalhes"
-          onClick={() => {
-  window.open(`/projeto/${projeto.id}`, "_blank");
+            <button
+              className="btn-detalhes"
+            onClick={() => {
+  window.open(`/projeto/${projeto.slug}`, "_blank");
   fechar();
 }}
-          >
-            Detalhes do Projeto
-          </button>
-        </div>
+            >
+              Detalhes do Projeto
+            </button>
+          </div>
 
+        </div>
       </div>
-    </div>
+
+      {/* GALERIA MODAL */}
+      <GaleriaModal
+        item={imagemSelecionada}
+        fechar={() => setImagemSelecionada(null)}
+      />
+    </>
   );
 }

@@ -11,18 +11,21 @@ export default function Projetos() {
     {
       id: 1,
       nome: "Projeto Andreia",
+      slug: "projeto-andreia",
       descricao: "Site institucional com foco em UX e QA",
       imagem: "https://picsum.photos/500/300?1",
     },
     {
       id: 2,
       nome: "Dashboard",
+      slug: "dashboard",
       descricao: "Painel interativo com gráficos",
       imagem: "https://picsum.photos/500/300?2",
     },
     {
       id: 3,
       nome: "Landing Page",
+      slug: "landing-page",
       descricao: "Página otimizada para conversão",
       imagem: "https://picsum.photos/500/300?3",
     },

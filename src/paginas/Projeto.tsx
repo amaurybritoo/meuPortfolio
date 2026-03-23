@@ -2,7 +2,6 @@ import { useParams } from "react-router-dom";
 import "../estilos/projeto.css";
 import { projetos } from "../data/projetos";
 import { useState } from "react";
-//import { useEffect } from "react";
 import GaleriaModal from "../componentes/GaleriaModal";
 
 export default function Projeto() {

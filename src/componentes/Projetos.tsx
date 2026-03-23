@@ -10,10 +10,10 @@ export default function Projetos() {
   const projetos = [
     {
       id: 1,
-      nome: "Projeto Andreia",
+      nome: "Site da Dra.Andréia",
       slug: "projeto-andreia",
-      descricao: "Site institucional com foco em UX e QA",
-      imagem: "https://picsum.photos/500/300?1",
+      descricao: "Landing Page moderna e responsiva, focada em conversão e experiência do usuário.",
+      imagem: "/Projetos/site-andreia/banner.png",
     },
     {
       id: 2,

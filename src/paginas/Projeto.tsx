@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import "../estilos/projeto.css";
 import { projetos } from "../data/projetos";
 import { useState } from "react";
+import { useEffect } from "react";
 import GaleriaModal from "../componentes/GaleriaModal";
 
 export default function Projeto() {
@@ -9,6 +10,8 @@ export default function Projeto() {
 
   // ✅ estado CORRETO (só aqui)
   const [selecionado, setSelecionado] = useState<any>(null);
+
+  
 
   const projeto = projetos.find(p => p.slug === slug);
 
@@ -98,10 +101,21 @@ export default function Projeto() {
         <p>{projeto.solucoes}</p>
       </section>
 
-      {/* BOTÃO GITHUB */}
-      <a href={projeto.github} target="_blank" className="btn-github">
-        Ver no GitHub
-      </a>
+      {/* ===================================== */}
+{/* ===== BOTÕES DO PROJETO ===== */}
+{/* ===================================== */}
+
+<div className="botoes-projeto">
+  <a href={projeto.github} target="_blank" rel="noopener noreferrer">
+    GitHub
+  </a>
+
+  {projeto.site && (
+    <a href={projeto.site} target="_blank" rel="noopener noreferrer">
+      Ir para o Site
+    </a>
+  )}
+</div>
 
       {/* 🔥 MODAL */}
       <GaleriaModal

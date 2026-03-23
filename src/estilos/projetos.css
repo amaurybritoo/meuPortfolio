@@ -6,27 +6,29 @@
   padding: 100px 80px;
 }
 
-/* ===== TÍTULO ===== */
+/* TÍTULO DA SEÇÃO */
 .projetos h2 {
-  text-align: center; /* centraliza */
-  color: #a855f7; /* roxo */
+  text-align: center;
+  color: #a855f7;
   margin-bottom: 40px;
   font-size: 28px;
   letter-spacing: 1px;
 }
 
 /* ===================================== */
-/* ===== GRID DESKTOP ===== */
+/* ===== GRID (DESKTOP RESPONSIVO) ===== */
 /* ===================================== */
 
 .grid-projetos {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 colunas */
-  gap: 25px;
+  gap: 20px;
+
+  /* 🔥 grid automático responsivo */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
 
 /* ===================================== */
-/* ===== CARD ===== */
+/* ===== CARD DO PROJETO ===== */
 /* ===================================== */
 
 .card-projeto {
@@ -41,30 +43,39 @@
   transition: all 0.3s ease;
 }
 
-/* imagem do projeto */
+/* IMAGEM DO CARD */
 .card-projeto img {
   width: 100%;
-  height: 180px;
-  object-fit: cover;
+  height: 200px; /* 🔥 altura padrão */
+  object-fit: cover; /* 🔥 preenche cortando, sem distorcer */
+  display: block;
 }
 
-/* conteúdo (texto) */
+/* CONTEÚDO DO CARD */
 .conteudo {
   padding: 15px;
 }
 
-/* nome do projeto */
+/* NOME DO PROJETO */
 .conteudo h3 {
   margin: 0;
   font-size: 18px;
+
+  /* evita quebrar feio */
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  white-space: normal; /* 🔥 permite quebrar */
+  word-break: break-word;
+
 }
 
-/* descrição do projeto */
+/* DESCRIÇÃO */
 .conteudo p {
-  color: #a855f7; /* roxo */
+  color: #a855f7;
   font-size: 14px;
   margin-top: 5px;
-  opacity: 0.85; /* suaviza */
+  opacity: 0.85;
 }
 
 /* ===================================== */
@@ -75,8 +86,13 @@
   transform: translateY(-6px);
   border-color: #a855f7;
 
-  /* glow */
+  /* glow neon */
   box-shadow: 0 0 20px rgba(168, 85, 247, 0.6);
+}
+
+/* ZOOM NA IMAGEM */
+.card-projeto:hover img {
+  transform: scale(1.05);
 }
 
 /* ===================================== */
@@ -89,20 +105,27 @@
   }
 
   .grid-projetos {
-    display: flex; /* vira linha */
-    overflow-x: auto; /* scroll lateral */
+    display: -webkit-box; /* 🔥 flex horizontal */
+    overflow-x: auto;
     gap: 15px;
-    padding-bottom: 10px;
+
+    padding: 10px 10px 15px;
+
+    /* 🔥 efeito carrossel suave */
+    scroll-snap-type: x mandatory;
   }
 
   .card-projeto {
-    min-width: 260px; /* largura fixa */
-    flex: 0 0 auto; /* impede quebrar */
+    min-width: 85%; /* ocupa quase toda tela */
+    flex: 0 0 auto;
+
+    /* 🔥 encaixa no centro ao rolar */
+    scroll-snap-align: center;
   }
 
-  /* scrollbar estilizada */
+  /* SCROLLBAR CUSTOM */
   .grid-projetos::-webkit-scrollbar {
-    height: 6px;
+    height: 5px;
   }
 
   .grid-projetos::-webkit-scrollbar-thumb {
@@ -118,10 +141,13 @@
 .modal-overlay {
   position: fixed;
   inset: 0;
+
   background: rgba(0, 0, 0, 0.85);
+
   display: flex;
   justify-content: center;
   align-items: center;
+
   z-index: 999;
 }
 
@@ -132,58 +158,70 @@
 .modal {
   background: #0a0a0a;
   border-radius: 12px;
+
   width: 90%;
   max-width: 500px;
+
   overflow: hidden;
+
   border: 1px solid rgba(168, 85, 247, 0.4);
   box-shadow: 0 0 25px rgba(168, 85, 247, 0.3);
+
+  /* 🔥 organização automática */
+  display: flex;
+  flex-direction: column;
 }
 
 /* ===================================== */
-/* ===== HEADER ===== */
+/* ===== HEADER (IMAGEM) ===== */
 /* ===================================== */
 
 .modal-header {
-  position: relative;
+  margin-bottom: 10px;
 }
 
 .modal-header img {
   width: 100%;
-  height: 200px;
-  object-fit: cover;
+  display: block;
+  border-radius: 12px;
+  cursor: pointer;
 }
 
-/* overlay escuro na imagem */
-.modal-header::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, #0a0a0a, transparent);
-}
+/* ===================================== */
+/* ===== TÍTULO ===== */
+/* ===================================== */
 
-/* título por cima da imagem */
 .modal-titulo {
-  position: absolute;
-  bottom: 10px;
-  left: 15px;
-  z-index: 2;
+  padding: 0 20px 0 20px;
 }
 
 .modal-titulo h2 {
+  font-size: 22px;
   color: #a855f7;
+  font-weight: 600;
+
+  display: inline-block;
+
+  padding-bottom: 4px;
+
+  /* linha neon embaixo */
+  border-bottom: 2px solid #a855f7;
+
 }
 
 /* ===================================== */
-/* ===== BODY ===== */
+/* ===== DESCRIÇÃO ===== */
 /* ===================================== */
 
 .modal-body {
-  padding: 20px;
+  padding: 0 20px 20px 20px; /* 🔥 menos espaço em cima */
 }
 
 .modal-body p {
   color: #aaa;
   font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
 }
 
 /* ===================================== */
@@ -192,34 +230,48 @@
 
 .modal-botoes {
   display: flex;
-  justify-content: space-between;
-  padding: 20px;
   gap: 10px;
+
+  padding: 20px;
 }
 
-/* botão fechar */
+/* BOTÃO FECHAR */
 .btn-fechar {
   flex: 1;
+
   background: transparent;
   border: 1px solid #555;
   color: #aaa;
+
   padding: 10px;
   cursor: pointer;
+
+  transition: 0.3s;
 }
 
-/* botão detalhes */
+/* BOTÃO DETALHES */
 .btn-detalhes {
   flex: 1;
+
   background: transparent;
   border: 1px solid #a855f7;
   color: #a855f7;
+
   padding: 10px;
   cursor: pointer;
+
+  transition: 0.3s;
 }
 
-/* hover */
+/* HOVER BOTÃO DETALHES */
 .btn-detalhes:hover {
   background: #a855f7;
   color: black;
   box-shadow: 0 0 10px #a855f7;
+}
+
+/* HOVER BOTÃO FECHAR */
+.btn-fechar:hover {
+  border-color: #aaa;
+  color: white;
 }

@@ -25,10 +25,32 @@
   position: absolute;
   bottom: 20px;
   left: 20px;
+
+  font-size: 2.2rem;
+  font-weight: 600;
+
   color: #a855f7;
-  font-size: 3rem;
-  text-shadow: 0 0 10px rgba(0,0,0,0.5);
+
+  /* 🔥 fundo preto elegante */
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+
+  padding: 10px 20px;
+  border-radius: 10px;
+
+  /* 💜 borda neon */
+  border: 2px solid #a855f7;
+
+  /* glow */
+  box-shadow:
+    0 0 5px #a855f7,
+    0 0 10px rgba(168, 85, 247, 0.6);
+
+  text-shadow: 0 0 5px #a855f7;
+
+  transition: 0.3s;
 }
+
 
 /* SEÇÕES */
 section {
@@ -50,11 +72,36 @@ h2 {
 
 .techs span {
   border: 1px solid #a855f7;
-  padding: 6px 12px;
-  border-radius: 6px;
+  padding: 6px 14px;
+  border-radius: 8px;
+
   font-weight: 500;
+  color: #a855f7;
+  background: rgba(168, 85, 247, 0.05);
+
   transition: all 0.3s ease;
   cursor: default;
+
+  /* deixa mais suave visualmente */
+  backdrop-filter: blur(4px);
+}
+
+.techs span:hover {
+  transform: translateY(-4px) scale(1.05);
+
+  background: #a855f7;
+  color: black;
+
+  border-color: #a855f7;
+
+  /* 💜 glow neon */
+  box-shadow:
+    0 0 5px #a855f7,
+    0 0 10px #a855f7,
+    0 0 20px rgba(168, 85, 247, 0.7);
+
+  /* leve brilho no texto */
+  text-shadow: 0 0 5px rgba(0,0,0,0.5);
 }
 
 /* TESTES */
@@ -87,22 +134,64 @@ h2 {
 }
 
 /* BOTÃO */
-.btn-github {
-  display: inline-block;
-  margin-top: 20px;
-  border: 2px solid #a855f7;
-  padding: 12px 24px;
-  color: #a855f7;
-  text-decoration: none;
-  font-weight: 600;
-  border-radius: 8px;
-  transition: all 0.3s ease;
+/* ===================================== */
+/* ===== CONTAINER DOS BOTÕES ===== */
+/* ===================================== */
+
+.botoes-projeto {
+  display: flex;
+  gap: 10px; /* 🔥 menos espaço */
+  margin-top: 25px;
+
+  flex-wrap: wrap; /* 🔥 evita quebrar feio */
 }
 
-.btn-github:hover {
-  background-color: #a855f7;
-  color: #000;
-  transform: translateY(-3px) scale(1.05);
+/* ===================================== */
+/* ===== TODOS OS LINKS VIRAM BOTÕES ===== */
+/* ===================================== */
+
+.botoes-projeto a {
+  /*flex: 1; /* estica de ponta-a-ponta */
+  
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 8px 14px; /* 🔥 menor */
+  
+  font-size: 13px; /* 🔥 texto menor */
+  font-weight: 500;
+
+  border-radius: 6px; /* levemente menor */
+
+  border: 1px solid #a855f7;
+  color: #a855f7;
+
+  text-decoration: none;
+
+  transition: all 0.25s ease;
+}
+
+/* ===================================== */
+/* ===== HOVER ===== */
+/* ===================================== */
+
+.botoes-projeto a:hover {
+  background: #a855f7;
+  color: black;
+
+  box-shadow: 0 0 8px #a855f7; /* 🔥 glow menor */
+  transform: translateY(-1px); /* mais sutil */
+}
+
+/* ===================================== */
+/* ===== RESPONSIVO ===== */
+/* ===================================== */
+
+@media (max-width: 500px) {
+  .botoes-projeto {
+    flex-direction: column;
+  }
 }
 
 /* RESPONSIVIDADE */
@@ -385,20 +474,4 @@ h2 {
   animation: fadeIn 0.3s ease;
 
   box-shadow: 0 0 10px #a855f7;
-}
-
-.galeria-titulo {
-  backdrop-filter: blur(6px);
-  animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }

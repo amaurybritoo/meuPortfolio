@@ -11,18 +11,29 @@ export interface Projeto {
   desafios: string;
   solucoes: string;
   github: string;
+  site: string;
 }
 
 export const projetos: Projeto[] = [
   {
     id: 1,
-    nome: "Projeto Andreia",
+
+    //---- NOME, SLUG, DESCRIÇÃO RESUMIDA E IMAGEM DO CARD (essa info aparece no card e no modal) ----//
+    nome: "Site da Dra.Andréia",
     slug: "projeto-andreia",
+    
+    //---- DESCRIÇÃO COMPLETA DO PROJETO(sobre o projeto) ----//
     descricao:
-      "Desenvolvimento de um site institucional com foco em experiência do usuário e testes de qualidade (QA).",
-    imagem: "https://picsum.photos/900/400",
-    cardImage: "https://picsum.photos/500/300?1",
-    tecnologias: ["React", "TypeScript", "CSS", "Vite"],
+      "Este projeto consiste no desenvolvimento de uma landing page moderna e estratégica para minha namorada, com foco em apresentação profissional, conversão e experiência do usuário. \n A proposta foi criar uma interface limpa, com visual elegante e elementos em destaque, transmitindo credibilidade e facilitanto o contato do cliente com os serviços oferecidos. O site foi desenvolvido utilizando React com Vite, priorizando performace, organização de código e escalabilidade, além de estilização com CSS puro para garantir fidelidade ao design e controle total da interface ",
+    
+    //---- IMAGENS: imagem principal do projeto e imagem do card (pode ser a mesma) ----//
+    imagem: "/Projetos/site-andreia/banner.png",
+    cardImage: "/Projetos/site-andreia/banner.png",
+    
+    //---- TECNOLOGIAS UTILIZADAS ----//
+    tecnologias: ["React", "TypeScript", "CSS", "Vite",],
+   
+   //---- TESTES REALIZADOS: cada teste tem um nome e uma imagem ilustrativa ----//
     testes: [
       {
         nome: "Responsividade",
@@ -37,6 +48,9 @@ export const projetos: Projeto[] = [
         imagem: "https://picsum.photos/400/200?3",
       },
     ],
+
+
+    //---- PRINTS: pode ser imagem ou vídeo, basta colocar tipo "img" ou "video" e a src correta ----//
     prints: [
     { 
       tipo: "img", src: "https://picsum.photos/600/400?1" 
@@ -48,12 +62,20 @@ export const projetos: Projeto[] = [
       tipo: "video", src: "https://www.w3schools.com/html/mov_bbb.mp4" 
     },
 ],
+
+    //---- DESAFIOS ----//    
     desafios:
       "Garantir compatibilidade entre navegadores e manter performance alta mesmo com imagens e animações.",
-    solucoes:
+    
+      //---- SOLUÇÕES ----//
+      solucoes:
       "Uso de lazy loading, otimização de imagens e testes em múltiplos navegadores.",
-    github: "https://github.com/amaurybritoo/Dra.AndreiaAlmeida.git"
+    
+      //---- LINK DO GITHUB (pode ser do projeto ou do perfil) ----//    
+      github: "https://github.com/amaurybritoo/Dra.AndreiaAlmeida.git",
+      site: "https://dra-andreia-almeida.vercel.app/",
   },
+
   {
     id: 2,
     nome: "Dashboard",
@@ -84,6 +106,7 @@ export const projetos: Projeto[] = [
     desafios: "Integrar gráficos dinâmicos e otimizar consultas de dados.",
     solucoes: "Uso de bibliotecas como D3.js e implementação de caching.",
     github: "https://github.com/",
+    site: "https://dashboardexemplo.com",
   },
   {
     id: 3,
@@ -116,6 +139,7 @@ export const projetos: Projeto[] = [
     desafios: "Aumentar taxa de conversão e otimizar para motores de busca.",
     solucoes: "Design focado em CTA e implementação de SEO on-page.",
     github: "https://github.com/",
+    site: " ",
   },
     
 ];

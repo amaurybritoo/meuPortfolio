@@ -87,7 +87,6 @@
   }
 
   .contato-card {
-    flex: 1; /* divide espaço igual */
     max-width: 160px;
     padding: 15px;
   }

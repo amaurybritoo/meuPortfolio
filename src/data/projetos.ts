@@ -53,10 +53,22 @@ export const projetos: Projeto[] = [
     //---- PRINTS: pode ser imagem ou vídeo, basta colocar tipo "img" ou "video" e a src correta ----//
     prints: [
     { 
-      tipo: "img", src: "https://picsum.photos/600/400?1" 
+      tipo: "img", src: "/Projetos/site-andreia/img/print_capa.png" 
     },
     { 
-      tipo: "img", src: "https://picsum.photos/600/400?2" 
+      tipo: "img", src: "/Projetos/site-andreia/img/print_sobre.png" 
+    },
+    { 
+      tipo: "img", src: "/Projetos/site-andreia/img/print_serviços.png" 
+    },
+    { 
+      tipo: "img", src: "/Projetos/site-andreia/img/print_como-funciona.png" 
+    },
+    { 
+      tipo: "img", src: "/Projetos/site-andreia/img/print_agendamento.png" 
+    },
+    { 
+      tipo: "img", src: "/Projetos/site-andreia/img/print_contato.png" 
     },
     { 
       tipo: "video", src: "https://www.w3schools.com/html/mov_bbb.mp4" 

@@ -27,8 +27,8 @@ export const projetos: Projeto[] = [
       "Este projeto consiste no desenvolvimento de uma landing page moderna e estratégica para minha namorada, com foco em apresentação profissional, conversão e experiência do usuário. \n A proposta foi criar uma interface limpa, com visual elegante e elementos em destaque, transmitindo credibilidade e facilitanto o contato do cliente com os serviços oferecidos. O site foi desenvolvido utilizando React com Vite, priorizando performace, organização de código e escalabilidade, além de estilização com CSS puro para garantir fidelidade ao design e controle total da interface ",
     
     //---- IMAGENS: imagem principal do projeto e imagem do card (pode ser a mesma) ----//
-    imagem: "/Projetos/site-andreia/banner.png",
-    cardImage: "/Projetos/site-andreia/banner.png",
+    imagem: "/Projetos/site-andreia/img/banner.png",
+    cardImage: "/Projetos/site-andreia/img/banner.png",
     
     //---- TECNOLOGIAS UTILIZADAS ----//
     tecnologias: ["React", "TypeScript", "CSS", "Vite",],

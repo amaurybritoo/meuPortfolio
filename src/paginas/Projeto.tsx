@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import "../estilos/projeto.css";
 import { projetos } from "../data/projetos";
 import { useState } from "react";
-import { useEffect } from "react";
+//import { useEffect } from "react";
 import GaleriaModal from "../componentes/GaleriaModal";
 
 export default function Projeto() {
@@ -10,6 +10,7 @@ export default function Projeto() {
 
   // ✅ estado CORRETO (só aqui)
   const [selecionado, setSelecionado] = useState<any>(null);
+  
 
   
 

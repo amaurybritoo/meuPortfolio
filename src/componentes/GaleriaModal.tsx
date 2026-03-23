@@ -1,15 +1,23 @@
 import { useEffect, useState } from "react";
 
+
+
 type Props = {
   item: any;
   fechar: () => void;
 };
 
+const getDistance = (touches: any) => {
+  const dx = touches[0].clientX - touches[1].clientX;
+  const dy = touches[0].clientY - touches[1].clientY;
+  return Math.sqrt(dx * dx + dy * dy);
+};
 
 
 export default function GaleriaModal({ item, fechar }: Props) {
   const [zoom, setZoom] = useState(1);
   const [pos, setPos] = useState({ x: 0, y: 0 });
+  const [distance, setDistance] = useState(0);
 
   useEffect(() => {
     const original = document.body.style.overflow;
@@ -71,6 +79,27 @@ export default function GaleriaModal({ item, fechar }: Props) {
             touchAction: "none",
           }}
           onWheel={handleWheel}
+
+onTouchStart={(e) => {
+  if (e.touches.length === 2) {
+    setDistance(getDistance(e.touches));
+  }
+}}
+
+onTouchMove={(e) => {
+  if (e.touches.length === 2) {
+    const newDistance = getDistance(e.touches);
+
+    const delta = (newDistance - distance) * 0.005;
+
+    setZoom((prev: number) => {
+      const novoZoom = Math.min(Math.max(prev + delta, 1), 4);
+      return novoZoom;
+    });
+
+    setDistance(newDistance);
+  }
+}}
         >
           <div
             style={{

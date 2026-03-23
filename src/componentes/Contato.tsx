@@ -13,21 +13,21 @@ export default function Contato() {
       <div className="contato-cards">
 
         {/* EMAIL */}
-        <a href="mailto:seuemail@email.com" className="contato-card">
+        <a href="mailto:amaurypb845@gmail.com" className="contato-card">
           <FaEnvelope />
           <span>Email</span>
-          <p>seuemail@email.com</p>
+          <p>amaurypb845@gmail.com</p>
         </a>
 
         {/* WHATSAPP */}
         <a
-          href="https://wa.me/5592999999999"
+          href="https://wa.me/5592981737451"
           target="_blank"
           className="contato-card"
         >
           <FaWhatsapp />
           <span>WhatsApp</span>
-          <p>(92) 99999-9999</p>
+          <p>(92) 98173-7451</p>
         </a>
 
       </div>

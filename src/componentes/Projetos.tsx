@@ -13,7 +13,7 @@ export default function Projetos() {
       nome: "Site da Dra.Andréia",
       slug: "projeto-andreia",
       descricao: "Landing Page moderna e responsiva, focada em conversão e experiência do usuário.",
-      imagem: "/Projetos/site-andreia/banner.png",
+      imagem: "/Projetos/site-andreia/img/banner.png",
     },
     {
       id: 2,

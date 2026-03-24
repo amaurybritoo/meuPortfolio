@@ -6,49 +6,88 @@
   font-family: "Inter", sans-serif;
 }
 
-/* HERO */
-.projeto-hero {
+/* ===================================== */
+/* ===== TÍTULOS DAS SEÇÕES ===== */
+/* ===================================== */
+
+.projeto-container h2 {
   position: relative;
-  margin-bottom: 60px;
-  overflow: hidden;
-  border-radius: 12px;
+  display: inline-block;
+
+  color: #a855f7;
+  margin-bottom: 20px;
 }
 
-.projeto-hero img {
+/* linha neon embaixo */
+.projeto-container h2::after {
+  content: "";
+  position: absolute;
+
+  left: 0;
+  bottom: -5px;
+
+  width: 60%;
+  height: 2px;
+
+  background: #a855f7;
+
+  /* glow neon */
+  box-shadow: 0 0 8px #a855f7, 0 0 15px #a855f7;
+
+  transition: width 0.3s ease;
+}
+
+/* animação leve no hover */
+.projeto-container h2:hover::after {
   width: 100%;
-  height: auto;
-  object-fit: cover;
-  border-radius: 12px;
+}
+
+/* HERO */
+
+.projeto-hero {
+  position: relative;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: flex-start; /* 🔥 alinha com conteúdo */
+  align-items: center;
 }
 
 .projeto-hero h1 {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-
   font-size: 2.2rem;
-  font-weight: 600;
-
   color: #a855f7;
 
-  /* 🔥 fundo preto elegante */
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(6px);
-
   padding: 10px 20px;
+
+  border: 1px solid #a855f7;
   border-radius: 10px;
 
-  /* 💜 borda neon */
-  border: 2px solid #a855f7;
+  background: transparent;
 
-  /* glow */
-  box-shadow:
-    0 0 5px #a855f7,
-    0 0 10px rgba(168, 85, 247, 0.6);
+  /* ❌ remove glow do texto */
+  text-shadow: none;
 
-  text-shadow: 0 0 5px #a855f7;
+  /* animação na borda */
+  animation: pulseBorder 2s infinite ease-in-out;
+}
 
-  transition: 0.3s;
+@keyframes pulseBorder {
+  0% {
+    box-shadow: 0 0 5px #a855f7;
+    border-color: #a855f7;
+  }
+
+  50% {
+    box-shadow:
+      0 0 10px #a855f7,
+      0 0 20px #a855f7,
+      0 0 30px rgba(168, 85, 247, 0.8);
+    border-color: #c084fc;
+  }
+
+  100% {
+    box-shadow: 0 0 5px #a855f7;
+    border-color: #a855f7;
+  }
 }
 
 
@@ -61,6 +100,38 @@ h2 {
   color: #a855f7;
   margin-bottom: 15px;
   font-size: 2rem;
+}
+
+  /*--- Listas -----*/
+  /* DESAFIOS */
+.desafios {
+  list-style: disc;
+  padding-left: 20px;
+  margin-bottom: 8px;
+}
+
+.desafios li::marker {
+  color: #a855f7; /* roxo */
+}
+
+/* SOLUÇÕES */
+.solucoes {
+  list-style: none;
+  padding-left: 0;
+}
+
+.solucoes li {
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 8px;
+}
+
+.solucoes li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  color: #a855f7; /* roxo */
+  font-weight: bold;
 }
 
 /* TECNOLOGIAS */
@@ -315,6 +386,37 @@ h2 {
   h2 {
     font-size: 18px;
   }
+
+  /*--- Listas -----*/
+  /* DESAFIOS */
+.desafios {
+  list-style: disc;
+  padding-left: 20px;
+}
+
+.desafios li::marker {
+  color: #a855f7; /* roxo */
+}
+
+/* SOLUÇÕES */
+.solucoes {
+  list-style: none;
+  padding-left: 0;
+}
+
+.solucoes li {
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 8px;
+}
+
+.solucoes li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  color: #a855f7; /* roxo */
+  font-weight: bold;
+}
 
   /* TECNOLOGIAS */
   .techs {

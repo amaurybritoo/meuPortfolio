@@ -88,12 +88,16 @@ onTouchStart={(e) => {
 
 onTouchMove={(e) => {
   if (e.touches.length === 2) {
+    e.preventDefault(); // 🔥 ESSENCIAL
+
     const newDistance = getDistance(e.touches);
 
-    const delta = (newDistance - distance) * 0.005;
+    if (!distance) return;
+
+    const scaleChange = newDistance / distance;
 
     setZoom((prev: number) => {
-      const novoZoom = Math.min(Math.max(prev + delta, 1), 4);
+      const novoZoom = Math.min(Math.max(prev * scaleChange, 1), 4);
       return novoZoom;
     });
 

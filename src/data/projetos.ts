@@ -8,8 +8,8 @@ export interface Projeto {
   tecnologias: string[];
   testes: { nome: string; imagem: string }[];
   prints: { tipo: string; src: string }[];
-  desafios: string;
-  solucoes: string;
+  desafios: string[];
+  solucoes: string[];
   github: string;
   site: string;
 }
@@ -24,7 +24,7 @@ export const projetos: Projeto[] = [
     
     //---- DESCRIÇÃO COMPLETA DO PROJETO(sobre o projeto) ----//
     descricao:
-      "Este projeto consiste no desenvolvimento de uma landing page moderna e estratégica para minha namorada, com foco em apresentação profissional, conversão e experiência do usuário. \n A proposta foi criar uma interface limpa, com visual elegante e elementos em destaque, transmitindo credibilidade e facilitanto o contato do cliente com os serviços oferecidos. O site foi desenvolvido utilizando React com Vite, priorizando performace, organização de código e escalabilidade, além de estilização com CSS puro para garantir fidelidade ao design e controle total da interface ",
+      "Este projeto consiste no desenvolvimento de uma landing page moderna e estratégica para minha namorada, com foco em apresentação profissional, conversão e experiência do usuário. \n A proposta foi criar uma interface limpa, com visual elegante e elementos em destaque, transmitindo credibilidade e facilitanto o contato do cliente com os serviços oferecidos. \n O site foi desenvolvido utilizando React com Vite, priorizando performace, organização de código e escalabilidade, além de estilização com CSS puro para garantir fidelidade ao design e controle total da interface ",
     
     //---- IMAGENS: imagem principal do projeto e imagem do card (pode ser a mesma) ----//
     imagem: "/Projetos/site-andreia/img/banner.png",
@@ -70,18 +70,26 @@ export const projetos: Projeto[] = [
     { 
       tipo: "img", src: "/Projetos/site-andreia/img/print_contato.png" 
     },
-    { 
+    /*{ 
       tipo: "video", src: "https://www.w3schools.com/html/mov_bbb.mp4" 
-    },
+   },*/
 ],
 
     //---- DESAFIOS ----//    
-    desafios:
-      "Garantir compatibilidade entre navegadores e manter performance alta mesmo com imagens e animações.",
+    desafios: [
+  "Criar presença digital do zero",
+  "Transmitir confiança em um serviço sensível",
+  "Explicar o diferencial do atendimento domiciliar",
+  "Garantir boa experiência no mobile"
+],
     
       //---- SOLUÇÕES ----//
       solucoes:
-      "Uso de lazy loading, otimização de imagens e testes em múltiplos navegadores.",
+      ["Uso de lazy loading, otimização de imagens e testes em múltiplos navegadores.",
+      "Design clean e profissional, com depoimentos e certificações em destaque.",
+      "Seção 'Como Funciona' com explicações claras e visuais.",
+      "Layout responsivo e navegação simplificada para telas pequenas."
+      ],
     
       //---- LINK DO GITHUB (pode ser do projeto ou do perfil) ----//    
       github: "https://github.com/amaurybritoo/Dra.AndreiaAlmeida.git",
@@ -115,8 +123,8 @@ export const projetos: Projeto[] = [
   { tipo: "img", src: "https://picsum.photos/600/400?2" },
   { tipo: "img", src: "https://picsum.photos/600/400?3" },
     ],
-    desafios: "Integrar gráficos dinâmicos e otimizar consultas de dados.",
-    solucoes: "Uso de bibliotecas como D3.js e implementação de caching.",
+    desafios:[ "Integrar gráficos dinâmicos e otimizar consultas de dados."],
+    solucoes:[ "Uso de bibliotecas como D3.js e implementação de caching."],
     github: "https://github.com/",
     site: "https://dashboardexemplo.com",
   },
@@ -148,8 +156,8 @@ export const projetos: Projeto[] = [
   { tipo: "img", src: "https://picsum.photos/600/400?2" },
   { tipo: "img", src: "https://picsum.photos/600/400?3" },
 ],
-    desafios: "Aumentar taxa de conversão e otimizar para motores de busca.",
-    solucoes: "Design focado em CTA e implementação de SEO on-page.",
+    desafios: ["Aumentar taxa de conversão e otimizar para motores de busca."],
+    solucoes: ["Design focado em CTA e implementação de SEO on-page."],
     github: "https://github.com/",
     site: " ",
   },

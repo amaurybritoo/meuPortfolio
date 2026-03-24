@@ -24,14 +24,15 @@ export default function Projeto() {
       
       {/* HERO */}
       <div className="projeto-hero">
-        <img src={projeto.imagem} alt={projeto.nome} />
         <h1>{projeto.nome}</h1>
       </div>
 
       {/* DESCRIÇÃO */}
       <section>
         <h2>Sobre o Projeto</h2>
-        <p>{projeto.descricao}</p>
+        <p style={{ whiteSpace: "pre-line" }}>
+  {projeto.descricao}
+</p>
       </section>
 
       {/* GALERIA DE PRINTS */}
@@ -91,14 +92,22 @@ export default function Projeto() {
 
       {/* DESAFIOS */}
       <section>
-        <h2>Desafios</h2>
-        <p>{projeto.desafios}</p>
+       <h2>Desafios</h2>
+<ul className="desafios">
+  {projeto.desafios.map((item, index) => (
+    <li key={index}>{item}</li>
+  ))}
+</ul>
       </section>
 
       {/* SOLUÇÕES */}
       <section>
         <h2>Soluções</h2>
-        <p>{projeto.solucoes}</p>
+<ul className="solucoes">
+  {projeto.solucoes.map((item, index) => (
+    <li key={index}>{item}</li>
+  ))}
+</ul>
       </section>
 
       {/* ===================================== */}

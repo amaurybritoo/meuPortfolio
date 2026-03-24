@@ -15,14 +15,14 @@ export default function Hero() {
 
       {/* ESQUERDA - texto principal */}
       <div className="left">
-        <h1>Amaury</h1>
+        <h1>Amaury Brito</h1>
 
         {/* cargo */}
         <p className="cargo">Front-end Developer & QA Engineer</p>
 
         {/* descrição */}
         <p className="desc">
-          Construindo interfaces modernas com foco em performance.
+          Construindo e testando interfaces modernas com foco em performance.
         </p>
 
         {/* botão que rola a página */}
@@ -42,7 +42,7 @@ export default function Hero() {
           Desenvolvedor focado em front-end e qualidade de software.
         </p>
 
-        <span>FOLLOW ME</span>
+        <span>REDES SOCIAIS</span>
 
         {/* redes sociais */}
         <div className="social">

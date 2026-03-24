@@ -107,7 +107,7 @@ export default function Projeto() {
 
 <div className="botoes-projeto">
   <a href={projeto.github} target="_blank" rel="noopener noreferrer">
-    GitHub
+    Repositório no GitHub
   </a>
 
   {projeto.site && (

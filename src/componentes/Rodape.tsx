@@ -8,7 +8,7 @@ export default function Rodape() {
         
         <div className="rodape-top">
           <div>
-            <h3>Amaury</h3>
+            <h3>Amaury Brito</h3>
             <p>Front-end Developer & QA Engineer</p>
           </div>
 

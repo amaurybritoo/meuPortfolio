@@ -12,18 +12,29 @@ export default function Rodape() {
             <p>Front-end Developer & QA Engineer</p>
           </div>
 
-          <div className="rodape-social">
+        {/* redes sociais */}
+        <div className="rodape-social">
+
+          <a href="https://github.com/amaurybritoo" target="_blank" rel="noopener noreferrer">
             <FaGithub />
+          </a>
+
+          <a href="https://linkedin.com/in/amaurybritoo" target="_blank" rel="noopener noreferrer">
             <FaLinkedin />
+          </a>
+
+          <a href="https://instagram.com/amaurybritoo" target="_blank" rel="noopener noreferrer">
             <FaInstagram />
-          </div>
+          </a>
+      </div>
+    
         </div>
 
         <div className="linha"></div>
 
         <div className="rodape-bottom">
           <p>© 2026 Amaury. Todos os direitos reservados.</p>
-          <span>Feito com código, café e visão ☕</span>
+          <span>Feito com código, café com leite e visão ☕</span>
         </div>
 
       </div>

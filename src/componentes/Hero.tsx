@@ -39,18 +39,26 @@ export default function Hero() {
         <h4>Sobre mim</h4>
 
         <p>
-          Desenvolvedor focado em front-end e qualidade de software.
+         QA Tester com base em desenvolvimento front-end, focado em qualidade, testes automatizados e melhoria contínua.
         </p>
 
         <span>REDES SOCIAIS</span>
 
         {/* redes sociais */}
         <div className="social">
-          <FaGithub />
-          <FaLinkedin />
-          <FaInstagram />
-        </div>
+          <a href="https://github.com/amaurybritoo" target="_blank" rel="noopener noreferrer">
+            <FaGithub />
+          </a>
+
+          <a href="https://linkedin.com/in/amaurybritoo" target="_blank" rel="noopener noreferrer">
+            <FaLinkedin />
+          </a>
+
+          <a href="https://instagram.com/amaurybritoo" target="_blank" rel="noopener noreferrer">
+            <FaInstagram />
+          </a>
       </div>
+    </div>
 
     </section>
   );

@@ -1,6 +1,6 @@
 /* ===== HERO LAYOUT PRINCIPAL ===== */
 .hero {
-  height: 90vh; /* ocupa quase toda a tela */
+  height: 80vh; /* ocupa quase toda a tela */
   display: grid;
   grid-template-columns: 1fr 1fr 1fr; /* 3 colunas: esquerda, foto, direita */
   align-items: center;

@@ -19,6 +19,10 @@ export default function GaleriaModal({ item, fechar }: Props) {
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const [distance, setDistance] = useState(0);
 
+  const [dragging, setDragging] = useState(false);
+const [start, setStart] = useState({ x: 0, y: 0 });
+const [lastTap, setLastTap] = useState(0);
+
   useEffect(() => {
     const original = document.body.style.overflow;
 
@@ -78,17 +82,28 @@ export default function GaleriaModal({ item, fechar }: Props) {
             overflow: "hidden",
             touchAction: "none",
           }}
-          onWheel={handleWheel}
+         onWheel={handleWheel}
 
 onTouchStart={(e) => {
+  /* 🔥 PINÇA */
   if (e.touches.length === 2) {
     setDistance(getDistance(e.touches));
+  }
+
+  /* 🔥 DRAG */
+  if (zoom > 1 && e.touches.length === 1) {
+    setDragging(true);
+    setStart({
+      x: e.touches[0].clientX - pos.x,
+      y: e.touches[0].clientY - pos.y,
+    });
   }
 }}
 
 onTouchMove={(e) => {
+  /* 🔥 PINÇA */
   if (e.touches.length === 2) {
-    e.preventDefault(); // 🔥 ESSENCIAL
+    e.preventDefault();
 
     const newDistance = getDistance(e.touches);
 
@@ -103,8 +118,34 @@ onTouchMove={(e) => {
 
     setDistance(newDistance);
   }
+
+  /* 🔥 DRAG */
+  if (dragging && zoom > 1 && e.touches.length === 1) {
+    setPos({
+      x: e.touches[0].clientX - start.x,
+      y: e.touches[0].clientY - start.y,
+    });
+  }
 }}
-        >
+
+onTouchEnd={() => {
+  setDragging(false);
+
+  /* 🔥 DUPLO TOQUE */
+  const now = Date.now();
+  const DOUBLE_TAP_DELAY = 300;
+
+  if (lastTap && now - lastTap < DOUBLE_TAP_DELAY) {
+    if (zoom === 1) {
+      setZoom(2);
+    } else {
+      setZoom(1);
+      setPos({ x: 0, y: 0 });
+    }
+  }
+
+  setLastTap(now);
+}}        >
           <div
             style={{
               transform: `translate(${pos.x}px, ${pos.y}px) scale(${zoom})`,

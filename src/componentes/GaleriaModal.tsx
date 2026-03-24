@@ -1,27 +1,25 @@
 import { useEffect, useState } from "react";
 
-
-
 type Props = {
   item: any;
   fechar: () => void;
 };
 
-const getDistance = (touches: any) => {
-  const dx = touches[0].clientX - touches[1].clientX;
-  const dy = touches[0].clientY - touches[1].clientY;
-  return Math.sqrt(dx * dx + dy * dy);
-};
-
-
 export default function GaleriaModal({ item, fechar }: Props) {
-  const [zoom, setZoom] = useState(1);
-  const [pos, setPos] = useState({ x: 0, y: 0 });
-  const [distance, setDistance] = useState(0);
 
+  /* 🔥 Zoom inicial (imagem já abre grande) */
+  const [zoom, setZoom] = useState(1.2);
+
+  /* 🔥 posição imagem */
+  const [pos, setPos] = useState({ x: 0, y: 0 });
+
+  /* 🔥 arrastar */
   const [dragging, setDragging] = useState(false);
-const [start, setStart] = useState({ x: 0, y: 0 });
-const [lastTap, setLastTap] = useState(0);
+  const [start, setStart] = useState({ x: 0, y: 0 });
+
+  /* 🔥 duplo toque */
+  const [lastTap, setLastTap] = useState(0);
+
 
   useEffect(() => {
     const original = document.body.style.overflow;
@@ -29,22 +27,28 @@ const [lastTap, setLastTap] = useState(0);
     if (item) {
       document.body.style.overflow = "hidden";
     } else {
-      setZoom(1);
+      setZoom(1.2);
       setPos({ x: 0, y: 0 });
     }
 
     return () => {
-      
       document.body.style.overflow = original;
     };
+
   }, [item]);
 
   if (!item) return null;
+
+
+  /* ===================== */
+  /* ZOOM SCROLL PC */
+  /* ===================== */
 
   const handleWheel = (e: any) => {
     e.preventDefault();
 
     const rect = e.currentTarget.getBoundingClientRect();
+
     const mouseX = e.clientX - rect.left;
     const mouseY = e.clientY - rect.top;
 
@@ -61,115 +65,194 @@ const [lastTap, setLastTap] = useState(0);
     setPos({ x: newX, y: newY });
   };
 
+
+  /* ===================== */
+  /* ARRASTAR PC */
+  /* ===================== */
+
+  const handleMouseDown = (e: any) => {
+    setDragging(true);
+
+    setStart({
+      x: e.clientX - pos.x,
+      y: e.clientY - pos.y
+    });
+  };
+
+  const handleMouseMove = (e: any) => {
+    if (!dragging) return;
+
+    setPos({
+      x: e.clientX - start.x,
+      y: e.clientY - start.y
+    });
+  };
+
+  const handleMouseUp = () => {
+    setDragging(false);
+  };
+
+
+  /* ===================== */
+  /* DUPLO TOQUE MOBILE */
+  /* ===================== */
+
+  const handleDoubleTap = (e: any) => {
+    const now = Date.now();
+    const delay = 300;
+
+    if (lastTap && now - lastTap < delay) {
+
+      const rect = e.currentTarget.getBoundingClientRect();
+
+      const x = e.changedTouches[0].clientX - rect.left;
+      const y = e.changedTouches[0].clientY - rect.top;
+
+      if (zoom <= 1.2) {
+
+        setZoom(2);
+
+        setPos({
+          x: -x,
+          y: -y
+        });
+
+      } else {
+
+        setZoom(1.2);
+        setPos({ x: 0, y: 0 });
+
+      }
+
+    }
+
+    setLastTap(now);
+  };
+
+
+  /* ===================== */
+  /* ARRASTAR MOBILE */
+  /* ===================== */
+
+  const handleTouchStart = (e: any) => {
+
+    setDragging(true);
+
+    setStart({
+      x: e.touches[0].clientX - pos.x,
+      y: e.touches[0].clientY - pos.y
+    });
+
+    handleDoubleTap(e);
+  };
+
+
+  const handleTouchMove = (e: any) => {
+
+    if (!dragging) return;
+
+    setPos({
+      x: e.touches[0].clientX - start.x,
+      y: e.touches[0].clientY - start.y
+    });
+
+  };
+
+
+  const handleTouchEnd = () => {
+    setDragging(false);
+  };
+
+
   return (
-    
+
     <div className="galeria-overlay" onClick={fechar}>
+
       <div
         className="galeria-modal"
         onClick={(e) => e.stopPropagation()}
       >
+
         {/* 🔥 TÍTULO */}
-{item.titulo && (
-  <div className="galeria-titulo">
-    {item.titulo}
-  </div>
-)}
+        {item.titulo && (
+          <div className="galeria-titulo">
+            {item.titulo}
+          </div>
+        )}
+
+
+        {/* 🔥 CONTAINER IMAGEM */}
         <div
+
           style={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             overflow: "hidden",
-            touchAction: "none",
+            cursor: dragging ? "grabbing" : "grab"
           }}
-         onWheel={handleWheel}
 
-onTouchStart={(e) => {
-  /* 🔥 PINÇA */
-  if (e.touches.length === 2) {
-    setDistance(getDistance(e.touches));
-  }
+          onWheel={handleWheel}
 
-  /* 🔥 DRAG */
-  if (zoom > 1 && e.touches.length === 1) {
-    setDragging(true);
-    setStart({
-      x: e.touches[0].clientX - pos.x,
-      y: e.touches[0].clientY - pos.y,
-    });
-  }
-}}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
 
-onTouchMove={(e) => {
-  /* 🔥 PINÇA */
-  if (e.touches.length === 2) {
-    e.preventDefault();
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
 
-    const newDistance = getDistance(e.touches);
+        >
 
-    if (!distance) return;
-
-    const scaleChange = newDistance / distance;
-
-    setZoom((prev: number) => {
-      const novoZoom = Math.min(Math.max(prev * scaleChange, 1), 4);
-      return novoZoom;
-    });
-
-    setDistance(newDistance);
-  }
-
-  /* 🔥 DRAG */
-  if (dragging && zoom > 1 && e.touches.length === 1) {
-    setPos({
-      x: e.touches[0].clientX - start.x,
-      y: e.touches[0].clientY - start.y,
-    });
-  }
-}}
-
-onTouchEnd={() => {
-  setDragging(false);
-
-  /* 🔥 DUPLO TOQUE */
-  const now = Date.now();
-  const DOUBLE_TAP_DELAY = 300;
-
-  if (lastTap && now - lastTap < DOUBLE_TAP_DELAY) {
-    if (zoom === 1) {
-      setZoom(2);
-    } else {
-      setZoom(1);
-      setPos({ x: 0, y: 0 });
-    }
-  }
-
-  setLastTap(now);
-}}        >
+          {/* 🔥 IMAGEM COM ZOOM */}
           <div
+
             style={{
               transform: `translate(${pos.x}px, ${pos.y}px) scale(${zoom})`,
-              transformOrigin: "0 0",
-              transition: "transform 0.1s",
+              transformOrigin: "center",
+              transition: dragging ? "none" : "transform 0.3s"
             }}
+
           >
+
             {item.tipo === "img" ? (
+
               <img
                 src={item.src}
                 alt="preview"
-                style={{ display: "block", maxWidth: "100%" }}
+                style={{
+                  display: "block",
+                  maxWidth: "100%",
+                  userSelect: "none"
+                }}
               />
+
             ) : (
-              <video src={item.src} controls style={{ display: "block", maxWidth: "100%" }} />
+
+              <video
+                src={item.src}
+                controls
+                style={{
+                  display: "block",
+                  maxWidth: "100%"
+                }}
+              />
+
             )}
+
           </div>
+
         </div>
 
-        <button className="fechar-btn" onClick={fechar}>Fechar</button>
+        <button className="fechar-btn" onClick={fechar}>
+          Fechar
+        </button>
+
       </div>
+
     </div>
-    
+
   );
-  
-  
+
 }

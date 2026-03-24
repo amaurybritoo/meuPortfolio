@@ -7,10 +7,10 @@ type Props = {
 
 export default function GaleriaModal({ item, fechar }: Props) {
 
-  /* 🔥 Zoom inicial (imagem já abre grande) */
+  /* 🔥 Zoom inicial */
   const [zoom, setZoom] = useState(1.2);
 
-  /* 🔥 posição imagem */
+  /* 🔥 posição */
   const [pos, setPos] = useState({ x: 0, y: 0 });
 
   /* 🔥 arrastar */
@@ -22,6 +22,7 @@ export default function GaleriaModal({ item, fechar }: Props) {
 
 
   useEffect(() => {
+
     const original = document.body.style.overflow;
 
     if (item) {
@@ -45,6 +46,7 @@ export default function GaleriaModal({ item, fechar }: Props) {
   /* ===================== */
 
   const handleWheel = (e: any) => {
+
     e.preventDefault();
 
     const rect = e.currentTarget.getBoundingClientRect();
@@ -63,6 +65,7 @@ export default function GaleriaModal({ item, fechar }: Props) {
 
     setZoom(newZoom);
     setPos({ x: newX, y: newY });
+
   };
 
 
@@ -71,21 +74,25 @@ export default function GaleriaModal({ item, fechar }: Props) {
   /* ===================== */
 
   const handleMouseDown = (e: any) => {
+
     setDragging(true);
 
     setStart({
       x: e.clientX - pos.x,
       y: e.clientY - pos.y
     });
+
   };
 
   const handleMouseMove = (e: any) => {
+
     if (!dragging) return;
 
     setPos({
       x: e.clientX - start.x,
       y: e.clientY - start.y
     });
+
   };
 
   const handleMouseUp = () => {
@@ -94,10 +101,37 @@ export default function GaleriaModal({ item, fechar }: Props) {
 
 
   /* ===================== */
-  /* DUPLO TOQUE MOBILE */
+  /* MOBILE TOUCH */
   /* ===================== */
 
-  const handleDoubleTap = (e: any) => {
+  const handleTouchStart = (e: any) => {
+
+    setDragging(true);
+
+    setStart({
+      x: e.touches[0].clientX - pos.x,
+      y: e.touches[0].clientY - pos.y
+    });
+
+  };
+
+
+  const handleTouchMove = (e: any) => {
+
+    if (!dragging) return;
+
+    setPos({
+      x: e.touches[0].clientX - start.x,
+      y: e.touches[0].clientY - start.y
+    });
+
+  };
+
+
+  const handleTouchEnd = (e: any) => {
+
+    setDragging(false);
+
     const now = Date.now();
     const delay = 300;
 
@@ -127,40 +161,7 @@ export default function GaleriaModal({ item, fechar }: Props) {
     }
 
     setLastTap(now);
-  };
 
-
-  /* ===================== */
-  /* ARRASTAR MOBILE */
-  /* ===================== */
-
-  const handleTouchStart = (e: any) => {
-
-    setDragging(true);
-
-    setStart({
-      x: e.touches[0].clientX - pos.x,
-      y: e.touches[0].clientY - pos.y
-    });
-
-    handleDoubleTap(e);
-  };
-
-
-  const handleTouchMove = (e: any) => {
-
-    if (!dragging) return;
-
-    setPos({
-      x: e.touches[0].clientX - start.x,
-      y: e.touches[0].clientY - start.y
-    });
-
-  };
-
-
-  const handleTouchEnd = () => {
-    setDragging(false);
   };
 
 
@@ -181,16 +182,19 @@ export default function GaleriaModal({ item, fechar }: Props) {
         )}
 
 
-        {/* 🔥 CONTAINER IMAGEM */}
+        {/* 🔥 CONTAINER */}
         <div
 
           style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            overflow: "hidden",
-            cursor: dragging ? "grabbing" : "grab"
-          }}
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  overflow: "hidden",
+  cursor: dragging ? "grabbing" : "grab",
+
+  width: "100%",
+  height: "80vh" // 🔥 força área controlada
+}}
 
           onWheel={handleWheel}
 
@@ -205,30 +209,31 @@ export default function GaleriaModal({ item, fechar }: Props) {
 
         >
 
-          {/* 🔥 IMAGEM COM ZOOM */}
+          {/* 🔥 IMAGEM */}
           <div
-
             style={{
               transform: `translate(${pos.x}px, ${pos.y}px) scale(${zoom})`,
               transformOrigin: "center",
-              transition: dragging ? "none" : "transform 0.3s"
+              transition: dragging ? "none" : "transform 0.2s ease-out"
             }}
-
           >
 
             {item.tipo === "img" ? (
 
-              <img
-                src={item.src}
-                alt="preview"
-                style={{
-                  display: "block",
-                  maxWidth: "100%",
-                  userSelect: "none"
-                }}
-              />
+  <img
+    src={item.src}
+    alt="preview"
+    style={{
+      display: "block",
+      maxWidth: "100%",
+      maxHeight: "80vh",
+      objectFit: "contain",
+      userSelect: "none",
+      pointerEvents: "none"
+    }}
+  />
 
-            ) : (
+) : (
 
               <video
                 src={item.src}
@@ -244,6 +249,7 @@ export default function GaleriaModal({ item, fechar }: Props) {
           </div>
 
         </div>
+
 
         <button className="fechar-btn" onClick={fechar}>
           Fechar

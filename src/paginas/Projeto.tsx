@@ -1,12 +1,16 @@
 import { useParams } from "react-router-dom";
 import "../estilos/projeto.css";
 import { projetos } from "../data/projetos";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import GaleriaModal from "../componentes/GaleriaModal";
 
 export default function Projeto() {
   const { slug } = useParams();
-
+useEffect(() => {
+  window.scrollTo({
+    top: 0
+  });
+}, [slug]);
   // ✅ estado CORRETO (só aqui)
   const [selecionado, setSelecionado] = useState<any>(null);
   

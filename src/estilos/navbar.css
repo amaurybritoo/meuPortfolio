@@ -42,3 +42,26 @@
     flex-wrap: wrap;
   }
 }
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.logo img {
+  width: 52px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.logo img {
+  width: 100%;
+  filter: drop-shadow(0 0 6px #a855f7);
+  transition: 0.3s;
+}
+
+.logo img:hover {
+  transform: scale(1.0);
+}

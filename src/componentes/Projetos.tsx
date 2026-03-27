@@ -20,7 +20,7 @@ export default function Projetos() {
       nome: "Curso de QA da EBAC",
       slug: "Curso de QA da EBAC",
       descricao: "Projeto de automação de testes end-to-end desenvolvido com Cypress para validação das funcionalidades da loja EBAC Shop, simulando o comportamento real do usuário.",
-      imagem: "./projetos/curso-ebac/img/banner-ebac.png",
+      imagem: "./Projetos/curso-ebac/img/banner-ebac.png",
     },
     {
       id: 3,

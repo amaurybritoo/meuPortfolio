@@ -17,10 +17,10 @@ export default function Projetos() {
     },
     {
       id: 2,
-      nome: "Dashboard",
-      slug: "dashboard",
-      descricao: "Painel interativo com gráficos",
-      imagem: "https://picsum.photos/500/300?2",
+      nome: "Curso de QA da EBAC",
+      slug: "Curso de QA da EBAC",
+      descricao: "Projeto de automação de testes end-to-end desenvolvido com Cypress para validação das funcionalidades da loja EBAC Shop, simulando o comportamento real do usuário.",
+      imagem: "./projetos/ebac/img/banner.png",
     },
     {
       id: 3,

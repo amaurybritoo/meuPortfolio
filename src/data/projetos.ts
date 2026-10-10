@@ -19,8 +19,8 @@ export const projetos: Projeto[] = [
     id: 1,
 
     //---- NOME, SLUG, DESCRIÇÃO RESUMIDA E IMAGEM DO CARD (essa info aparece no card e no modal) ----//
-    nome: "Site da Dra.Andréia",
-    slug: "projeto-andreia",
+    nome: "Site vet. domiciliar",
+    slug: "projeto-medvet",
     
     //---- DESCRIÇÃO COMPLETA DO PROJETO(sobre o projeto) ----//
     descricao:

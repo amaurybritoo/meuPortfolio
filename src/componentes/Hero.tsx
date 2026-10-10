@@ -31,7 +31,7 @@ export default function Hero() {
 
       {/* CENTRO - sua foto */}
       <div className="center">
-        <img src="/me.png" alt="Amaury" />
+        <img src="/me.jpeg" alt="Amaury" />
       </div>
 
       {/* DIREITA - sobre + redes */}

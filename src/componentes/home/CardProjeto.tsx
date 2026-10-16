@@ -46,7 +46,13 @@ export default function CardProjeto({ projeto }: { projeto: Projeto }) {
 
       <div className="card-corpo">
         <h3 className="card-titulo">
-          <Link to={`/projeto/${projeto.slug}`} className="card-link">
+          <Link
+            to={`/projeto/${projeto.slug}`}
+            className="card-link"
+            onPointerEnter={() => { void import("../../paginas/Projeto"); }}
+            onFocus={() => { void import("../../paginas/Projeto"); }}
+            onTouchStart={() => { void import("../../paginas/Projeto"); }}
+          >
             {projeto.nome}
           </Link>
         </h3>

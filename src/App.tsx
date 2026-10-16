@@ -2,8 +2,8 @@ import { lazy, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollAoTrocarRota from "./componentes/layout/ScrollAoTrocarRota";
 import PortfolioProvider from "./contexto/PortfolioProvider";
-import Home from "./paginas/Home";
 import NaoEncontrado from "./paginas/NaoEncontrado";
+const Home = lazy(() => import("./paginas/Home"));
 const Projeto = lazy(() => import("./paginas/Projeto"));
 const Curriculo = lazy(() => import("./paginas/Curriculo"));
 

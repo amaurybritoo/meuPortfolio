@@ -48,7 +48,7 @@ export default function Contato() {
     <section id="contato" className="secao secao-contato" aria-labelledby="titulo-contato">
       <div className="container">
         <Revelar>
-          <CabecalhoSecao id="titulo-contato" rotulo="05" titulo={config.titulo} subtitulo={config.subtitulo} />
+          <CabecalhoSecao id="titulo-contato" titulo={config.titulo} subtitulo={config.subtitulo} />
         </Revelar>
 
         <Revelar className="contato-chamada">

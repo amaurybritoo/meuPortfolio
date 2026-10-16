@@ -18,7 +18,7 @@ export default function Sobre() {
     <section id="sobre" className="secao" aria-labelledby="titulo-sobre">
       <div className="container">
         <Revelar>
-          <CabecalhoSecao id="titulo-sobre" rotulo="01" titulo={config.titulo} subtitulo={config.subtitulo} />
+          <CabecalhoSecao id="titulo-sobre" titulo={config.titulo} subtitulo={config.subtitulo} />
         </Revelar>
         <div className={`sobre-grade ${temInfo ? "" : "sobre-sozinho"}`}>
           <Revelar className="sobre-texto">

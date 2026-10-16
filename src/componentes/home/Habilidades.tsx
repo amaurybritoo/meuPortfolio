@@ -14,7 +14,7 @@ export default function Habilidades() {
     <section id="habilidades" className="secao" aria-labelledby="titulo-habilidades">
       <div className="container">
         <Revelar>
-          <CabecalhoSecao id="titulo-habilidades" rotulo="02" titulo={config.titulo} subtitulo={config.subtitulo} />
+          <CabecalhoSecao id="titulo-habilidades" titulo={config.titulo} subtitulo={config.subtitulo} />
         </Revelar>
         <div className="habilidades-grade">
           {grupos.map((grupo, i) => (

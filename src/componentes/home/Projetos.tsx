@@ -72,7 +72,7 @@ export default function Projetos() {
     <section id="projetos" className="secao" aria-labelledby="titulo-projetos">
       <div className="container">
         <Revelar>
-          <CabecalhoSecao id="titulo-projetos" rotulo="03" titulo={config.titulo} subtitulo={config.subtitulo} />
+          <CabecalhoSecao id="titulo-projetos" titulo={config.titulo} subtitulo={config.subtitulo} />
         </Revelar>
 
         {categorias.length > 1 && (

@@ -13,7 +13,7 @@ export default function Experiencia() {
     <section id="formacao" className="secao" aria-labelledby="titulo-formacao">
       <div className="container container-estreito">
         <Revelar>
-          <CabecalhoSecao id="titulo-formacao" rotulo="04" titulo={formacao.titulo} subtitulo={formacao.subtitulo} />
+          <CabecalhoSecao id="titulo-formacao" titulo={formacao.titulo} subtitulo={formacao.subtitulo} />
         </Revelar>
         <ol className="linha-tempo">
           {dados.formacoes.map((item, i) => (

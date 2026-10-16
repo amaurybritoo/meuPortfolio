@@ -1,5 +1,6 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { usePortfolio } from "../../contexto/usePortfolio";
+import { FaChevronRight, FaHandPointRight } from "react-icons/fa";
 import CabecalhoSecao from "../comuns/CabecalhoSecao";
 import Revelar from "../comuns/Revelar";
 import CardProjeto from "./CardProjeto";
@@ -11,11 +12,35 @@ export default function Projetos() {
   const { dados, projetos } = usePortfolio();
   const config = dados.secoes.projetos;
   const [filtro, setFiltro] = useState(TODOS);
+  const gradeRef = useRef<HTMLUListElement>(null);
+  const [carrossel, setCarrossel] = useState({ ativo: false, largura: 100, esquerda: 0, percentual: 0 });
 
   const visiveis = projetos;
   const categorias = useMemo(() => Array.from(new Set(visiveis.map((p) => p.categoria).filter(Boolean))), [visiveis]);
   const filtroAtual = categorias.includes(filtro) ? filtro : TODOS;
   const lista = filtroAtual === TODOS ? visiveis : visiveis.filter((p) => p.categoria === filtroAtual);
+
+  useEffect(() => {
+    const grade = gradeRef.current;
+    if (!grade) return;
+    const atualizar = () => {
+      const maximo = grade.scrollWidth - grade.clientWidth;
+      const ativo = window.matchMedia("(max-width: 700px)").matches && maximo > 2;
+      const largura = ativo ? Math.min(100, (grade.clientWidth / grade.scrollWidth) * 100) : 100;
+      const percentual = maximo > 0 ? (grade.scrollLeft / maximo) * 100 : 0;
+      const esquerda = ativo ? (grade.scrollLeft / maximo) * (100 - largura) : 0;
+      setCarrossel((anterior) => anterior.ativo === ativo && anterior.largura === largura && anterior.esquerda === esquerda && anterior.percentual === percentual
+        ? anterior
+        : { ativo, largura, esquerda, percentual });
+    };
+    atualizar();
+    grade.addEventListener("scroll", atualizar, { passive: true });
+    window.addEventListener("resize", atualizar);
+    return () => {
+      grade.removeEventListener("scroll", atualizar);
+      window.removeEventListener("resize", atualizar);
+    };
+  }, [filtroAtual, lista.length]);
 
   if (!config.ativa || visiveis.length === 0) return null;
 
@@ -42,7 +67,7 @@ export default function Projetos() {
           </div>
         )}
 
-        <ul className="projetos-grade">
+        <ul className="projetos-grade" ref={gradeRef}>
           {lista.map((projeto, i) => (
             <li key={projeto.id}>
               <Revelar atraso={(i % 3) * 90}>
@@ -51,6 +76,12 @@ export default function Projetos() {
             </li>
           ))}
         </ul>
+        <div className={`projetos-carrossel-indicador ${carrossel.ativo ? "ativo" : ""}`} aria-hidden={!carrossel.ativo}>
+          <span className="projetos-carrossel-instrucao"><FaHandPointRight aria-hidden="true" /> Arraste para ver mais projetos <FaChevronRight aria-hidden="true" /></span>
+          <div className="projetos-carrossel-trilho" role="progressbar" aria-label="Posição no carrossel de projetos" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(carrossel.percentual)}>
+            <span style={{ width: `${carrossel.largura}%`, left: `${carrossel.esquerda}%` }} />
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import type { MouseEvent as EventoMouse, PointerEvent as EventoPonteiro } from "react";
 import { FaChevronLeft, FaChevronRight, FaSearchMinus, FaSearchPlus, FaTimes } from "react-icons/fa";
 import type { Midia } from "../../tipos";
@@ -165,7 +166,7 @@ export default function Lightbox({ itens, indice, onMudar, onFechar }: Props) {
 
   if (!item) return null;
 
-  return (
+  return createPortal((
     <div className="lightbox" role="dialog" aria-modal="true" aria-label={item.legenda || "Galeria de imagens"}>
       <div className="lightbox-fundo" onClick={onFechar} aria-hidden="true" />
 
@@ -212,5 +213,5 @@ export default function Lightbox({ itens, indice, onMudar, onFechar }: Props) {
 
       {item.legenda && <p className="lightbox-legenda">{item.legenda}</p>}
     </div>
-  );
+  ), document.body);
 }

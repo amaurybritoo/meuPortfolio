@@ -54,25 +54,76 @@
     width: 100%;
     gap: 16px;
     margin: 0;
-    padding: 0 0 18px;
+    padding: 0 0 8px;
     overflow-x: auto;
     overscroll-behavior-x: contain;
     scroll-snap-type: x mandatory;
     scroll-padding-inline: 0;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(var(--cor-primaria-rgb), 0.55) transparent;
+    scrollbar-width: none;
+    cursor: grab;
+  }
+
+  .projetos-grade:active {
+    cursor: grabbing;
+  }
+
+  .projetos-grade::-webkit-scrollbar {
+    display: none;
   }
 
   .projetos-grade > li {
-    flex: 0 0 min(86vw, 390px);
-    width: min(86vw, 390px);
-    min-width: min(86vw, 390px);
+    flex: 0 0 min(80vw, 370px);
+    width: min(80vw, 370px);
+    min-width: min(80vw, 370px);
     scroll-snap-align: start;
   }
 
   .projetos-grade > li > .revelar {
     min-width: 0;
   }
+
+  .projetos-carrossel-indicador.ativo {
+    display: grid;
+  }
+}
+
+.projetos-carrossel-indicador {
+  display: none;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.projetos-carrossel-instrucao {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  color: var(--texto-fraco);
+  font-size: 0.78rem;
+  letter-spacing: 0.025em;
+}
+
+.projetos-carrossel-instrucao svg {
+  color: var(--cor-primaria);
+  font-size: 0.72rem;
+}
+
+.projetos-carrossel-trilho {
+  position: relative;
+  height: 4px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.projetos-carrossel-trilho > span {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--cor-primaria), #d8b4fe);
+  box-shadow: 0 0 12px rgba(var(--cor-primaria-rgb), 0.7);
+  transition: left 0.12s ease-out, width 0.2s ease;
 }
 
 .card-projeto {

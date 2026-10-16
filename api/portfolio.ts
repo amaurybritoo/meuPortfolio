@@ -14,6 +14,6 @@ export default async function handler(req: IncomingMessage, res: ServerResponse)
     responderJson(res, 200, { content: data?.content ?? null });
   } catch (erro) {
     console.error("Falha ao ler portfólio do Supabase:", erro);
-    responderJson(res, 503, { error: erro instanceof Error ? erro.message : "Não foi possível carregar o conteúdo." });
+    responderJson(res, 503, { error: "Não foi possível carregar o conteúdo." });
   }
 }

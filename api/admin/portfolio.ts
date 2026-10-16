@@ -1,6 +1,6 @@
 import type { IncomingMessage, ServerResponse } from "node:http";
 import { exigirSessao, responderJson } from "../../server/adminAuth.js";
-import { supabaseAdmin } from "../../server/supabase.js";
+import { mensagemErroSupabase, supabaseAdmin } from "../../server/supabase.js";
 
 type Requisicao = IncomingMessage & { body?: unknown };
 
@@ -13,7 +13,7 @@ export default async function handler(req: Requisicao, res: ServerResponse) {
       responderJson(res, 200, { content: data?.content ?? null });
     } catch (erro) {
       console.error("Falha ao ler conteúdo do admin:", erro);
-      responderJson(res, 503, { error: erro instanceof Error ? erro.message : "Não foi possível carregar o conteúdo do banco." });
+      responderJson(res, 503, { error: mensagemErroSupabase(erro, "Não foi possível carregar o conteúdo do banco.") });
     }
     return;
   }
@@ -29,7 +29,7 @@ export default async function handler(req: Requisicao, res: ServerResponse) {
       responderJson(res, 200, { saved: true });
     } catch (erro) {
       console.error("Falha ao salvar conteúdo do admin:", erro);
-      responderJson(res, 503, { error: erro instanceof Error ? erro.message : "Não foi possível salvar no Supabase." });
+      responderJson(res, 503, { error: mensagemErroSupabase(erro, "Não foi possível salvar no Supabase.") });
     }
     return;
   }

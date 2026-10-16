@@ -67,7 +67,7 @@ Abra **`/admin`** (ex.: `https://seusite.com.br/admin`). O painel pede um códig
 e não há link para ele no site. A sessão fica em cookie `HttpOnly` por até 8 horas; o código não é salvo no código
 do site nem no navegador.
 
-Antes de usar no Vercel, cadastre `ADMIN_ACCESS_CODE`, `ADMIN_SESSION_SECRET`, `SUPABASE_URL` e `SUPABASE_SECRET_KEY` em **Project → Settings → Environment Variables** e faça um
+Antes de usar no Vercel, cadastre `ADMIN_ACCESS_CODE`, `ADMIN_SESSION_SECRET`, `SUPABASE_URL` e `CHAVE_SECRETA` em **Project → Settings → Environment Variables** e faça um
 deploy para aplicar as variáveis. `ADMIN_ACCESS_CODE` é o código de entrada; `ADMIN_SESSION_SECRET` deve ser uma chave aleatória forte
 (por exemplo, gerada com `node -e "console.log(require('node:crypto').randomBytes(32).toString('base64url'))"`). Guarde ambos somente nas variáveis privadas do projeto; não os coloque em arquivos `.env` enviados
 ao GitHub, `portfolio.json` ou no código do frontend. Para desenvolvimento local, use `vercel dev` com essas variáveis
@@ -95,7 +95,7 @@ definidas no ambiente do terminal, pois o Vite sozinho não executa as funções
 4. Antes de salvar o admin confere erros comuns (projeto sem nome, endereço repetido, link sem `https://`, e-mail
    inválido) e explica em português o que corrigir.
 
-Imagens enviadas pelo admin são redimensionadas e convertidas para WebP no navegador e armazenadas no bucket público `portfolio-media`. O conteúdo fica na tabela `portfolio_content`. As funções serverless usam a `SUPABASE_SECRET_KEY` apenas no servidor e validam a sessão antes de permitir alterações.
+Imagens enviadas pelo admin são redimensionadas e convertidas para WebP no navegador e armazenadas no bucket público `portfolio-media`. O conteúdo fica na tabela `portfolio_content`. As funções serverless usam a `CHAVE_SECRETA` apenas no servidor e validam a sessão antes de permitir alterações.
 
 Para desenvolvimento local com painel e API, use `vercel dev` e forneça as quatro variáveis listadas acima. O Vite sozinho serve apenas o frontend e não executa as funções `/api`.
 

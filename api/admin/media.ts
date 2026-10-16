@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import type { IncomingMessage, ServerResponse } from "node:http";
 import { exigirSessao, responderJson } from "../../server/adminAuth.js";
-import { supabaseAdmin } from "../../server/supabase.js";
+import { mensagemErroSupabase, supabaseAdmin } from "../../server/supabase.js";
 
 type Requisicao = IncomingMessage & { body?: unknown };
 const EXTENSOES: Record<string, string> = {
@@ -36,6 +36,6 @@ export default async function handler(req: Requisicao, res: ServerResponse) {
     responderJson(res, 200, { url: data.publicUrl });
   } catch (erro) {
     console.error("Falha ao enviar mídia ao Supabase:", erro);
-    responderJson(res, 503, { error: erro instanceof Error ? erro.message : "Não foi possível enviar o arquivo ao Supabase." });
+    responderJson(res, 503, { error: mensagemErroSupabase(erro, "Não foi possível enviar o arquivo ao Supabase.") });
   }
 }

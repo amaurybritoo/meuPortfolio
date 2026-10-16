@@ -309,6 +309,8 @@
       "destaque": false,
       "descricao": "Site da Demasi Boutique desenvolvido para apresentar a marca e seus conteúdos em uma experiência web própria.",
       "visivel": true,
+      "colecao": true,
+      "projetosRelacionados": ["proj-demasi-links"],
       "capa": "",
       "tecnologias": [],
       "site": "",

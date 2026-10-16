@@ -522,6 +522,13 @@ select.entrada { appearance: auto; }
 .seletor-imagem-controles { display: grid; gap: 10px; min-width: 0; }
 .seletor-imagem-botoes { display: flex; flex-wrap: wrap; gap: 8px; }
 .seletor-imagem-nota { margin: 0; color: var(--texto-suave); font-size: 0.85rem; }
+.projetos-conjunto-selecao { display: grid; gap: 8px; min-width: 0; margin: 0; padding: 14px; border: 1px solid var(--borda); border-radius: 14px; }
+.projetos-conjunto-selecao legend { padding: 0 6px; }
+.projetos-conjunto-opcao { display: flex; align-items: center; gap: 11px; min-width: 0; padding: 10px; border-radius: 10px; background: rgba(255,255,255,.035); cursor: pointer; }
+.projetos-conjunto-opcao input { flex: none; width: 18px; height: 18px; accent-color: var(--cor-primaria); }
+.projetos-conjunto-opcao span { display: grid; gap: 3px; min-width: 0; }
+.projetos-conjunto-opcao strong, .projetos-conjunto-opcao small { overflow-wrap: anywhere; }
+.projetos-conjunto-opcao small { color: var(--texto-suave); font-size: .76rem; }
 
 /* listas e cartões */
 .lista { display: grid; gap: 10px; margin: 0; padding: 0; border: 0; min-width: 0; }

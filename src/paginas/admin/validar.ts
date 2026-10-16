@@ -31,6 +31,14 @@ export function validarPortfolio(dados: Portfolio): Problema[] {
     if (!p.slug.trim()) erro("projetos", `O projeto "${nome}" está sem endereço (slug).`, p.id);
     if (slugs.has(p.slug)) erro("projetos", `Os projetos "${slugs.get(p.slug)}" e "${nome}" usam o mesmo endereço "${p.slug}".`, p.id);
     slugs.set(p.slug, nome);
+    if (p.projetosRelacionados.includes(p.id)) erro("projetos", `O conjunto "${nome}" não pode incluir a si próprio.`, p.id);
+    if (p.colecao && p.projetosRelacionados.length === 0) erro("projetos", `Selecione pelo menos um projeto para formar o conjunto "${nome}".`, p.id);
+    if (new Set(p.projetosRelacionados).size !== p.projetosRelacionados.length) erro("projetos", `Há um projeto repetido no conjunto "${nome}".`, p.id);
+    p.projetosRelacionados.forEach((id) => {
+      const relacionado = dados.projetos.find((item) => item.id === id);
+      if (!relacionado) erro("projetos", `Um projeto incluído no conjunto "${nome}" não existe mais.`, p.id);
+      else if (relacionado.colecao) erro("projetos", `O conjunto "${nome}" não pode incluir outro conjunto (${relacionado.nome}).`, p.id);
+    });
     if (p.site && !ehLinkValido(p.site)) erro("projetos", `O link do site de "${nome}" precisa começar com https://`, p.id);
     if (p.github && !ehLinkValido(p.github)) erro("projetos", `O link do GitHub de "${nome}" precisa começar com https://`, p.id);
     if (p.visivel) {
@@ -38,6 +46,12 @@ export function validarPortfolio(dados: Portfolio): Problema[] {
       if (!p.resumo.trim()) aviso("projetos", `"${nome}" está sem resumo para o card.`, p.id);
     }
   });
+  const pertencentes = new Map<string, string>();
+  dados.projetos.filter((p) => p.colecao).forEach((colecao) => colecao.projetosRelacionados.forEach((id) => {
+    const anterior = pertencentes.get(id);
+    if (anterior && anterior !== colecao.id) erro("projetos", `Um projeto só pode pertencer a um conjunto. Confira "${colecao.nome}" e "${dados.projetos.find((p) => p.id === anterior)?.nome ?? "outro conjunto"}".`, colecao.id);
+    pertencentes.set(id, colecao.id);
+  }));
   if (!dados.projetos.some((p) => p.visivel) && dados.secoes.projetos.ativa) aviso("projetos", "Nenhum projeto está visível: a seção Projetos não aparece no site.");
   if (!dados.perfil.foto) aviso("perfil", "Sem foto no topo do site.");
   if (!dados.seo.descricao.trim()) aviso("seo", "Escreva uma descrição para aparecer no Google e ao compartilhar o link.");

@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { usePortfolio } from "../../contexto/usePortfolio";
 import { FaCheckCircle, FaChevronRight, FaThumbsUp } from "react-icons/fa";
+import { idsEmConjuntos } from "../../utilitarios/conjuntos";
 import CabecalhoSecao from "../comuns/CabecalhoSecao";
 import Revelar from "../comuns/Revelar";
 import CardProjeto from "./CardProjeto";
@@ -18,7 +19,8 @@ export default function Projetos() {
   const [carrosselAtivo, setCarrosselAtivo] = useState(false);
   const [carrosselFinal, setCarrosselFinal] = useState(false);
 
-  const visiveis = projetos;
+  const emConjuntos = idsEmConjuntos(projetos);
+  const visiveis = projetos.filter((p) => !emConjuntos.has(p.id));
   const categorias = useMemo(() => Array.from(new Set(visiveis.map((p) => p.categoria).filter(Boolean))), [visiveis]);
   const filtroAtual = categorias.includes(filtro) ? filtro : TODOS;
   const lista = filtroAtual === TODOS ? visiveis : visiveis.filter((p) => p.categoria === filtroAtual);
@@ -95,7 +97,7 @@ export default function Projetos() {
           {lista.map((projeto, i) => (
             <li key={projeto.id}>
               <Revelar atraso={(i % 3) * 90}>
-                <CardProjeto projeto={projeto} />
+                <CardProjeto projeto={projeto} projetos={projetos} />
               </Revelar>
             </li>
           ))}

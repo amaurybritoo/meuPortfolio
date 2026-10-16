@@ -11,6 +11,11 @@ export default function ProjetosAba({ dados, atualizar, projetoSelecionado: sele
   const projeto: Projeto | undefined = dados.projetos[indice];
   const categorias = Array.from(new Set(dados.projetos.map((p) => p.categoria).filter(Boolean)));
   const alterar = (fn: (p: Projeto) => void) => atualizar((d) => fn(d.projetos[indice]));
+  const projetosDisponiveis = dados.projetos.filter((p) => {
+    if (p.id === projeto?.id || p.colecao) return false;
+    const outraColecao = dados.projetos.find((outro) => outro.id !== projeto?.id && outro.colecao && outro.projetosRelacionados.includes(p.id));
+    return !outraColecao || projeto?.projetosRelacionados.includes(p.id);
+  });
 
   const adicionar = () => {
     const novo = novoProjeto();
@@ -95,11 +100,20 @@ export default function ProjetosAba({ dados, atualizar, projetoSelecionado: sele
               <CampoArea rotulo="Descrição completa" dica="Aparece na página do projeto. Use linhas em branco para separar parágrafos." linhas={8} valor={projeto.descricao} onChange={(v) => alterar((p) => { p.descricao = v; })} />
               <Interruptor rotulo="Publicado no site" dica="Desligado = rascunho: só aparece na prévia do admin." valor={projeto.visivel} onChange={(v) => alterar((p) => { p.visivel = v; })} />
               <Interruptor rotulo="Projeto em destaque" dica="Mostra uma etiqueta “Destaque” no card." valor={projeto.destaque} onChange={(v) => alterar((p) => { p.destaque = v; })} />
+              <Interruptor rotulo="Este projeto é um conjunto" dica="Agrupa outros projetos em um único card na página inicial. Ao abrir, o visitante vê o título, a descrição e um card para cada projeto do conjunto." valor={projeto.colecao} onChange={(v) => alterar((p) => { p.colecao = v; if (!v) p.projetosRelacionados = []; })} />
+              {projeto.colecao && <fieldset className="projetos-conjunto-selecao">
+                <legend className="campo-rotulo">Quais projetos fazem parte?</legend>
+                <p className="campo-dica">Os projetos marcados deixam de aparecer como cards separados e passam a ser explorados dentro deste conjunto. Um projeto em rascunho continua disponível aqui, mas não terá página individual.</p>
+                {projetosDisponiveis.length ? projetosDisponiveis.map((item) => <label key={item.id} className="projetos-conjunto-opcao">
+                  <input type="checkbox" checked={projeto.projetosRelacionados.includes(item.id)} onChange={(evento) => alterar((p) => { p.projetosRelacionados = evento.target.checked ? [...p.projetosRelacionados, item.id] : p.projetosRelacionados.filter((id) => id !== item.id); })} />
+                  <span><strong>{item.nome || "(sem nome)"}</strong><small>{item.visivel ? (item.slug ? `/projeto/${item.slug}` : "Projeto sem endereço") : "Rascunho · aparece apenas neste conjunto"}</small></span>
+                </label>) : <p className="campo-dica">Não há outros projetos disponíveis para incluir.</p>}
+              </fieldset>}
             </Bloco>
 
             <Bloco titulo="Imagens" resumo={projeto.capa ? "com capa" : "sem capa"}>
               <SeletorImagem rotulo="Capa do card" dica="Formato horizontal (16:9) fica melhor. Ex.: print da página inicial do projeto." maxLado={1400} valor={projeto.capa} onChange={(v) => alterar((p) => { p.capa = v; })} />
-              <SeletorImagem rotulo="Banner da página do projeto" dica="Se ficar vazio, usa a capa." maxLado={1600} valor={projeto.banner} onChange={(v) => alterar((p) => { p.banner = v; })} />
+              <SeletorImagem rotulo="Banner da página do projeto (opcional)" dica="Se não enviar um banner, nenhuma imagem será exibida no topo da página do projeto." maxLado={2560} qualidade={0.9} valor={projeto.banner} onChange={(v) => alterar((p) => { p.banner = v; })} />
             </Bloco>
 
             <Bloco titulo="Tecnologias" resumo={`${projeto.tecnologias.length} item(ns)`}>
@@ -116,9 +130,9 @@ export default function ProjetosAba({ dados, atualizar, projetoSelecionado: sele
                 <div key={i} className="cartao-item cartao-item-grande">
                   <SeletorOpcao rotulo="Tipo" valor={m.tipo} opcoes={[{ valor: "img", rotulo: "Imagem" }, { valor: "video", rotulo: "Vídeo" }]} onChange={(v) => alterar((p) => { p.prints[i].tipo = v === "video" ? "video" : "img"; })} />
                   {m.tipo === "img" ? (
-                    <SeletorImagem rotulo="Imagem" maxLado={1600} valor={m.src} onChange={(v) => alterar((p) => { p.prints[i].src = v; })} />
+                    <SeletorImagem rotulo="Imagem" maxLado={2560} qualidade={0.9} valor={m.src} onChange={(v) => alterar((p) => { p.prints[i].src = v; })} />
                   ) : (
-                    <SeletorVideo rotulo="Vídeo" dica="Envie MP4, WebM ou MOV de até 3 MB, ou cole um link direto para o vídeo." valor={m.src} onChange={(v) => alterar((p) => { p.prints[i].src = v; })} />
+                    <SeletorVideo rotulo="Vídeo" dica="Envie MP4, WebM ou MOV de até 3,2 MB, ou cole um link direto para o vídeo." valor={m.src} onChange={(v) => alterar((p) => { p.prints[i].src = v; })} />
                   )}
                   <CampoTexto rotulo="Legenda" valor={m.legenda} onChange={(v) => alterar((p) => { p.prints[i].legenda = v; })} />
                   <BotoesItem indice={i} total={projeto.prints.length} rotuloItem={`print ${i + 1}`} onMover={(passo) => alterar((p) => moverItem(p.prints, i, passo))} onRemover={() => alterar((p) => removerItem(p.prints, i))} />
@@ -137,7 +151,7 @@ export default function ProjetosAba({ dados, atualizar, projetoSelecionado: sele
                   {t.video ? (
                     <SeletorVideo rotulo="Vídeo de evidência" dica="Envie MP4, WebM ou MOV de até 3 MB, ou cole um link direto para o vídeo." valor={t.video} onChange={(v) => alterar((p) => { p.testes[i].video = v; })} />
                   ) : (
-                    <SeletorImagem rotulo="Imagem de evidência (opcional)" maxLado={1400} valor={t.imagem} onChange={(v) => alterar((p) => { p.testes[i].imagem = v; })} />
+                    <SeletorImagem rotulo="Imagem de evidência (opcional)" maxLado={2560} qualidade={0.9} valor={t.imagem} onChange={(v) => alterar((p) => { p.testes[i].imagem = v; })} />
                   )}
                   <BotoesItem indice={i} total={projeto.testes.length} rotuloItem={`teste ${i + 1}`} onMover={(passo) => alterar((p) => moverItem(p.testes, i, passo))} onRemover={() => alterar((p) => removerItem(p.testes, i))} />
                 </div>

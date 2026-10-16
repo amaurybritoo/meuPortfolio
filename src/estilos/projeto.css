@@ -66,6 +66,20 @@
   box-shadow: 0 30px 70px -20px rgba(var(--cor-primaria-rgb), 0.45);
 }
 
+.projeto-banner-botao {
+  display: block;
+  width: 100%;
+  padding: 0;
+  color: inherit;
+  text-align: left;
+  cursor: zoom-in;
+}
+
+.projeto-banner-botao:focus-visible {
+  outline: 2px solid var(--cor-secundaria);
+  outline-offset: 4px;
+}
+
 .projeto-banner img {
   width: 100%;
   height: auto;
@@ -88,12 +102,38 @@
 
 .projeto-texto {
   max-width: var(--container-estreito);
+  overflow-wrap: anywhere;
 }
 
 .projeto-texto p {
   color: var(--texto-suave);
   font-size: clamp(1.02rem, 1.8vw, 1.12rem);
   line-height: 1.85;
+}
+
+.projeto-texto ul,
+.projeto-resumo ul {
+  margin: 12px 0;
+  padding-left: 1.4rem;
+  list-style: disc;
+}
+
+.projeto-texto li,
+.projeto-resumo li {
+  padding-left: .25rem;
+  overflow-wrap: anywhere;
+}
+
+.projeto-texto li + li,
+.projeto-resumo li + li {
+  margin-top: 6px;
+}
+
+.projeto-texto code,
+.projeto-resumo code,
+.projeto-texto a,
+.projeto-resumo a {
+  overflow-wrap: anywhere;
 }
 
 /* ---------- galeria ---------- */
@@ -396,6 +436,7 @@
   }
 }
 
+
 @media (max-width: 520px) {
   .projeto-navegacao {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -420,4 +461,45 @@
   .projeto-acoes .botao {
     width: 100%;
   }
+}
+
+/* ---------- página de um conjunto ---------- */
+
+.projeto-selo-conjunto {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  padding: 7px 14px;
+  border: 1px solid rgba(var(--cor-secundaria-rgb), 0.45);
+  border-radius: 999px;
+  background: rgba(var(--cor-secundaria-rgb), 0.08);
+  color: var(--cor-secundaria);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.projeto-topo-sem-imagem {
+  grid-template-columns: minmax(0, 860px);
+}
+
+.conjunto-grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr));
+  gap: clamp(18px, 2.4vw, 28px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.conjunto-grade > li {
+  display: flex;
+  min-width: 0;
+}
+
+.conjunto-grade > li > .revelar {
+  display: flex;
+  width: 100%;
 }

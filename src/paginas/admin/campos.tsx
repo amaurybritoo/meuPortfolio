@@ -60,7 +60,6 @@ export function Interruptor({ rotulo, dica, valor, onChange }: CampoBase & { val
         <span className="interruptor-trilho" aria-hidden="true" />
         <span className="interruptor-texto">{rotulo}</span>
       </label>
-      {multilinha && <small className="campo-dica">Markdown: **negrito**, *itálico*, # título, - lista, `código` e [link](https://…). </small>}
       {dica && <small className="campo-dica">{dica}</small>}
     </div>
   );
@@ -125,10 +124,11 @@ interface PropsImagem extends CampoBase {
   valor: string;
   onChange: (valor: string) => void;
   maxLado?: number;
+  qualidade?: number;
   aceitar?: string;
 }
 
-export function SeletorImagem({ rotulo, dica, valor, onChange, maxLado = 1600 }: PropsImagem) {
+export function SeletorImagem({ rotulo, dica, valor, onChange, maxLado = 1600, qualidade }: PropsImagem) {
   const id = useId();
   const entrada = useRef<HTMLInputElement>(null);
   const [erro, setErro] = useState("");
@@ -142,7 +142,7 @@ export function SeletorImagem({ rotulo, dica, valor, onChange, maxLado = 1600 }:
     setErro("");
     setOcupado(true);
     try {
-      onChange(await comprimirImagem(arquivo, { maxLado }));
+      onChange(await comprimirImagem(arquivo, { maxLado, qualidade }));
     } catch (e) {
       setErro(e instanceof Error ? e.message : "Não foi possível usar essa imagem.");
     } finally {
@@ -222,7 +222,7 @@ export function SeletorArquivo({ rotulo, dica, valor, onChange, aceitar = "appli
   );
 }
 
-export function SeletorVideo({ rotulo, dica, valor, onChange, limiteMb = 3 }: PropsImagem & { limiteMb?: number }) {
+export function SeletorVideo({ rotulo, dica, valor, onChange, limiteMb = 3.2 }: PropsImagem & { limiteMb?: number }) {
   const id = useId();
   const entrada = useRef<HTMLInputElement>(null);
   const [erro, setErro] = useState("");
@@ -319,6 +319,7 @@ export function ListaTextos({ rotulo, dica, itens, onChange, placeholder, multil
       <button type="button" className="admin-botao admin-botao-contorno admin-botao-pequeno" onClick={() => alterar((c) => { c.push(""); })}>
         <FaPlus aria-hidden="true" /> {adicionar}
       </button>
+      {multilinha && <small className="campo-dica">Markdown: **negrito**, *itálico*, # título, - lista, `código` e [link](https://…). </small>}
       {dica && <small className="campo-dica">{dica}</small>}
     </fieldset>
   );

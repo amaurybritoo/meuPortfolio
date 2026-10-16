@@ -12,7 +12,7 @@ export default function Experiencia() {
 
   return (
     <section id="formacao" className="secao" aria-labelledby="titulo-formacao">
-      <div className="container container-estreito">
+      <div className="container">
         <Revelar>
           <CabecalhoSecao id="titulo-formacao" titulo={formacao.titulo} subtitulo={formacao.subtitulo} />
         </Revelar>

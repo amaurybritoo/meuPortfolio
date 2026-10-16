@@ -30,6 +30,7 @@ export default function Lightbox({ itens, indice, onMudar, onFechar }: Props) {
   const botaoFechar = useRef<HTMLButtonElement>(null);
   const ponteiros = useRef(new Map<number, { x: number; y: number }>());
   const gesto = useRef({ distancia: 0, inicioX: 0, inicioY: 0, zoomInicial: ZOOM_INICIAL, moveu: false });
+  const limiteZoom = useRef(ESCALA_MAX);
   const ehImagem = item?.tipo === "img";
 
   const limitarPan = useCallback((z: Zoom): Zoom => {
@@ -43,7 +44,7 @@ export default function Lightbox({ itens, indice, onMudar, onFechar }: Props) {
   const aplicarZoom = useCallback(
     (novaEscala: number, focoX?: number, focoY?: number) => {
       setZoom((atual) => {
-        const escala = limitar(novaEscala, 1, ESCALA_MAX);
+        const escala = limitar(novaEscala, 1, limiteZoom.current);
         const caixa = palco.current?.getBoundingClientRect();
         if (!caixa || escala === 1) return ZOOM_INICIAL;
         // mantém o ponto sob o cursor no mesmo lugar enquanto aproxima
@@ -176,7 +177,7 @@ export default function Lightbox({ itens, indice, onMudar, onFechar }: Props) {
           <div className="lightbox-zoom" role="group" aria-label="Zoom">
             <button type="button" onClick={() => aplicarZoom(zoom.escala / 1.4)} aria-label="Diminuir zoom" disabled={zoom.escala <= 1}><FaSearchMinus aria-hidden="true" /></button>
             <button type="button" onClick={() => setZoom(ZOOM_INICIAL)} aria-label="Tamanho original" className="lightbox-escala" disabled={zoom.escala === 1}>{Math.round(zoom.escala * 100)}%</button>
-            <button type="button" onClick={() => aplicarZoom(zoom.escala * 1.4)} aria-label="Aumentar zoom" disabled={zoom.escala >= ESCALA_MAX}><FaSearchPlus aria-hidden="true" /></button>
+            <button type="button" onClick={() => aplicarZoom(zoom.escala * 1.4)} aria-label="Aumentar zoom" disabled={zoom.escala >= limiteZoom.current}><FaSearchPlus aria-hidden="true" /></button>
           </div>
         )}
         <button ref={botaoFechar} type="button" className="lightbox-fechar" onClick={onFechar} aria-label="Fechar galeria"><FaTimes aria-hidden="true" /></button>
@@ -204,6 +205,12 @@ export default function Lightbox({ itens, indice, onMudar, onFechar }: Props) {
             src={item.src}
             alt={item.legenda || "Imagem do projeto"}
             draggable={false}
+            onLoad={(evento) => {
+              const imagem = evento.currentTarget;
+              const fatorLargura = imagem.naturalWidth / imagem.offsetWidth;
+              const fatorAltura = imagem.naturalHeight / imagem.offsetHeight;
+              limiteZoom.current = Math.min(ESCALA_MAX, Math.max(1, Math.min(fatorLargura, fatorAltura)));
+            }}
             style={{ transform: `translate3d(${zoom.x}px, ${zoom.y}px, 0) scale(${zoom.escala})` }}
           />
         ) : (

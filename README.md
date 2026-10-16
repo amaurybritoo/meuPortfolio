@@ -95,7 +95,7 @@ definidas no ambiente do terminal, pois o Vite sozinho não executa as funções
 4. Antes de salvar o admin confere erros comuns (projeto sem nome, endereço repetido, link sem `https://`, e-mail
    inválido) e explica em português o que corrigir.
 
-Imagens enviadas pelo admin são redimensionadas e convertidas para WebP no navegador; vídeos MP4, WebM e MOV de até 3 MB também podem ser enviados pela galeria. A mídia é armazenada no bucket público `portfolio-media`. Nos campos de texto longo do admin, use Markdown para negrito, itálico, títulos, listas, código e links. O conteúdo fica na tabela `portfolio_content`. As funções serverless usam a `CHAVE_SECRETA` apenas no servidor e validam a sessão antes de permitir alterações.
+Imagens enviadas pelo admin são redimensionadas e convertidas para WebP no navegador; vídeos MP4, WebM e MOV de até 3 MB também podem ser enviados pela galeria. A mídia é armazenada no bucket público `portfolio-media`. Nos campos de texto longo do admin, use Markdown para negrito, itálico, títulos, listas, código e links. Um projeto pode ser marcado como conjunto e receber projetos relacionados; eles aparecem juntos na página do conjunto com seletor e carrossel próprio. O conteúdo fica na tabela `portfolio_content`. As funções serverless usam a `CHAVE_SECRETA` apenas no servidor e validam a sessão antes de permitir alterações.
 
 Para desenvolvimento local com painel e API, use `vercel dev` e forneça as quatro variáveis listadas acima. O Vite sozinho serve apenas o frontend e não executa as funções `/api`.
 

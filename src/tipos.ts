@@ -28,6 +28,8 @@ export interface Projeto {
   banner: string; // imagem grande da página do projeto
   tecnologias: string[];
   prints: Midia[];
+  colecao: boolean;
+  projetosRelacionados: string[];
   testes: Teste[];
   desafios: string[];
   solucoes: string[];

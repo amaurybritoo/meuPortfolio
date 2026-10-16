@@ -24,8 +24,8 @@ export default async function handler(req: Requisicao, res: ServerResponse) {
   }
   const mime = partes[1];
   const bytes = Buffer.from(partes[2], "base64");
-  if (!bytes.length || bytes.length > 3 * 1024 * 1024) {
-    responderJson(res, 413, { error: "O arquivo precisa ter até 3 MB. Reduza o tamanho e tente novamente." });
+  if (!bytes.length || bytes.length > 3.2 * 1024 * 1024) {
+    responderJson(res, 413, { error: "O arquivo precisa ter até 3,2 MB. Reduza o tamanho e tente novamente." });
     return;
   }
   const nome = `${createHash("sha256").update(bytes).digest("hex").slice(0, 24)}.${EXTENSOES[mime]}`;

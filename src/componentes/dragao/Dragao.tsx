@@ -37,7 +37,9 @@ export default function Dragao({ config, modo = "fundo" }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const configRef = useRef(config);
   // quem pede "reduzir animações" no aparelho não vê o dragão voando (só a prévia do admin ignora isso)
-  const reduzirMovimento = modo === "fundo" && typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reduzirMovimento = modo === "fundo" && typeof window !== "undefined" && (
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches || window.matchMedia("(max-width: 768px)").matches
+  );
 
   useEffect(() => {
     configRef.current = config;

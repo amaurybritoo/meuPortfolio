@@ -87,8 +87,8 @@
 }
 
 @keyframes entrar-texto {
-  from { opacity: 0; transform: translateY(10px); filter: blur(3px); }
-  to { opacity: 1; transform: none; filter: none; }
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
 }
 
 .hero-frase {
@@ -356,4 +356,71 @@
     width: 48px;
     height: 48px;
   }
+}
+
+/* No celular, a foto e os intervalos são compactos para manter a apresentação,
+   os botões e as redes sociais juntos na primeira tela. */
+@media (max-width: 768px) {
+  .hero {
+    min-height: 0;
+    padding-top: calc(var(--nav-altura) + 8px);
+    padding-bottom: 18px;
+  }
+
+  .hero-grade {
+    gap: clamp(8px, 2vh, 16px);
+  }
+
+  .hero-visual {
+    width: clamp(216px, 58vw, 270px);
+  }
+
+  .hero-ola { margin-bottom: 4px; font-size: 0.95rem; }
+  .hero h1 { font-size: clamp(2rem, 8.5vw, 2.7rem); }
+  .hero-cargo { min-height: 1.2em; margin-top: 7px; font-size: clamp(1.1rem, 5vw, 1.4rem); }
+  .hero-frase { max-width: 460px; margin-top: 9px; font-size: 0.95rem; line-height: 1.45; }
+
+  .hero-acoes {
+    gap: 8px;
+    margin-top: 13px;
+  }
+
+  .hero-acoes-principais { gap: 8px; }
+  .hero-acoes-principais .botao {
+    min-height: 40px;
+    padding-inline: 14px;
+    font-size: 0.84rem;
+  }
+  .hero-curriculo { min-height: 36px; font-size: 0.82rem; }
+
+  .hero-redes {
+    gap: 9px;
+    margin-top: 14px;
+  }
+
+  .hero-redes a { width: 40px; height: 40px; font-size: 1.1rem; }
+  .hero-chip {
+    display: inline-flex;
+    gap: 5px;
+    padding: 6px 8px;
+    border-color: rgba(255, 255, 255, 0.18);
+    background: rgba(14, 12, 24, 0.86);
+    font-size: 0.68rem;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.28);
+    animation: none;
+  }
+
+  .hero-chip-1 { top: 14%; left: -5%; }
+  .hero-chip-2 { top: 14%; right: -5%; }
+  .hero-chip-3 { bottom: 9%; left: -5%; }
+}
+
+@media (max-width: 768px) and (max-height: 700px) {
+  .hero-visual { width: clamp(204px, 54vw, 245px); }
+  .hero { padding-top: calc(var(--nav-altura) + 4px); padding-bottom: 12px; }
+  .hero-grade { gap: 7px; }
+  .hero-frase { margin-top: 6px; }
+  .hero-acoes { margin-top: 9px; }
+  .hero-redes { margin-top: 10px; }
 }

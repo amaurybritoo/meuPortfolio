@@ -21,16 +21,38 @@ export default function ScrollAoTrocarRota() {
       const quadro = window.requestAnimationFrame(() => window.scrollTo({ top: posicao, left: 0, behavior: "auto" }));
       return () => window.cancelAnimationFrame(quadro);
     }
-    const reduzir = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     // Âncoras internas continuam funcionando, mas uma página aberta/atualizada
     // com um hash antigo começa no topo em vez de saltar direto para uma seção.
     if (hash) {
       const id = decodeURIComponent(hash.slice(1));
-      // espera a página desenhar a seção antes de rolar
-      const tentativa = window.setTimeout(() => {
-        document.getElementById(id)?.scrollIntoView({ behavior: reduzir ? "auto" : "smooth", block: "start" });
-      }, 60);
-      return () => window.clearTimeout(tentativa);
+      let quadro = 0;
+      let tempoLimite = 0;
+      const rolarParaSecao = () => {
+        const secao = document.getElementById(id);
+        if (!secao) return false;
+        quadro = window.requestAnimationFrame(() => {
+          secao.scrollIntoView({ behavior: "auto", block: "start" });
+        });
+        return true;
+      };
+
+      // A página inicial e suas seções são carregadas sob demanda. Aguarda o
+      // alvo existir para não deixar o usuário no topo ao voltar de um projeto.
+      if (rolarParaSecao()) return () => window.cancelAnimationFrame(quadro);
+
+      const observador = new MutationObserver(() => {
+        if (rolarParaSecao()) {
+          observador.disconnect();
+          window.clearTimeout(tempoLimite);
+        }
+      });
+      observador.observe(document.getElementById("root") ?? document.body, { childList: true, subtree: true });
+      tempoLimite = window.setTimeout(() => observador.disconnect(), 10000);
+      return () => {
+        observador.disconnect();
+        window.clearTimeout(tempoLimite);
+        window.cancelAnimationFrame(quadro);
+      };
     }
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, [pathname, hash, navigationType, key]);

@@ -1,0 +1,286 @@
+{
+  "versao": 1,
+  "perfil": {
+    "nome": "Amaury Brito",
+    "cargos": [
+      "Front-end Developer",
+      "QA Engineer"
+    ],
+    "frase": "Construindo e testando interfaces modernas com foco em performance.",
+    "resumo": "QA Tester com base em desenvolvimento front-end, focado em qualidade, testes automatizados e melhoria contínua.",
+    "sobre": [
+      "Sou QA Tester com base em desenvolvimento front-end. Gosto de entender o produto dos dois lados: construir interfaces com React e TypeScript e garantir que elas funcionem de verdade para quem usa.",
+      "No dia a dia, penso em qualidade desde o começo: plano de testes, automação de testes end-to-end com Cypress, responsividade, compatibilidade entre navegadores e performance. O objetivo é sempre o mesmo: entregar rápido, com segurança e melhorar a cada versão."
+    ],
+    "foto": "/uploads/ea229e21a9ffed.webp",
+    "logo": "/logo.webp",
+    "localizacao": "",
+    "disponivel": true,
+    "textoDisponibilidade": "Aberto a oportunidades",
+    "curriculo": "",
+    "email": "amaurypb845@gmail.com",
+    "whatsapp": "5592981737451",
+    "redes": [
+      {
+        "id": "rede-github",
+        "rotulo": "GitHub",
+        "url": "https://github.com/amaurybritoo",
+        "icone": "github"
+      },
+      {
+        "id": "rede-linkedin",
+        "rotulo": "LinkedIn",
+        "url": "https://linkedin.com/in/amaurybritoo",
+        "icone": "linkedin"
+      },
+      {
+        "id": "rede-instagram",
+        "rotulo": "Instagram",
+        "url": "https://instagram.com/amaurybritoo",
+        "icone": "instagram"
+      }
+    ],
+    "rodape": "Feito com código, café com leite e visão ☕"
+  },
+  "estatisticas": [],
+  "habilidades": [
+    {
+      "id": "grupo-front",
+      "titulo": "Front-end",
+      "itens": [
+        {
+          "id": "h-react",
+          "nome": "React",
+          "icone": "react"
+        },
+        {
+          "id": "h-ts",
+          "nome": "TypeScript",
+          "icone": "typescript"
+        },
+        {
+          "id": "h-js",
+          "nome": "JavaScript",
+          "icone": "javascript"
+        },
+        {
+          "id": "h-html",
+          "nome": "HTML",
+          "icone": "html5"
+        },
+        {
+          "id": "h-css",
+          "nome": "CSS",
+          "icone": "css3"
+        },
+        {
+          "id": "h-vite",
+          "nome": "Vite",
+          "icone": "vite"
+        }
+      ]
+    },
+    {
+      "id": "grupo-qa",
+      "titulo": "QA e testes",
+      "itens": [
+        {
+          "id": "h-cypress",
+          "nome": "Cypress",
+          "icone": "cypress"
+        },
+        {
+          "id": "h-e2e",
+          "nome": "Testes E2E",
+          "icone": "teste"
+        },
+        {
+          "id": "h-resp",
+          "nome": "Responsividade",
+          "icone": "responsivo"
+        },
+        {
+          "id": "h-cross",
+          "nome": "Cross-browser",
+          "icone": "globo"
+        },
+        {
+          "id": "h-perf",
+          "nome": "Performance",
+          "icone": "raio"
+        }
+      ]
+    },
+    {
+      "id": "grupo-ferramentas",
+      "titulo": "Ferramentas",
+      "itens": [
+        {
+          "id": "h-git",
+          "nome": "Git",
+          "icone": "git"
+        },
+        {
+          "id": "h-github",
+          "nome": "GitHub",
+          "icone": "github"
+        },
+        {
+          "id": "h-vercel",
+          "nome": "Vercel",
+          "icone": "vercel"
+        }
+      ]
+    }
+  ],
+  "experiencias": [
+    {
+      "id": "exp-ebac",
+      "periodo": "Formação",
+      "titulo": "Tecnólogo em Análise e Desenvolvimento de Sistemas (ADS)",
+      "local": "FAMETRO",
+      "descricao": ""
+    },
+    {
+      "id": "exp-6kqebkb8cp",
+      "periodo": "Cursando",
+      "titulo": "Pós-Graduação em QA e Teste de Software",
+      "local": "FACINT",
+      "descricao": ""
+    }
+  ],
+  "projetos": [
+    {
+      "id": "proj-ebac",
+      "slug": "curso-qa-ebac",
+      "nome": "Curso de QA da EBAC",
+      "categoria": "QA / Testes",
+      "ano": "",
+      "resumo": "Automação de testes end-to-end com Cypress na loja EBAC Shop, simulando o comportamento real do usuário.",
+      "descricao": "Projeto de automação de testes end-to-end desenvolvido com Cypress para validação das funcionalidades da loja EBAC Shop, simulando o comportamento real do usuário.",
+      "capa": "/Projetos/curso-ebac/img/banner-ebac.webp",
+      "banner": "/Projetos/curso-ebac/img/banner-ebac.webp",
+      "tecnologias": [
+        "Cypress",
+        "Testes E2E",
+        "Automação de testes"
+      ],
+      "prints": [],
+      "testes": [],
+      "desafios": [],
+      "solucoes": [],
+      "github": "",
+      "site": "",
+      "destaque": true,
+      "visivel": true
+    },
+    {
+      "id": "proj-dashboard",
+      "slug": "dashboard",
+      "nome": "Dashboard",
+      "categoria": "Front-end",
+      "ano": "",
+      "resumo": "Painel interativo com gráficos para análise de dados.",
+      "descricao": "Painel interativo com gráficos para análise de dados.",
+      "capa": "",
+      "banner": "",
+      "tecnologias": [
+        "React",
+        "D3.js",
+        "Node.js",
+        "MongoDB"
+      ],
+      "prints": [],
+      "testes": [],
+      "desafios": [
+        "Integrar gráficos dinâmicos e otimizar consultas de dados."
+      ],
+      "solucoes": [
+        "Uso de bibliotecas como D3.js e implementação de caching."
+      ],
+      "github": "",
+      "site": "",
+      "destaque": false,
+      "visivel": false
+    },
+    {
+      "id": "proj-landing",
+      "slug": "landing-page",
+      "nome": "Landing Page",
+      "categoria": "Front-end",
+      "ano": "",
+      "resumo": "Página otimizada para conversão de leads.",
+      "descricao": "Página otimizada para conversão de leads.",
+      "capa": "",
+      "banner": "",
+      "tecnologias": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Google Analytics"
+      ],
+      "prints": [],
+      "testes": [],
+      "desafios": [
+        "Aumentar taxa de conversão e otimizar para motores de busca."
+      ],
+      "solucoes": [
+        "Design focado em CTA e implementação de SEO on-page."
+      ],
+      "github": "",
+      "site": "",
+      "destaque": false,
+      "visivel": false
+    }
+  ],
+  "contato": {
+    "titulo": "Vamos trabalhar juntos?",
+    "texto": "Tem um projeto, uma vaga ou só quer trocar uma ideia sobre qualidade e front-end? Me chama.",
+    "mensagemWhatsapp": "Olá, Amaury! Vi seu portfólio e gostaria de conversar.",
+    "mostrarFormulario": true
+  },
+  "secoes": {
+    "sobre": {
+      "ativa": true,
+      "titulo": "Sobre mim",
+      "subtitulo": "Quem está por trás do código e dos testes"
+    },
+    "habilidades": {
+      "ativa": true,
+      "titulo": "Habilidades",
+      "subtitulo": "Tecnologias e práticas que uso no dia a dia"
+    },
+    "projetos": {
+      "ativa": true,
+      "titulo": "Projetos",
+      "subtitulo": "Alguns trabalhos que mostram como eu penso e entrego"
+    },
+    "experiencia": {
+      "ativa": true,
+      "titulo": "Formação e experiência",
+      "subtitulo": "Meu caminho até aqui"
+    },
+    "contato": {
+      "ativa": true,
+      "titulo": "Contato",
+      "subtitulo": ""
+    }
+  },
+  "aparencia": {
+    "corPrimaria": "#a855f7",
+    "corSecundaria": "#38bdf8",
+    "brilhoFundo": true,
+    "dragao": {
+      "ativo": true,
+      "opacidade": 0.2,
+      "velocidade": 1,
+      "tamanho": 1,
+      "cor": "#c084fc",
+      "intervalo": 10
+    }
+  },
+  "seo": {
+    "titulo": "Amaury Brito | Front-end Developer & QA Engineer",
+    "descricao": "Portfólio de Amaury Brito: desenvolvimento front-end com React e TypeScript, automação de testes com Cypress e foco em qualidade e performance."
+  }
+}

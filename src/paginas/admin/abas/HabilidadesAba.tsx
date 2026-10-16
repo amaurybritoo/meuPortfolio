@@ -2,7 +2,7 @@ import { FaPlus } from "react-icons/fa";
 import { novaHabilidade, novoGrupo } from "../../../data/padrao";
 import { OPCOES_ICONES_HABILIDADES } from "../../../utilitarios/icones";
 import { moverItem, removerItem } from "../../../utilitarios/lista";
-import { BotoesItem, Bloco, CampoTexto, SeletorIcone, TituloAba } from "../campos";
+import { BotoesItem, Bloco, CampoTexto, ConfirmarExclusao, SeletorIcone, TituloAba } from "../campos";
 import type { PropsAba } from "../tiposAdmin";
 
 export default function HabilidadesAba({ dados, atualizar }: PropsAba) {
@@ -27,7 +27,7 @@ export default function HabilidadesAba({ dados, atualizar }: PropsAba) {
             </button>
             <button type="button" className="admin-botao admin-botao-texto admin-botao-pequeno" disabled={g === 0} onClick={() => atualizar((d) => moverItem(d.habilidades, g, -1))}>Subir grupo</button>
             <button type="button" className="admin-botao admin-botao-texto admin-botao-pequeno" disabled={g === dados.habilidades.length - 1} onClick={() => atualizar((d) => moverItem(d.habilidades, g, 1))}>Descer grupo</button>
-            <button type="button" className="admin-botao admin-botao-perigo admin-botao-pequeno" onClick={() => { if (window.confirm(`Remover o grupo "${grupo.titulo}" e tudo que está nele?`)) atualizar((d) => removerItem(d.habilidades, g)); }}>Remover grupo</button>
+            <ConfirmarExclusao rotulo={`o grupo “${grupo.titulo || "sem nome"}” e todas as habilidades dele`} className="admin-botao admin-botao-perigo admin-botao-pequeno" ariaLabel={`Remover grupo ${grupo.titulo}`} onConfirmar={() => atualizar((d) => removerItem(d.habilidades, g))}>Remover grupo</ConfirmarExclusao>
           </div>
         </Bloco>
       ))}

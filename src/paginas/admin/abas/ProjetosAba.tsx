@@ -3,7 +3,7 @@ import { novaMidia, novoProjeto, novoTeste } from "../../../data/padrao";
 import type { Projeto } from "../../../tipos";
 import { gerarId, slugUnico } from "../../../utilitarios/texto";
 import { moverItem, removerItem } from "../../../utilitarios/lista";
-import { BotoesItem, Bloco, CampoArea, CampoTexto, Interruptor, ListaTextos, SeletorImagem, SeletorOpcao, TituloAba } from "../campos";
+import { BotoesItem, Bloco, CampoArea, CampoTexto, ConfirmarExclusao, Interruptor, ListaTextos, SeletorImagem, SeletorOpcao, TituloAba } from "../campos";
 import type { PropsAba } from "../tiposAdmin";
 
 export default function ProjetosAba({ dados, atualizar, projetoSelecionado: selecionadoId, aoSelecionarProjeto: setSelecionadoId }: PropsAba) {
@@ -25,8 +25,6 @@ export default function ProjetosAba({ dados, atualizar, projetoSelecionado: sele
   };
 
   const excluir = (i: number) => {
-    const alvo = dados.projetos[i];
-    if (!window.confirm(`Excluir o projeto "${alvo.nome}"? Essa ação não pode ser desfeita (a menos que você descarte o rascunho).`)) return;
     atualizar((d) => removerItem(d.projetos, i));
     setSelecionadoId(dados.projetos[i === 0 ? 1 : i - 1]?.id ?? "");
   };
@@ -51,7 +49,7 @@ export default function ProjetosAba({ dados, atualizar, projetoSelecionado: sele
                   <button type="button" className="icone-botao" onClick={() => atualizar((d) => moverItem(d.projetos, i, -1))} disabled={i === 0} aria-label={`Subir ${p.nome}`}><FaArrowUp aria-hidden="true" /></button>
                   <button type="button" className="icone-botao" onClick={() => atualizar((d) => moverItem(d.projetos, i, 1))} disabled={i === dados.projetos.length - 1} aria-label={`Descer ${p.nome}`}><FaArrowDown aria-hidden="true" /></button>
                   <button type="button" className="icone-botao" onClick={() => duplicar(i)} aria-label={`Duplicar ${p.nome}`}><FaClone aria-hidden="true" /></button>
-                  <button type="button" className="icone-botao icone-botao-perigo" onClick={() => excluir(i)} aria-label={`Excluir ${p.nome}`}><FaTrash aria-hidden="true" /></button>
+                  <ConfirmarExclusao rotulo={`o projeto “${p.nome || "sem nome"}”`} className="icone-botao icone-botao-perigo" ariaLabel={`Excluir ${p.nome}`} onConfirmar={() => excluir(i)}><FaTrash aria-hidden="true" /></ConfirmarExclusao>
                 </div>
               </li>
             ))}

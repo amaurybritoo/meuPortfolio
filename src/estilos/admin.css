@@ -94,6 +94,77 @@
   font-size: .9rem;
 }
 
+/* Confirmação de exclusão no visual do painel */
+.admin-confirmacao-fundo {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(5, 3, 12, .78);
+  backdrop-filter: blur(9px);
+}
+
+.admin-confirmacao {
+  width: min(100%, 440px);
+  padding: clamp(24px, 5vw, 34px);
+  border: 1px solid var(--borda-forte);
+  border-radius: calc(var(--raio) + 4px);
+  background: radial-gradient(90% 70% at 100% 0%, rgba(var(--cor-primaria-rgb), .14), transparent 72%), var(--fundo-elevado);
+  box-shadow: 0 28px 100px rgba(0, 0, 0, .58), 0 0 36px rgba(var(--cor-primaria-rgb), .12);
+  animation: admin-confirmacao-entrada .18s ease-out both;
+}
+
+.admin-confirmacao-icone {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border: 1px solid rgba(248, 113, 113, .3);
+  border-radius: 15px;
+  background: rgba(248, 113, 113, .12);
+  color: #fca5a5;
+  font-size: 1.1rem;
+}
+
+.admin-confirmacao-selo {
+  margin: 20px 0 6px;
+  color: var(--cor-primaria);
+  font-size: .74rem;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.admin-confirmacao h2 {
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  font-size: clamp(1.35rem, 5vw, 1.7rem);
+}
+
+.admin-confirmacao > p:last-of-type {
+  margin: 12px 0 24px;
+  color: var(--texto-suave);
+  line-height: 1.65;
+}
+
+.admin-confirmacao-acoes {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+@keyframes admin-confirmacao-entrada {
+  from { opacity: 0; transform: translateY(8px) scale(.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-confirmacao { animation: none; }
+}
+
 /* ---------- topo ---------- */
 
 .admin-topo {

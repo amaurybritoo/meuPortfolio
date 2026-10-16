@@ -155,7 +155,7 @@ export function SeletorImagem({ rotulo, dica, valor, onChange, maxLado = 1600 }:
         </div>
         <div className="seletor-imagem-controles">
           {enviada ? (
-            <p className="seletor-imagem-nota">Imagem enviada do seu computador ({tamanhoAproximadoKb(valor)} KB). Ela vai para o site quando você clicar em <strong>Publicar</strong>.</p>
+            <p className="seletor-imagem-nota">Imagem enviada do seu computador ({tamanhoAproximadoKb(valor)} KB). Ela vai para o site quando você clicar em <strong>Salvar alterações</strong>.</p>
           ) : (
             <input id={id} className="entrada" type="text" value={valor} placeholder="/caminho/da/imagem.webp ou https://…" onChange={(e) => onChange(e.target.value)} />
           )}
@@ -164,9 +164,7 @@ export function SeletorImagem({ rotulo, dica, valor, onChange, maxLado = 1600 }:
               <FaUpload aria-hidden="true" /> {ocupado ? "Processando…" : "Enviar imagem"}
             </button>
             {valor && (
-              <button type="button" className="admin-botao admin-botao-texto admin-botao-pequeno" onClick={() => onChange("")}>
-                <FaTrash aria-hidden="true" /> Remover
-              </button>
+              <ConfirmarExclusao rotulo="esta imagem" className="admin-botao admin-botao-texto admin-botao-pequeno" ariaLabel="Remover imagem" onConfirmar={() => onChange("")}><FaTrash aria-hidden="true" /> Remover</ConfirmarExclusao>
             )}
             <input ref={entrada} type="file" accept="image/*" hidden onChange={aoEscolher} data-testid="upload-imagem" />
           </div>
@@ -177,7 +175,7 @@ export function SeletorImagem({ rotulo, dica, valor, onChange, maxLado = 1600 }:
   );
 }
 
-export function SeletorArquivo({ rotulo, dica, valor, onChange, aceitar = "application/pdf", limiteMb = 4 }: PropsImagem & { limiteMb?: number }) {
+export function SeletorArquivo({ rotulo, dica, valor, onChange, aceitar = "application/pdf", limiteMb = 3 }: PropsImagem & { limiteMb?: number }) {
   const id = useId();
   const entrada = useRef<HTMLInputElement>(null);
   const [erro, setErro] = useState("");
@@ -202,7 +200,7 @@ export function SeletorArquivo({ rotulo, dica, valor, onChange, aceitar = "appli
     <Campo rotulo={rotulo} dica={dica} id={id}>
       <div className="seletor-imagem-controles">
         {enviado ? (
-          <p className="seletor-imagem-nota">Arquivo enviado do seu computador ({tamanhoAproximadoKb(valor)} KB). Vai para o site quando você clicar em <strong>Publicar</strong>.</p>
+          <p className="seletor-imagem-nota">Arquivo enviado do seu computador ({tamanhoAproximadoKb(valor)} KB). Vai para o site quando você clicar em <strong>Salvar alterações</strong>.</p>
         ) : (
           <input id={id} className="entrada" type="text" value={valor} placeholder="/curriculo.pdf ou https://…" onChange={(e) => onChange(e.target.value)} />
         )}
@@ -211,9 +209,7 @@ export function SeletorArquivo({ rotulo, dica, valor, onChange, aceitar = "appli
             <FaUpload aria-hidden="true" /> Enviar arquivo
           </button>
           {valor && (
-            <button type="button" className="admin-botao admin-botao-texto admin-botao-pequeno" onClick={() => onChange("")}>
-              <FaTrash aria-hidden="true" /> Remover
-            </button>
+            <ConfirmarExclusao rotulo="este arquivo" className="admin-botao admin-botao-texto admin-botao-pequeno" ariaLabel="Remover arquivo" onConfirmar={() => onChange("")}><FaTrash aria-hidden="true" /> Remover</ConfirmarExclusao>
           )}
           <input ref={entrada} type="file" accept={aceitar} hidden onChange={aoEscolher} />
         </div>
@@ -235,8 +231,30 @@ export function BotoesItem({ indice, total, onMover, onRemover, rotuloItem }: { 
     <div className="botoes-item">
       <button type="button" className="icone-botao" onClick={() => onMover(-1)} disabled={indice === 0} aria-label={`Mover ${rotuloItem} para cima`}><FaArrowUp aria-hidden="true" /></button>
       <button type="button" className="icone-botao" onClick={() => onMover(1)} disabled={indice === total - 1} aria-label={`Mover ${rotuloItem} para baixo`}><FaArrowDown aria-hidden="true" /></button>
-      <button type="button" className="icone-botao icone-botao-perigo" onClick={onRemover} aria-label={`Remover ${rotuloItem}`}><FaTrash aria-hidden="true" /></button>
+      <ConfirmarExclusao rotulo={rotuloItem} className="icone-botao icone-botao-perigo" ariaLabel={`Remover ${rotuloItem}`} onConfirmar={onRemover}><FaTrash aria-hidden="true" /></ConfirmarExclusao>
     </div>
+  );
+}
+
+export function ConfirmarExclusao({ rotulo, className, ariaLabel, onConfirmar, children }: { rotulo: string; className: string; ariaLabel: string; onConfirmar: () => void; children: ReactNode }) {
+  const [aberto, setAberto] = useState(false);
+  const tituloId = useId();
+  return (
+    <>
+      <button type="button" className={className} aria-label={ariaLabel} onClick={() => setAberto(true)}>{children}</button>
+      {aberto && <div className="admin-confirmacao-fundo" role="presentation" onKeyDown={(evento) => { if (evento.key === "Escape") setAberto(false); }} onMouseDown={(evento) => { if (evento.target === evento.currentTarget) setAberto(false); }}>
+        <section className="admin-confirmacao" role="alertdialog" aria-modal="true" aria-labelledby={tituloId}>
+          <span className="admin-confirmacao-icone" aria-hidden="true"><FaTrash /></span>
+          <p className="admin-confirmacao-selo">Confirmar exclusão</p>
+          <h2 id={tituloId}>Remover {rotulo}?</h2>
+          <p>Este item será removido do rascunho. Você pode descartar as alterações para recuperá-lo antes de salvar.</p>
+          <div className="admin-confirmacao-acoes">
+            <button type="button" className="admin-botao admin-botao-contorno" autoFocus onClick={() => setAberto(false)}>Cancelar</button>
+            <button type="button" className="admin-botao admin-botao-perigo" onClick={() => { onConfirmar(); setAberto(false); }}>Excluir item</button>
+          </div>
+        </section>
+      </div>}
+    </>
   );
 }
 

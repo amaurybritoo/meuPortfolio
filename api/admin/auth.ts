@@ -1,5 +1,6 @@
 import { createHmac, randomBytes, timingSafeEqual } from "node:crypto";
 import type { IncomingMessage, ServerResponse } from "node:http";
+import { sessaoAdminValida } from "../../server/adminAuth";
 
 const COOKIE = "admin_session";
 const DURACAO_SEGUNDOS = 8 * 60 * 60;
@@ -8,20 +9,6 @@ type Requisicao = IncomingMessage & { body?: unknown };
 
 function assinatura(payload: string, segredo: string): Buffer {
   return createHmac("sha256", segredo).update(payload).digest();
-}
-
-function sessaoValida(req: IncomingMessage, segredo: string): boolean {
-  const cookies = req.headers.cookie ?? "";
-  const valor = cookies.split(";").map((item) => item.trim()).find((item) => item.startsWith(`${COOKIE}=`))?.slice(COOKIE.length + 1);
-  if (!valor) return false;
-  const [payload, assinaturaRecebida] = decodeURIComponent(valor).split(".");
-  if (!payload || !assinaturaRecebida) return false;
-  const recebida = Buffer.from(assinaturaRecebida, "base64url");
-  const esperada = assinatura(payload, segredo);
-  if (recebida.length !== esperada.length || !timingSafeEqual(recebida, esperada)) return false;
-  const dados = Buffer.from(payload, "base64url").toString("utf8");
-  const expira = Number(dados.split(".", 1)[0]);
-  return Number.isFinite(expira) && expira > Math.floor(Date.now() / 1000);
 }
 
 function responder(res: ServerResponse, status: number, dados: Record<string, unknown>): void {
@@ -40,7 +27,7 @@ export default function handler(req: Requisicao, res: ServerResponse): void {
   }
 
   if (req.method === "GET") {
-    const autenticado = sessaoValida(req, segredoSessao);
+    const autenticado = sessaoAdminValida(req);
     responder(res, autenticado ? 200 : 401, { authenticated: autenticado, configured: true });
     return;
   }

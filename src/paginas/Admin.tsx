@@ -38,7 +38,7 @@ const ABAS: DefinicaoAba[] = [
   { id: "secoes", rotulo: "Seções", icone: FaCog, componente: SecoesAba },
   { id: "aparencia", rotulo: "Aparência", icone: FaPalette, componente: AparenciaAba },
   { id: "seo", rotulo: "Google", icone: FaSearch, componente: SeoAba },
-  { id: "publicar", rotulo: "Publicar", icone: FaCloudUploadAlt },
+  { id: "publicar", rotulo: "Salvar", icone: FaCloudUploadAlt },
 ];
 
 export default function Admin() {
@@ -126,7 +126,7 @@ export default function Admin() {
 
 function PainelAdmin({ aoSair }: { aoSair: () => void }) {
   const rascunho = useRascunho();
-  const { dados, atualizar, alterado, salvoNoNavegador } = rascunho;
+  const { dados, atualizar, alterado, salvoNoNavegador, carregado } = rascunho;
   const [abaAtual, setAbaAtual] = useState("perfil");
   const [projetoSelecionado, setProjetoSelecionado] = useState(() => dados.projetos[0]?.id ?? "");
   const problemas = useMemo(() => validarPortfolio(dados), [dados]);
@@ -153,13 +153,13 @@ function PainelAdmin({ aoSair }: { aoSair: () => void }) {
         </div>
         <div className="admin-topo-estado" role="status" aria-live="polite">
           <span className={`admin-ponto ${alterado ? "pendente" : "ok"}`} aria-hidden="true" />
-          {alterado ? (salvoNoNavegador ? "Rascunho salvo · não publicado" : "Rascunho não salvo (sem espaço)") : "Tudo publicado"}
+          {!carregado ? "Carregando conteúdo…" : alterado ? (salvoNoNavegador ? "Rascunho salvo · alterações pendentes" : "Rascunho não salvo (sem espaço)") : "Tudo salvo no Supabase"}
         </div>
         <div className="admin-topo-acoes">
           <Link to="/" className="admin-botao admin-botao-texto admin-botao-pequeno">Ver site <FaExternalLinkAlt aria-hidden="true" /></Link>
           <button type="button" className="admin-botao admin-botao-contorno admin-botao-pequeno" onClick={aoSair}><FaSignOutAlt aria-hidden="true" /> Sair</button>
-          <button type="button" className="admin-botao admin-botao-primario admin-botao-pequeno" onClick={() => irParaAba("publicar")}>
-            Publicar{alterado ? " alterações" : ""}
+          <button type="button" className="admin-botao admin-botao-primario admin-botao-pequeno" onClick={() => irParaAba("publicar")} disabled={!carregado}>
+            Salvar{alterado ? " alterações" : ""}
             {totalErros > 0 && <span className="admin-contador" aria-label={`${totalErros} pendência(s)`}>{totalErros}</span>}
           </button>
         </div>
@@ -188,6 +188,7 @@ function PainelAdmin({ aoSair }: { aoSair: () => void }) {
           ) : (
             <PublicarAba
               dados={dados}
+              carregado={carregado}
               alterado={alterado}
               salvoNoNavegador={salvoNoNavegador}
               problemas={problemas}

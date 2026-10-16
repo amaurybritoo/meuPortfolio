@@ -18,7 +18,7 @@ npm run preview    # testa o build localmente
 npm run lint
 ```
 
-As dependências são as mesmas do projeto original (`react`, `react-dom`, `react-router-dom`, `react-icons`).
+Dependências principais: `react`, `react-dom`, `react-router-dom`, `react-icons` e `@supabase/supabase-js`.
 O `framer-motion` continua instalado, mas não é mais usado: pode ser removido com `npm uninstall framer-motion`
 quando quiser.
 
@@ -28,7 +28,7 @@ quando quiser.
 
 ```
 src/
-  data/portfolio.json     ← TODO o conteúdo do site (é o arquivo que o admin atualiza)
+  data/portfolio.json     ← conteúdo local de reserva (o conteúdo ativo vem do Supabase)
   data/padrao.ts          ← valida e completa os dados (o site nunca quebra por campo faltando)
   tipos.ts                ← descreve cada campo editável
   contexto/               ← entrega os dados aos componentes (e troca para o rascunho na prévia)
@@ -40,10 +40,10 @@ src/
   paginas/                ← Home, Projeto, 404 e Admin
   paginas/admin/          ← abas do painel (Perfil, Projetos, Aparência, Publicar...)
   estilos/                ← CSS por área (variáveis de cor em global.css)
-  utilitarios/            ← GitHub, imagens, ícones, rascunho local
+  utilitarios/            ← imagens, ícones e rascunho local
 public/
   Projetos/               ← imagens dos projetos (WebP, já otimizadas)
-  uploads/                ← imagens enviadas pelo admin (criadas automaticamente ao publicar)
+  uploads/                ← imagens antigas incluídas no projeto; novas imagens ficam no Supabase Storage
 ```
 
 ### Principais correções
@@ -67,11 +67,11 @@ Abra **`/admin`** (ex.: `https://seusite.com.br/admin`). O painel pede um códig
 e não há link para ele no site. A sessão fica em cookie `HttpOnly` por até 8 horas; o código não é salvo no código
 do site nem no navegador.
 
-Antes de usar no Vercel, cadastre `ADMIN_ACCESS_CODE` e `ADMIN_SESSION_SECRET` em **Project → Settings → Environment Variables** e faça um
-novo deploy. `ADMIN_ACCESS_CODE` é o código de entrada; `ADMIN_SESSION_SECRET` deve ser uma chave aleatória forte
+Antes de usar no Vercel, cadastre `ADMIN_ACCESS_CODE`, `ADMIN_SESSION_SECRET`, `SUPABASE_URL` e `SUPABASE_SECRET_KEY` em **Project → Settings → Environment Variables** e faça um
+deploy para aplicar as variáveis. `ADMIN_ACCESS_CODE` é o código de entrada; `ADMIN_SESSION_SECRET` deve ser uma chave aleatória forte
 (por exemplo, gerada com `node -e "console.log(require('node:crypto').randomBytes(32).toString('base64url'))"`). Guarde ambos somente nas variáveis privadas do projeto; não os coloque em arquivos `.env` enviados
 ao GitHub, `portfolio.json` ou no código do frontend. Para desenvolvimento local, use `vercel dev` com essas variáveis
-definidas no ambiente do terminal, pois o Vite sozinho não executa a função de autenticação.
+definidas no ambiente do terminal, pois o Vite sozinho não executa as funções de autenticação e acesso ao Supabase.
 
 | Aba | O que edita |
 |---|---|
@@ -84,37 +84,22 @@ definidas no ambiente do terminal, pois o Vite sozinho não executa a função d
 | **Seções** | liga/desliga cada seção e define os títulos |
 | **Aparência** | cores e **todas as opções do dragão** |
 | **Google** | título e descrição para buscas e compartilhamento (com prévia) |
-| **Publicar** | verificação, publicação, backup e restauração |
+| **Salvar alterações** | verificação, gravação no Supabase, backup e restauração |
 
 ### Como o admin funciona
 
-1. **Tudo que você edita vira rascunho**, salvo automaticamente no seu navegador (nada é publicado ainda).
+1. **Tudo que você edita vira rascunho**, salvo automaticamente neste navegador.
 2. **Pré-visualizar** abre o site real mostrando o rascunho (inclusive projetos em rascunho). Uma faixa amarela avisa
    que é prévia e há o botão "Sair da prévia".
-3. **Publicar** grava o conteúdo no seu repositório do GitHub; a Vercel percebe o commit e atualiza o site sozinha
-   em 1 a 2 minutos. A função serverless do Vercel só valida o acesso administrativo.
-4. Antes de publicar o admin confere erros comuns (projeto sem nome, endereço repetido, link sem `https://`, e-mail
+3. **Salvar alterações** grava o conteúdo no Supabase e o site lê a versão atual diretamente do banco, sem novo deploy.
+4. Antes de salvar o admin confere erros comuns (projeto sem nome, endereço repetido, link sem `https://`, e-mail
    inválido) e explica em português o que corrigir.
 
-Imagens enviadas pelo admin são redimensionadas e convertidas para WebP no próprio navegador; ao publicar, viram
-arquivos em `public/uploads/` e o JSON guarda só o caminho (`/uploads/xxxx.webp`).
+Imagens enviadas pelo admin são redimensionadas e convertidas para WebP no navegador e armazenadas no bucket público `portfolio-media`. O conteúdo fica na tabela `portfolio_content`. As funções serverless usam a `SUPABASE_SECRET_KEY` apenas no servidor e validam a sessão antes de permitir alterações.
 
-### Publicar pelo GitHub (uma configuração só)
+Para desenvolvimento local com painel e API, use `vercel dev` e forneça as quatro variáveis listadas acima. O Vite sozinho serve apenas o frontend e não executa as funções `/api`.
 
-1. No GitHub: **Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token**.
-2. **Repository access:** *Only select repositories* → escolha o repositório do portfólio.
-3. **Permissions → Repository permissions → Contents: Read and write.**
-4. Copie o token, abra **/admin → Publicar**, confira usuário/repositório/branch e cole o token.
-   Clique em **Testar conexão** e depois **Publicar agora**.
-
-> **Segurança:** o token só vale para esse repositório e, por padrão, só fica na memória da aba (some ao fechar).
-> Marque "Lembrar o token neste navegador" apenas no seu computador. Como qualquer publicação exige o token,
-> quem abrir `/admin` sem ele consegue mexer só no próprio rascunho, nunca no seu site.
-
-### Sem GitHub? Publicação manual
-
-Em **Publicar → Baixar portfolio.json**, substitua `src/data/portfolio.json` no projeto e faça o commit.
-Para trazer um arquivo de volta ao admin use **Importar portfolio.json**.
+No painel, **Salvar alterações** grava a versão no banco. **Baixar backup JSON** e **Importar backup JSON** permitem exportar e restaurar o conteúdo.
 
 ---
 

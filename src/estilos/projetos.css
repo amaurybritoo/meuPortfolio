@@ -54,14 +54,17 @@
     width: 100%;
     gap: 16px;
     margin: 0;
-    padding: 0 0 8px;
+    padding: 0 4px 8px;
     overflow-x: auto;
     overscroll-behavior-x: contain;
+    overflow-y: hidden;
+    touch-action: auto;
+    user-select: none;
+    -webkit-user-select: none;
     -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth;
     scroll-snap-type: x mandatory;
     scroll-snap-stop: always;
-    scroll-padding-inline: 0;
+    scroll-padding-inline: 4px;
     scrollbar-width: none;
     cursor: grab;
   }
@@ -75,14 +78,19 @@
   }
 
   .projetos-grade > li {
-    flex: 0 0 min(76vw, 350px);
-    width: min(76vw, 350px);
-    min-width: min(76vw, 350px);
+    flex: 0 0 min(68vw, 300px);
+    width: min(68vw, 300px);
+    min-width: min(68vw, 300px);
     scroll-snap-align: start;
   }
 
   .projetos-grade > li > .revelar {
     min-width: 0;
+  }
+
+  .card-projeto:hover,
+  .card-projeto:focus-within {
+    transform: none;
   }
 
   .projetos-carrossel-indicador.ativo {

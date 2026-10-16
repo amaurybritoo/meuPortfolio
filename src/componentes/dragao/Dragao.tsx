@@ -58,6 +58,7 @@ export default function Dragao({ config, modo = "fundo" }: Props) {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
     let raf = 0;
+    let timer = 0;
     let ultimoDesenho = 0;
     let voo: Voo | null = null;
     let larguraAnterior = window.innerWidth;
@@ -94,8 +95,17 @@ export default function Dragao({ config, modo = "fundo" }: Props) {
       };
     };
 
+    const agendar = (atraso: number) => {
+      if (document.hidden) return;
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => {
+        timer = 0;
+        raf = requestAnimationFrame(quadro);
+      }, Math.max(0, atraso));
+    };
+
     const quadro = (agora: number) => {
-      raf = requestAnimationFrame(quadro);
+      raf = 0;
       if (document.hidden) return;
       // Em celulares a barra do navegador altera innerHeight durante o scroll.
       // Tratar essa mudança como redimensionamento reiniciava o voo e escondia o dragão.
@@ -118,11 +128,15 @@ export default function Dragao({ config, modo = "fundo" }: Props) {
           ultimoDesenho = agora;
           desenharDragao(ctx, { cor: cfg.cor, t: (agora / 1000) * (0.8 + 0.4 * cfg.velocidade) });
         }
+        raf = requestAnimationFrame(quadro);
         return;
       }
 
       if (!voo) {
-        if (agora < proximoInicio) return;
+        if (agora < proximoInicio) {
+          agendar(proximoInicio - agora);
+          return;
+        }
         voo = iniciarVoo(agora);
         canvas.style.visibility = "visible";
       }
@@ -130,7 +144,9 @@ export default function Dragao({ config, modo = "fundo" }: Props) {
       if (progresso >= 1) {
         voo = null;
         canvas.style.visibility = "hidden";
-        proximoInicio = agora + cfg.intervalo * 1000 * sorteio(0.8, 1.25);
+        const espera = cfg.intervalo * 1000 * sorteio(0.8, 1.25);
+        proximoInicio = agora + espera;
+        agendar(espera);
         return;
       }
 
@@ -148,11 +164,28 @@ export default function Dragao({ config, modo = "fundo" }: Props) {
         ultimoDesenho = agora;
         desenharDragao(ctx, { cor: cfg.cor, t: ((agora - voo.inicio) / 1000) * (0.8 + 0.4 * cfg.velocidade) });
       }
+      raf = requestAnimationFrame(quadro);
+    };
+
+    const aoMudarVisibilidade = () => {
+      if (document.hidden) {
+        cancelAnimationFrame(raf);
+        raf = 0;
+        window.clearTimeout(timer);
+        timer = 0;
+      } else if (!raf && !timer) {
+        raf = requestAnimationFrame(quadro);
+      }
     };
 
     canvas.style.visibility = modo === "previa" ? "visible" : "hidden";
     raf = requestAnimationFrame(quadro);
-    return () => cancelAnimationFrame(raf);
+    document.addEventListener("visibilitychange", aoMudarVisibilidade);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.clearTimeout(timer);
+      document.removeEventListener("visibilitychange", aoMudarVisibilidade);
+    };
   }, [config.ativo, modo, reduzirMovimento]);
 
   if (!config.ativo || reduzirMovimento) return null;

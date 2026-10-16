@@ -4,18 +4,29 @@ import ScrollAoTrocarRota from "./componentes/layout/ScrollAoTrocarRota";
 import PortfolioProvider from "./contexto/PortfolioProvider";
 import Home from "./paginas/Home";
 import NaoEncontrado from "./paginas/NaoEncontrado";
-import Projeto from "./paginas/Projeto";
-import Curriculo from "./paginas/Curriculo";
+const Projeto = lazy(() => import("./paginas/Projeto"));
+const Curriculo = lazy(() => import("./paginas/Curriculo"));
 
 // O painel de administração só é baixado quando alguém abre /admin (mantém o site público leve).
 const Admin = lazy(() => import("./paginas/Admin"));
+
+function TelaCarregamento() {
+  return (
+    <div className="inicio-carregando" role="status" aria-label="Carregando portfólio">
+      <div className="inicio-carregando-conteudo">
+        <img className="inicio-carregando-logo" src="/logo.webp" width="190" height="190" alt="Logo de Amaury Brito" />
+        <span className="inicio-carregando-status" aria-label="Carregando">Carregando</span>
+      </div>
+    </div>
+  );
+}
 
 export default function App() {
   return (
     <BrowserRouter>
       <PortfolioProvider>
         <ScrollAoTrocarRota />
-        <Suspense fallback={<div className="carregando" role="status">Carregando…</div>}>
+        <Suspense fallback={<TelaCarregamento />}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/projeto/:slug" element={<Projeto />} />

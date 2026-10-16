@@ -12,11 +12,10 @@
       .inicio-carregando { min-height: 100vh; min-height: 100svh; display: grid; place-items: center; padding: 24px; color: #ecebf5; font: 600 1rem/1.5 system-ui, sans-serif; background: radial-gradient(65% 58% at 50% 46%, #211238 0%, #07060d 76%); }
       .inicio-carregando-conteudo { display: grid; justify-items: center; gap: 28px; text-align: center; transform: translateY(-2vh); }
       .inicio-carregando-logo { display: block; width: clamp(132px, 24vw, 190px); height: clamp(132px, 24vw, 190px); object-fit: contain; animation: logo-pulso-coracao 1.45s ease-in-out infinite; filter: drop-shadow(0 0 18px #a855f788); }
-      .inicio-carregando-status { display: flex; min-height: 1.5em; color: #e5d4ff; font: 600 clamp(1rem, 3vw, 1.25rem)/1.4 "Orbitron", "Share Tech Mono", ui-monospace, monospace; letter-spacing: .2em; text-transform: uppercase; text-shadow: 0 0 14px #a855f7aa; }
-      .inicio-carregando-letra { display: inline-block; opacity: .08; animation: letra-carregando .45s ease-out both; animation-delay: calc(var(--i) * .09s); }
+      .inicio-carregando-status { display: inline-block; min-height: 1.5em; color: #e5d4ff; font: 600 clamp(1rem, 3vw, 1.25rem)/1.4 "Orbitron", "Share Tech Mono", ui-monospace, monospace; letter-spacing: .2em; text-transform: uppercase; animation: carregando-neon 1.15s ease-in-out infinite; }
       @keyframes logo-pulso-coracao { 0%, 100% { transform: scale(1); opacity: .88; filter: drop-shadow(0 0 14px #a855f777); } 14% { transform: scale(1.1); opacity: 1; filter: drop-shadow(0 0 28px #c084fcdd); } 28% { transform: scale(1); } 42% { transform: scale(1.07); filter: drop-shadow(0 0 24px #c084fccc); } 65% { transform: scale(1); opacity: .92; } }
-      @keyframes letra-carregando { from { opacity: .08; transform: translateY(7px); text-shadow: 0 0 0 #c084fc; } to { opacity: 1; transform: translateY(0); text-shadow: 0 0 14px #a855f7aa; } }
-      @media (prefers-reduced-motion: reduce) { .inicio-carregando-logo, .inicio-carregando-letra { animation: none; opacity: 1; transform: none; } }
+      @keyframes carregando-neon { 0%, 100% { opacity: .58; text-shadow: 0 0 7px #a855f7aa, 0 0 18px #a855f755; } 50% { opacity: 1; text-shadow: 0 0 12px #c084fc, 0 0 30px #a855f7dd; } }
+      @media (prefers-reduced-motion: reduce) { .inicio-carregando-logo, .inicio-carregando-status { animation: none; opacity: 1; transform: none; } }
     </style>
 
     <meta property="og:type" content="website" />
@@ -30,6 +29,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="preload" as="image" href="/logo.webp" fetchpriority="high" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -46,7 +46,7 @@
       <div class="inicio-carregando" role="status" aria-label="Carregando portfólio">
         <div class="inicio-carregando-conteudo">
           <img class="inicio-carregando-logo" src="/logo.webp" width="190" height="190" alt="Logo de Amaury Brito" />
-          <span class="inicio-carregando-status" aria-label="Carregando" aria-live="off"><span class="inicio-carregando-letra" style="--i:0" aria-hidden="true">C</span><span class="inicio-carregando-letra" style="--i:1" aria-hidden="true">a</span><span class="inicio-carregando-letra" style="--i:2" aria-hidden="true">r</span><span class="inicio-carregando-letra" style="--i:3" aria-hidden="true">r</span><span class="inicio-carregando-letra" style="--i:4" aria-hidden="true">e</span><span class="inicio-carregando-letra" style="--i:5" aria-hidden="true">g</span><span class="inicio-carregando-letra" style="--i:6" aria-hidden="true">a</span><span class="inicio-carregando-letra" style="--i:7" aria-hidden="true">n</span><span class="inicio-carregando-letra" style="--i:8" aria-hidden="true">d</span><span class="inicio-carregando-letra" style="--i:9" aria-hidden="true">o</span></span>
+          <span class="inicio-carregando-status" aria-label="Carregando">Carregando</span>
         </div>
       </div>
     </div>

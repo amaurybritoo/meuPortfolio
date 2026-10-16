@@ -1,6 +1,9 @@
+import { lazy, Suspense } from "react";
 import { usePortfolio } from "../../contexto/usePortfolio";
-import Dragao from "../dragao/Dragao";
 import "../../estilos/fundo.css";
+
+// O desenho animado do dragão carrega em separado para liberar a primeira tela antes.
+const Dragao = lazy(() => import("../dragao/Dragao"));
 
 /** Camada fixa atrás de tudo: brilhos suaves + dragão voando. Nunca recebe cliques. */
 export default function FundoSite() {
@@ -10,7 +13,9 @@ export default function FundoSite() {
       <div className="fundo-brilho fundo-brilho-1" />
       <div className="fundo-brilho fundo-brilho-2" />
       <div className="fundo-grade" />
-      <Dragao config={dados.aparencia.dragao} />
+      <Suspense fallback={null}>
+        <Dragao config={dados.aparencia.dragao} />
+      </Suspense>
     </div>
   );
 }

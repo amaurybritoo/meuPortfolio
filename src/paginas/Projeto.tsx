@@ -1,142 +1,158 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { FaArrowLeft, FaArrowRight, FaExternalLinkAlt, FaGithub, FaVial } from "react-icons/fa";
+import { usePortfolio } from "../contexto/usePortfolio";
+import CabecalhoSecao from "../componentes/comuns/CabecalhoSecao";
+import Revelar from "../componentes/comuns/Revelar";
+import { useSeo } from "../componentes/comuns/useSeo";
+import PaginaBase from "../componentes/layout/PaginaBase";
+import GaleriaProjeto from "../componentes/projeto/GaleriaProjeto";
+import { paragrafos } from "../utilitarios/texto";
+import NaoEncontrado from "./NaoEncontrado";
 import "../estilos/projeto.css";
-import { projetos } from "../data/projetos";
-import { useState, useEffect } from "react";
-import GaleriaModal from "../componentes/GaleriaModal";
 
 export default function Projeto() {
-  const { slug } = useParams();
-useEffect(() => {
-  window.scrollTo({
-    top: 0
-  });
-}, [slug]);
-  // ✅ estado CORRETO (só aqui)
-  const [selecionado, setSelecionado] = useState<any>(null);
-  
+  const { slug = "" } = useParams();
+  const { dados, projetos: visiveis } = usePortfolio();
+  const indice = visiveis.findIndex((p) => p.slug === slug);
+  const projeto = indice >= 0 ? visiveis[indice] : undefined;
+  useSeo(projeto ? `${projeto.nome} | ${dados.perfil.nome}` : `Projeto não encontrado | ${dados.perfil.nome}`, projeto?.resumo || dados.seo.descricao, projeto?.banner || undefined);
 
-  
+  if (!projeto) return <NaoEncontrado mensagem="Projeto não encontrado" />;
 
-  const projeto = projetos.find(p => p.slug === slug);
-
-  if (!projeto) {
-    return <div>Projeto não encontrado</div>;
-  }
+  const anterior = visiveis.length > 1 ? visiveis[(indice - 1 + visiveis.length) % visiveis.length] : undefined;
+  const proximo = visiveis.length > 1 ? visiveis[(indice + 1) % visiveis.length] : undefined;
+  const temPares = projeto.desafios.length > 0 || projeto.solucoes.length > 0;
+  const textos = paragrafos(projeto.descricao);
+  const imagemTopo = projeto.banner || projeto.capa;
 
   return (
-    <div className="projeto-container">
-      
-      {/* HERO */}
-      <div className="projeto-hero">
-        <h1>{projeto.nome}</h1>
-      </div>
-
-      {/* DESCRIÇÃO */}
-      <section>
-        <h2>Sobre o Projeto</h2>
-        <p style={{ whiteSpace: "pre-line" }}>
-  {projeto.descricao}
-</p>
-      </section>
-
-      {/* GALERIA DE PRINTS */}
-      <section>
-        <h2>Galeria do Projeto</h2>
-
-        <div className="galeria">
-          {projeto.prints.map((item, index) => (
-            <div
-              key={index}
-              onClick={() => setSelecionado(item)}
-              className="galeria-item"
-            >
-              {item.tipo === "img" ? (
-                <img src={item.src} />
-              ) : (
-                <video src={item.src} />
+    <PaginaBase>
+      <article className="projeto">
+        <header className="projeto-topo">
+          <div className="container">
+            <Link to="/#projetos" className="projeto-voltar"><FaArrowLeft aria-hidden="true" /> Voltar aos projetos</Link>
+            <div className="projeto-topo-grade">
+              <div>
+                <p className="projeto-categoria">{[projeto.categoria, projeto.ano].filter(Boolean).join(" · ")}</p>
+                <h1>{projeto.nome}</h1>
+                {projeto.resumo && <p className="projeto-resumo">{projeto.resumo}</p>}
+                {projeto.tecnologias.length > 0 && (
+                  <ul className="chips" aria-label="Tecnologias usadas">
+                    {projeto.tecnologias.map((t) => <li key={t} className="chip">{t}</li>)}
+                  </ul>
+                )}
+                {(projeto.site || projeto.github) && (
+                  <div className="projeto-acoes">
+                    {projeto.site && (
+                      <a className="botao botao-primario" href={projeto.site} target="_blank" rel="noopener noreferrer">
+                        Ver o site <FaExternalLinkAlt aria-hidden="true" />
+                      </a>
+                    )}
+                    {projeto.github && (
+                      <a className="botao botao-contorno" href={projeto.github} target="_blank" rel="noopener noreferrer">
+                        <FaGithub aria-hidden="true" /> Ver o código
+                      </a>
+                    )}
+                  </div>
+                )}
+              </div>
+              {imagemTopo && (
+                <div className="projeto-banner">
+                  <img src={imagemTopo} alt={`Capa do projeto ${projeto.nome}`} width={1200} height={675} fetchPriority="high" />
+                </div>
               )}
             </div>
-          ))}
-        </div>
-      </section>
+          </div>
+        </header>
 
-      {/* TECNOLOGIAS */}
-      <section>
-        <h2>Tecnologias</h2>
-        <div className="techs">
-          {projeto.tecnologias.map((tech, i) => (
-            <span key={i}>{tech}</span>
-          ))}
-        </div>
-      </section>
-
-      {/* TESTES */}
-      <section>
-        <h2>Testes Realizados</h2>
-
-        <div className="testes">
-          {projeto.testes.map((teste, i) => (
-            <div key={i} className="teste-card">
-              <img
-                src={teste.imagem}
-                onClick={() =>
-                  setSelecionado({
-                    tipo: "img",
-                    src: teste.imagem,
-                    titulo: teste.nome,
-                  })
-                }
-                style={{ cursor: "zoom-in" }}
-              />
-              <p>{teste.nome}</p>
+        {textos.length > 0 && (
+          <section className="secao secao-projeto" aria-labelledby="proj-sobre">
+            <div className="container container-estreito">
+              <Revelar>
+                <CabecalhoSecao id="proj-sobre" titulo="Sobre o projeto" />
+                <div className="projeto-texto">
+                  {textos.map((p, i) => <p key={i}>{p}</p>)}
+                </div>
+              </Revelar>
             </div>
-          ))}
-        </div>
-      </section>
+          </section>
+        )}
 
-      {/* DESAFIOS */}
-      <section>
-       <h2>Desafios</h2>
-<ul className="desafios">
-  {projeto.desafios.map((item, index) => (
-    <li key={index}>{item}</li>
-  ))}
-</ul>
-      </section>
+        {projeto.prints.some((m) => m.src) && (
+          <section className="secao secao-projeto" aria-labelledby="proj-galeria">
+            <div className="container">
+              <Revelar>
+                <CabecalhoSecao id="proj-galeria" titulo="Galeria" subtitulo="Toque numa imagem para ampliar." />
+                <GaleriaProjeto itens={projeto.prints} nome={projeto.nome} />
+              </Revelar>
+            </div>
+          </section>
+        )}
 
-      {/* SOLUÇÕES */}
-      <section>
-        <h2>Soluções</h2>
-<ul className="solucoes">
-  {projeto.solucoes.map((item, index) => (
-    <li key={index}>{item}</li>
-  ))}
-</ul>
-      </section>
+        {projeto.testes.length > 0 && (
+          <section className="secao secao-projeto" aria-labelledby="proj-testes">
+            <div className="container">
+              <Revelar>
+                <CabecalhoSecao id="proj-testes" titulo="Testes realizados" subtitulo="Como a qualidade deste projeto foi verificada." />
+              </Revelar>
+              <ul className="testes-grade">
+                {projeto.testes.map((teste, i) => (
+                  <li key={`${teste.nome}-${i}`}>
+                    <Revelar atraso={(i % 3) * 80}>
+                      <article className="teste-card">
+                        {teste.imagem ? <img src={teste.imagem} alt={`Evidência do teste: ${teste.nome}`} loading="lazy" decoding="async" /> : <span className="teste-icone" aria-hidden="true"><FaVial /></span>}
+                        <h3>{teste.nome}</h3>
+                        {teste.descricao && <p>{teste.descricao}</p>}
+                      </article>
+                    </Revelar>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+        )}
 
-      {/* ===================================== */}
-{/* ===== BOTÕES DO PROJETO ===== */}
-{/* ===================================== */}
+        {temPares && (
+          <section className="secao secao-projeto" aria-labelledby="proj-desafios">
+            <div className="container">
+              <Revelar>
+                <CabecalhoSecao id="proj-desafios" titulo="Desafios e soluções" />
+              </Revelar>
+              <div className="pares-grade">
+                {projeto.desafios.length > 0 && (
+                  <Revelar>
+                    <div className="par-bloco par-desafios">
+                      <h3>Desafios</h3>
+                      <ul>{projeto.desafios.map((d, i) => <li key={i}>{d}</li>)}</ul>
+                    </div>
+                  </Revelar>
+                )}
+                {projeto.solucoes.length > 0 && (
+                  <Revelar atraso={100}>
+                    <div className="par-bloco par-solucoes">
+                      <h3>Soluções</h3>
+                      <ul>{projeto.solucoes.map((d, i) => <li key={i}>{d}</li>)}</ul>
+                    </div>
+                  </Revelar>
+                )}
+              </div>
+            </div>
+          </section>
+        )}
 
-<div className="botoes-projeto">
-  <a href={projeto.github} target="_blank" rel="noopener noreferrer">
-    Repositório no GitHub
-  </a>
-
-  {projeto.site && (
-    <a href={projeto.site} target="_blank" rel="noopener noreferrer">
-      Ir para o Site
-    </a>
-  )}
-</div>
-
-      {/* 🔥 MODAL */}
-      <GaleriaModal
-        item={selecionado}
-        fechar={() => setSelecionado(null)}
-        
-      />
-
-    </div>
+        {anterior && proximo && (
+          <nav className="projeto-navegacao container" aria-label="Outros projetos">
+            <Link to={`/projeto/${anterior.slug}`} className="projeto-nav-link">
+              <small><FaArrowLeft aria-hidden="true" /> Anterior</small>
+              <span>{anterior.nome}</span>
+            </Link>
+            <Link to={`/projeto/${proximo.slug}`} className="projeto-nav-link projeto-nav-prox">
+              <small>Próximo <FaArrowRight aria-hidden="true" /></small>
+              <span>{proximo.nome}</span>
+            </Link>
+          </nav>
+        )}
+      </article>
+    </PaginaBase>
   );
 }

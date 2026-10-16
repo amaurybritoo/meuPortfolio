@@ -1,236 +1,273 @@
-/* ===== HERO LAYOUT PRINCIPAL ===== */
 .hero {
-  height: 80vh; /* ocupa quase toda a tela */
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr; /* 3 colunas: esquerda, foto, direita */
-  align-items: center;
-  padding: 0 80px;
-}
-
-/* ===== LADO ESQUERDO ===== */
-.left h1 {
-  font-size: 48px;
-  margin-bottom: 10px;
-}
-
-/* cargo (roxo destaque) */
-.cargo {
-  color: #a855f7;
-  margin-bottom: 10px;
-}
-
-/* descrição */
-.desc {
-  color: #aaa;
-  max-width: 350px;
-  margin-bottom: 20px;
-  line-height: 1.5;
-}
-
-/* botão */
-button {
-  padding: 10px 20px;
-  border: 1px solid #a855f7;
-  background: transparent;
-  color: #a855f7;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-/* efeito hover botão */
-button:hover {
-  background: #a855f7;
-  color: black;
-  box-shadow: 0 0 15px #a855f7;
-}
-
-/* ===== CENTRO (FOTO) ===== */
-.center {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  min-height: min(100svh, 920px);
+  padding: calc(var(--nav-altura) + clamp(20px, 4vw, 48px)) 0 clamp(36px, 6vw, 72px);
+}
+
+.hero-grade {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
   align-items: center;
-  position: relative; /* necessário pro glow */
+  gap: clamp(24px, 5vw, 72px);
 }
 
-/* imagem */
-.center img {
-  height: 360px;
+.hero-disponivel {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 22px;
+  padding: 8px 16px;
+  border: 1px solid rgba(52, 211, 153, 0.35);
+  border-radius: 999px;
+  background: rgba(52, 211, 153, 0.08);
+  color: #a7f3d0;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.hero-ponto {
   position: relative;
-  z-index: 2; /* fica na frente do glow */
-  transition: transform 0.4s ease, filter 0.4s ease;
+  display: inline-block;
+  flex: none;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--sucesso);
 }
 
-/* efeito inflar */
-.center img:hover {
-  transform: scale(1.08);
-  filter: brightness(1.1);
-}
-
-/* glow roxo atrás */
-.center::before {
+.hero-ponto::after {
   content: "";
   position: absolute;
-  width: 300px;
-  height: 420px;
-  background: radial-gradient(circle, #a855f7, transparent 70%);
-  filter: blur(70px);
-  opacity: 0.8;
-  z-index: 1;
-  transition: 0.4s;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1px solid var(--sucesso);
+  animation: pulsar 2.2s ease-out infinite;
 }
 
-/* glow mais forte no hover */
-.center:hover::before {
-  filter: blur(90px);
-  opacity: 1;
+@keyframes pulsar {
+  from { transform: scale(0.6); opacity: 0.9; }
+  to { transform: scale(1.6); opacity: 0; }
 }
 
-/* ===== LADO DIREITO ===== */
-.right {
-  max-width: 280px;
-  margin-left: 40px; /* espaço da foto */
+.hero-ola {
+  margin: 0 0 6px;
+  color: var(--texto-suave);
+  font-size: 1.1rem;
 }
 
-.right h4 {
-  color: #a855f7;
-  margin-bottom: 10px;
+.hero h1 {
+  background: linear-gradient(120deg, #ffffff 20%, var(--cor-primaria) 120%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: clamp(2.7rem, 7.4vw, 5.2rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.035em;
 }
 
-.right p {
-  color: #aaa;
-  font-size: 14px;
-  margin-bottom: 20px;
-  line-height: 1.5;
+.hero-cargo {
+  min-height: 1.5em;
+  margin: 16px 0 0;
+  color: var(--cor-primaria);
+  font-family: var(--fonte-titulo);
+  font-size: clamp(1.25rem, 3.2vw, 1.8rem);
+  font-weight: 600;
 }
 
-/* texto FOLLOW ME */
-.right span {
-  font-size: 12px;
-  color: #777;
-  display: block;
-  margin-bottom: 10px;
-  letter-spacing: 1px;
+.hero-cargo-texto {
+  display: inline-block;
+  animation: entrar-texto 0.55s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-/* linha roxa */
-.right span::after {
-  content: "";
-  display: block;
-  width: 60px;
-  height: 2px;
-  background: #a855f7;
-  margin-top: 5px;
+@keyframes entrar-texto {
+  from { opacity: 0; transform: translateY(10px); filter: blur(3px); }
+  to { opacity: 1; transform: none; filter: none; }
 }
 
-/* redes sociais */
-.social {
+.hero-frase {
+  max-width: 540px;
+  margin: 22px 0 0;
+  color: var(--texto-suave);
+  font-size: clamp(1.02rem, 2vw, 1.2rem);
+}
+
+.hero-acoes {
   display: flex;
-  gap: 15px;
-  font-size: 18px;
-  color: #aaa;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 34px;
 }
 
-.social svg {
-  cursor: pointer;
-  transition: 0.3s;
+.hero-redes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 30px;
+  list-style: none;
 }
 
-/* hover icones */
-.social svg:hover {
-  color: #a855f7;
-  transform: scale(1.2);
+.hero-redes a {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid var(--borda);
+  border-radius: 50%;
+  background: var(--superficie);
+  color: var(--texto-suave);
+  font-size: 1.15rem;
+  transition: transform 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-/* ===================================== */
-/* 🔥 RESPONSIVO (SEM QUEBRAR O LAYOUT) */
-/* ===================================== */
+.hero-redes a:hover {
+  transform: translateY(-3px);
+  border-color: var(--cor-primaria);
+  color: #fff;
+  box-shadow: 0 8px 24px -6px rgba(var(--cor-primaria-rgb), 0.7);
+}
 
-/* TABLET */
-@media (max-width: 1024px) {
+/* ---------- foto ---------- */
+
+.hero-visual {
+  position: relative;
+  width: min(100%, 500px);
+  aspect-ratio: 1 / 1;
+  margin-inline: auto;
+}
+
+.hero-aura {
+  position: absolute;
+  inset: 6%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 55%, rgba(var(--cor-primaria-rgb), 0.5), rgba(var(--cor-primaria-rgb), 0.08) 55%, transparent 72%);
+  filter: blur(12px);
+}
+
+.hero-marca {
+  position: absolute;
+  inset: 4%;
+  width: 92%;
+  height: 92%;
+  object-fit: contain;
+  opacity: 0.22;
+  mix-blend-mode: screen;
+}
+
+.hero-foto {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: auto;
+  height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 24px 40px rgba(var(--cor-primaria-rgb), 0.35));
+  /* a foto termina na altura dos joelhos: esmaece a base para não parecer cortada */
+  -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 18%);
+  mask-image: linear-gradient(to top, transparent 0%, #000 18%);
+}
+
+.hero-chip {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px;
+  border: 1px solid var(--borda-forte);
+  border-radius: 999px;
+  background: rgba(14, 12, 24, 0.82);
+  backdrop-filter: blur(8px);
+  font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  animation: flutuar 6s ease-in-out infinite;
+}
+
+.hero-chip svg {
+  color: var(--cor-primaria);
+}
+
+.hero-chip-1 { top: 10%; left: -2%; }
+.hero-chip-2 { top: 34%; right: -4%; animation-delay: -2s; }
+.hero-chip-3 { bottom: 14%; left: 0; animation-delay: -4s; }
+
+@keyframes flutuar {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* ---------- números ---------- */
+
+.hero-numeros {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 14px;
+  margin-top: clamp(32px, 5vw, 56px);
+  list-style: none;
+}
+
+.hero-numeros li {
+  padding: 20px 22px;
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  background: var(--superficie);
+}
+
+.hero-numeros strong {
+  display: block;
+  font-family: var(--fonte-titulo);
+  font-size: clamp(1.7rem, 4vw, 2.3rem);
+  line-height: 1.1;
+}
+
+.hero-numeros span {
+  color: var(--texto-suave);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 900px) {
   .hero {
-    padding: 0 40px;
+    min-height: 0;
   }
 
-  .center img {
-    height: 300px;
+  .hero-grade {
+    grid-template-columns: 1fr;
   }
-}
 
-/* CELULAR */
-@media (max-width: 768px) {
-  .hero {
-    grid-template-columns: 1fr; /* vira coluna única */
-    height: auto;
+  .hero-visual {
+    order: -1;
+    width: min(78vw, 360px);
+  }
+
+  .hero-chip-1 { left: -6%; }
+  .hero-chip-2 { right: -8%; }
+
+  .hero-texto {
     text-align: center;
-    padding: 40px 20px;
-    gap: 40px;
   }
 
-  /* remove espaçamento lateral */
-  .right {
-    margin-left: 0;
+  .hero-frase {
+    margin-inline: auto;
   }
 
-  /* centraliza tudo */
-  .left, .right {
-    align-items: center;
-  }
-
-  /* imagem menor */
-  .center img {
-    height: 250px;
-  }
-
-  /* glow ajustado */
-  .center::before {
-    width: 250px;
-    height: 300px;
-  }
-
-  /* redes centralizadas */
-  .social {
+  .hero-acoes,
+  .hero-redes {
     justify-content: center;
   }
 }
-/* ============================= */
-/* AJUSTE SOBRE MIM (MOBILE) */
-/* ============================= */
 
-
-@media (max-width: 768px) {
-  .right {
-    margin: 0 auto; /* centraliza bloco */
-    text-align: center;
+@media (max-width: 420px) {
+  .hero-chip {
+    padding: 7px 11px;
+    font-size: 0.78rem;
   }
 
-  .right span::after {
-    margin: 5px auto 0; /* centraliza linha */
-  }
-
-  .social {
-    justify-content: center; /* centraliza icones */
-  }
-}
-/* ============================= */
-/* EFEITO MOBILE NA FOTO */
-/* ============================= */
-
-@media (max-width: 768px) {
-  .center img {
-    animation: flutuar 3s ease-in-out infinite;
-  }
-
-  /* animação leve de flutuação */
-  @keyframes flutuar {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-    100% { transform: translateY(0px); }
-  }
-
-  /* glow mais forte no mobile */
-  .center::before {
-    filter: blur(90px);
-    opacity: 1;
+  .hero-acoes .botao {
+    width: 100%;
   }
 }

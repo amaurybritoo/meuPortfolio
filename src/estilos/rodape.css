@@ -1,76 +1,78 @@
-footer {
-  margin-top: 65px;
-  padding: 40px 80px;
-  background: linear-gradient(to top, #050505, #000);
+.rodape {
+  position: relative;
+  z-index: 1;
+  margin-top: 40px;
+  padding: 44px 0 28px;
+  border-top: 1px solid var(--borda);
+  background: linear-gradient(180deg, transparent, rgba(8, 6, 16, 0.85));
 }
 
-/* CONTAINER */
-.rodape-container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* TOPO */
-.rodape-top {
+.rodape-conteudo {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: space-between;
+  gap: 24px;
 }
 
-.rodape-top h3 {
-  margin: 0;
+.rodape-marca {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
 }
 
-.rodape-top p {
-  color: #aaa;
-  font-size: 14px;
+.rodape-marca img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  filter: drop-shadow(0 0 10px rgba(var(--cor-primaria-rgb), 0.6));
 }
 
-/* REDES */
-.rodape-social {
-  display: flex;
-  gap: 20px;
-  font-size: 18px;
-  color: #aaa;
-}
-
-.rodape-social svg:hover {
-  color: #a855f7;
-  cursor: pointer;
-}
-
-/* LINHA */
-.linha {
-  height: 1px;
-  background: linear-gradient(to right, transparent, #a855f7, transparent);
-  margin: 25px 0;
-}
-
-/* BAIXO */
-.rodape-bottom {
-  text-align: center;
-  color: #777;
-  font-size: 13px;
-}
-
-.rodape-bottom span {
+.rodape-marca strong {
   display: block;
-  margin-top: 5px;
-  color: #a855f7;
+  font-family: var(--fonte-titulo);
 }
 
-/* ============================= */
-/* RESPONSIVO RODAPÉ */
-/* ============================= */
+.rodape-marca small {
+  color: var(--texto-fraco);
+}
 
-@media (max-width: 768px) {
-  .rodape-top {
-    flex-direction: column;
-    gap: 20px;
-    text-align: center;
-  }
+.rodape-redes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style: none;
+}
 
-  footer {
-    padding: 40px 20px;
-  }
+.rodape-redes a {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--borda);
+  border-radius: 50%;
+  color: var(--texto-suave);
+  transition: all 0.2s ease;
+}
+
+.rodape-redes a:hover {
+  border-color: var(--cor-primaria);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.rodape-base {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid var(--borda);
+  color: var(--texto-fraco);
+  font-size: 0.85rem;
+}
+
+.rodape-base p {
+  margin: 0;
 }

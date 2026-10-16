@@ -6,6 +6,7 @@ import { mensagemErroSupabase, supabaseAdmin } from "../../server/supabase.js";
 type Requisicao = IncomingMessage & { body?: unknown };
 const EXTENSOES: Record<string, string> = {
   "image/webp": "webp", "image/jpeg": "jpg", "image/png": "png", "image/gif": "gif", "image/svg+xml": "svg", "application/pdf": "pdf",
+  "video/mp4": "mp4", "video/webm": "webm", "video/quicktime": "mov",
 };
 
 export default async function handler(req: Requisicao, res: ServerResponse) {

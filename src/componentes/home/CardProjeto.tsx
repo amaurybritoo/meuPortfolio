@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { FaArrowRight, FaExternalLinkAlt, FaGithub, FaStar } from "react-icons/fa";
 import type { Projeto } from "../../tipos";
 import Icone from "../comuns/Icone";
+import { MarkdownEmLinha } from "../comuns/Markdown";
 
 const MAX_TECNOLOGIAS = 4;
 
@@ -56,7 +57,7 @@ export default function CardProjeto({ projeto }: { projeto: Projeto }) {
             {projeto.nome}
           </Link>
         </h3>
-        {projeto.resumo && <p className="card-resumo">{projeto.resumo}</p>}
+        {projeto.resumo && <p className="card-resumo">{MarkdownEmLinha({ texto: projeto.resumo })}</p>}
 
         {tecnologias.length > 0 && (
           <ul className="chips" aria-label="Tecnologias">

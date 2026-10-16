@@ -8,7 +8,7 @@ export default function SeoAba({ dados, atualizar }: PropsAba) {
       <TituloAba titulo="Google e compartilhamento" descricao="Como o seu portfólio aparece nas buscas e quando o link é enviado no WhatsApp, LinkedIn etc." />
       <div className="painel-cartao">
         <CampoTexto rotulo="Título da página" dica={`${titulo.length}/60 caracteres (ideal: até 60)`} valor={titulo} onChange={(v) => atualizar((d) => { d.seo.titulo = v; })} />
-        <CampoArea rotulo="Descrição" dica={`${descricao.length}/160 caracteres (ideal: até 160)`} linhas={3} valor={descricao} onChange={(v) => atualizar((d) => { d.seo.descricao = v; })} />
+        <CampoArea rotulo="Descrição" dica={`${descricao.length}/160 caracteres (ideal: até 160)`} markdown={false} linhas={3} valor={descricao} onChange={(v) => atualizar((d) => { d.seo.descricao = v; })} />
       </div>
       <div className="painel-cartao">
         <h3>Prévia no Google</h3>

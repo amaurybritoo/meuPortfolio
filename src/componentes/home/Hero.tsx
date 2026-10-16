@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { FaArrowRight, FaDownload } from "react-icons/fa";
 import { usePortfolio } from "../../contexto/usePortfolio";
 import Icone from "../comuns/Icone";
+import { MarkdownEmLinha } from "../comuns/Markdown";
 import LinkSecao from "../layout/LinkSecao";
 import "../../estilos/hero.css";
 
@@ -38,7 +39,7 @@ export default function Hero() {
           <p className="hero-ola">Olá, eu sou</p>
           <h1 id="titulo-hero">{perfil.nome}</h1>
           <CargosAlternando cargos={perfil.cargos} />
-          {perfil.frase && <p className="hero-frase">{perfil.frase}</p>}
+          {perfil.frase && <p className="hero-frase">{MarkdownEmLinha({ texto: perfil.frase })}</p>}
 
           <div className="hero-acoes">
             <div className="hero-acoes-principais">

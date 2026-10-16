@@ -3,7 +3,7 @@ import { novaMidia, novoProjeto, novoTeste } from "../../../data/padrao";
 import type { Projeto } from "../../../tipos";
 import { gerarId, slugUnico } from "../../../utilitarios/texto";
 import { moverItem, removerItem } from "../../../utilitarios/lista";
-import { BotoesItem, Bloco, CampoArea, CampoTexto, ConfirmarExclusao, Interruptor, ListaTextos, SeletorImagem, SeletorOpcao, TituloAba } from "../campos";
+import { BotoesItem, Bloco, CampoArea, CampoTexto, ConfirmarExclusao, Interruptor, ListaTextos, SeletorImagem, SeletorOpcao, SeletorVideo, TituloAba } from "../campos";
 import type { PropsAba } from "../tiposAdmin";
 
 export default function ProjetosAba({ dados, atualizar, projetoSelecionado: selecionadoId, aoSelecionarProjeto: setSelecionadoId }: PropsAba) {
@@ -92,7 +92,7 @@ export default function ProjetosAba({ dados, atualizar, projetoSelecionado: sele
                 <CampoTexto rotulo="Ano" placeholder="2025" valor={projeto.ano} onChange={(v) => alterar((p) => { p.ano = v; })} />
               </div>
               <CampoArea rotulo="Resumo do card" dica={`${projeto.resumo.length}/200 caracteres. Aparece no card da página inicial.`} linhas={3} valor={projeto.resumo} onChange={(v) => alterar((p) => { p.resumo = v; })} />
-              <CampoArea rotulo="Descrição completa" dica="Aparece na página do projeto. Use Enter para criar parágrafos." linhas={8} valor={projeto.descricao} onChange={(v) => alterar((p) => { p.descricao = v; })} />
+              <CampoArea rotulo="Descrição completa" dica="Aparece na página do projeto. Use linhas em branco para separar parágrafos." linhas={8} valor={projeto.descricao} onChange={(v) => alterar((p) => { p.descricao = v; })} />
               <Interruptor rotulo="Publicado no site" dica="Desligado = rascunho: só aparece na prévia do admin." valor={projeto.visivel} onChange={(v) => alterar((p) => { p.visivel = v; })} />
               <Interruptor rotulo="Projeto em destaque" dica="Mostra uma etiqueta “Destaque” no card." valor={projeto.destaque} onChange={(v) => alterar((p) => { p.destaque = v; })} />
             </Bloco>
@@ -114,11 +114,11 @@ export default function ProjetosAba({ dados, atualizar, projetoSelecionado: sele
             <Bloco titulo="Galeria de prints" resumo={`${projeto.prints.length} item(ns)`}>
               {projeto.prints.map((m, i) => (
                 <div key={i} className="cartao-item cartao-item-grande">
-                  <SeletorOpcao rotulo="Tipo" valor={m.tipo} opcoes={[{ valor: "img", rotulo: "Imagem" }, { valor: "video", rotulo: "Vídeo (link)" }]} onChange={(v) => alterar((p) => { p.prints[i].tipo = v === "video" ? "video" : "img"; })} />
+                  <SeletorOpcao rotulo="Tipo" valor={m.tipo} opcoes={[{ valor: "img", rotulo: "Imagem" }, { valor: "video", rotulo: "Vídeo" }]} onChange={(v) => alterar((p) => { p.prints[i].tipo = v === "video" ? "video" : "img"; })} />
                   {m.tipo === "img" ? (
                     <SeletorImagem rotulo="Imagem" maxLado={1600} valor={m.src} onChange={(v) => alterar((p) => { p.prints[i].src = v; })} />
                   ) : (
-                    <CampoTexto rotulo="Link do vídeo (.mp4)" dica="O arquivo precisa estar hospedado (ex.: /videos/demo.mp4 na pasta public)." valor={m.src} onChange={(v) => alterar((p) => { p.prints[i].src = v; })} />
+                    <SeletorVideo rotulo="Vídeo" dica="Envie MP4, WebM ou MOV de até 3 MB, ou cole um link direto para o vídeo." valor={m.src} onChange={(v) => alterar((p) => { p.prints[i].src = v; })} />
                   )}
                   <CampoTexto rotulo="Legenda" valor={m.legenda} onChange={(v) => alterar((p) => { p.prints[i].legenda = v; })} />
                   <BotoesItem indice={i} total={projeto.prints.length} rotuloItem={`print ${i + 1}`} onMover={(passo) => alterar((p) => moverItem(p.prints, i, passo))} onRemover={() => alterar((p) => removerItem(p.prints, i))} />
@@ -135,7 +135,7 @@ export default function ProjetosAba({ dados, atualizar, projetoSelecionado: sele
                   <CampoArea rotulo="Descrição" linhas={2} valor={t.descricao} onChange={(v) => alterar((p) => { p.testes[i].descricao = v; })} />
                   <SeletorOpcao rotulo="Tipo de evidência" valor={t.video ? "video" : "img"} opcoes={[{ valor: "img", rotulo: "Imagem" }, { valor: "video", rotulo: "Vídeo" }]} onChange={(v) => alterar((p) => { if (v === "video") p.testes[i].imagem = ""; else p.testes[i].video = ""; })} />
                   {t.video ? (
-                    <CampoTexto rotulo="Vídeo de evidência" dica="Cole um link direto para um vídeo (MP4/WebM) ou um caminho do site." valor={t.video} onChange={(v) => alterar((p) => { p.testes[i].video = v; })} />
+                    <SeletorVideo rotulo="Vídeo de evidência" dica="Envie MP4, WebM ou MOV de até 3 MB, ou cole um link direto para o vídeo." valor={t.video} onChange={(v) => alterar((p) => { p.testes[i].video = v; })} />
                   ) : (
                     <SeletorImagem rotulo="Imagem de evidência (opcional)" maxLado={1400} valor={t.imagem} onChange={(v) => alterar((p) => { p.testes[i].imagem = v; })} />
                   )}

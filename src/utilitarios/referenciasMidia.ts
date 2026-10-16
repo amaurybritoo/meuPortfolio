@@ -17,8 +17,8 @@ export function coletarImagens(dados: Portfolio): ReferenciaImagem[] {
   const refs: ReferenciaImagem[] = [referencia(dados.perfil, "foto"), referencia(dados.perfil, "logo"), referencia(dados.perfil, "curriculo")];
   dados.projetos.forEach((projeto) => {
     refs.push(referencia(projeto, "capa"), referencia(projeto, "banner"));
-    projeto.prints.forEach((midia) => { if (midia.tipo === "img") refs.push(referencia(midia, "src")); });
-    projeto.testes.forEach((teste) => refs.push(referencia(teste, "imagem")));
+    projeto.prints.forEach((midia) => refs.push(referencia(midia, "src")));
+    projeto.testes.forEach((teste) => refs.push(referencia(teste, "imagem"), referencia(teste, "video")));
   });
   return refs.filter((ref) => ehDataUrl(ref.ler()));
 }

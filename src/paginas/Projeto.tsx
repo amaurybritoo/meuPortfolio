@@ -3,13 +3,13 @@ import { Link, useParams } from "react-router-dom";
 import { FaArrowLeft, FaArrowRight, FaExternalLinkAlt, FaGithub, FaPlay, FaSearchPlus, FaVial } from "react-icons/fa";
 import { usePortfolio } from "../contexto/usePortfolio";
 import CabecalhoSecao from "../componentes/comuns/CabecalhoSecao";
+import { Markdown, MarkdownEmLinha } from "../componentes/comuns/Markdown";
 import Revelar from "../componentes/comuns/Revelar";
 import { useSeo } from "../componentes/comuns/useSeo";
 import PaginaBase from "../componentes/layout/PaginaBase";
 import GaleriaProjeto from "../componentes/projeto/GaleriaProjeto";
 import Lightbox from "../componentes/projeto/Lightbox";
 import type { Midia, Teste as TipoTeste } from "../tipos";
-import { paragrafos } from "../utilitarios/texto";
 import NaoEncontrado from "./NaoEncontrado";
 import "../estilos/projeto.css";
 
@@ -30,7 +30,7 @@ export default function Projeto() {
   const anterior = visiveis.length > 1 ? visiveis[(indice - 1 + visiveis.length) % visiveis.length] : undefined;
   const proximo = visiveis.length > 1 ? visiveis[(indice + 1) % visiveis.length] : undefined;
   const temPares = projeto.desafios.length > 0 || projeto.solucoes.length > 0;
-  const textos = paragrafos(projeto.descricao);
+  const textos = projeto.descricao.trim();
   const imagemTopo = projeto.banner || projeto.capa;
 
   return (
@@ -43,7 +43,7 @@ export default function Projeto() {
               <div>
                 <p className="projeto-categoria">{[projeto.categoria, projeto.ano].filter(Boolean).join(" · ")}</p>
                 <h1>{projeto.nome}</h1>
-                {projeto.resumo && <p className="projeto-resumo">{projeto.resumo}</p>}
+                {projeto.resumo && <Markdown className="projeto-resumo" texto={projeto.resumo} />}
                 {projeto.tecnologias.length > 0 && (
                   <ul className="chips" aria-label="Tecnologias usadas">
                     {projeto.tecnologias.map((t) => <li key={t} className="chip">{t}</li>)}
@@ -79,7 +79,7 @@ export default function Projeto() {
               <Revelar>
                 <CabecalhoSecao id="proj-sobre" titulo="Sobre o projeto" />
                 <div className="projeto-texto">
-                  {textos.map((p, i) => <p key={i}>{p}</p>)}
+                  <Markdown texto={textos} />
                 </div>
               </Revelar>
             </div>
@@ -127,7 +127,7 @@ export default function Projeto() {
                   <Revelar>
                     <div className="par-bloco par-desafios">
                       <h3>Desafios</h3>
-                      <ul>{projeto.desafios.map((d, i) => <li key={i}>{d}</li>)}</ul>
+                      <ul>{projeto.desafios.map((d, i) => <li key={i}><Markdown texto={d} /></li>)}</ul>
                     </div>
                   </Revelar>
                 )}
@@ -135,7 +135,7 @@ export default function Projeto() {
                   <Revelar atraso={100}>
                     <div className="par-bloco par-solucoes">
                       <h3>Soluções</h3>
-                      <ul>{projeto.solucoes.map((d, i) => <li key={i}>{d}</li>)}</ul>
+                      <ul>{projeto.solucoes.map((d, i) => <li key={i}><Markdown texto={d} /></li>)}</ul>
                     </div>
                   </Revelar>
                 )}
@@ -172,7 +172,7 @@ function CartaoTeste({ teste }: { teste: TipoTeste }) {
           <span className="teste-icone" aria-hidden="true">{teste.video ? <FaPlay /> : <FaSearchPlus />}</span>
           <span className="teste-card-conteudo">
             <strong>{teste.nome}</strong>
-            {teste.descricao && <span className="teste-descricao">{teste.descricao}</span>}
+            {teste.descricao && <span className="teste-descricao">{MarkdownEmLinha({ texto: teste.descricao })}</span>}
             <span className="teste-ver">Clique para ver {teste.video ? "o vídeo" : "a imagem"}</span>
           </span>
         </button>
@@ -180,7 +180,7 @@ function CartaoTeste({ teste }: { teste: TipoTeste }) {
         <article className="teste-card">
           <span className="teste-icone" aria-hidden="true"><FaVial /></span>
           <h3>{teste.nome}</h3>
-          {teste.descricao && <p>{teste.descricao}</p>}
+          {teste.descricao && <Markdown texto={teste.descricao} />}
         </article>
       )}
       {aberto && <Lightbox itens={[midia]} indice={0} onMudar={() => {}} onFechar={() => setAberto(false)} />}

@@ -29,6 +29,7 @@ interface PropsTexto extends CampoBase {
   placeholder?: string;
   tipo?: "text" | "email" | "url" | "tel";
   maxLength?: number;
+  markdown?: boolean;
 }
 
 export function CampoTexto({ rotulo, dica, valor, onChange, placeholder, tipo = "text", maxLength }: PropsTexto) {
@@ -40,11 +41,12 @@ export function CampoTexto({ rotulo, dica, valor, onChange, placeholder, tipo = 
   );
 }
 
-export function CampoArea({ rotulo, dica, valor, onChange, placeholder, linhas = 4 }: PropsTexto & { linhas?: number }) {
+export function CampoArea({ rotulo, dica, valor, onChange, placeholder, linhas = 4, markdown = true }: PropsTexto & { linhas?: number }) {
   const id = useId();
   return (
     <Campo rotulo={rotulo} dica={dica} id={id}>
       <textarea id={id} className="entrada" rows={linhas} value={valor} placeholder={placeholder} onChange={(e) => onChange(e.target.value)} />
+      {markdown && <small className="campo-dica">Markdown: **negrito**, *itálico*, # título, - lista, `código` e [link](https://…). </small>}
     </Campo>
   );
 }
@@ -58,6 +60,7 @@ export function Interruptor({ rotulo, dica, valor, onChange }: CampoBase & { val
         <span className="interruptor-trilho" aria-hidden="true" />
         <span className="interruptor-texto">{rotulo}</span>
       </label>
+      {multilinha && <small className="campo-dica">Markdown: **negrito**, *itálico*, # título, - lista, `código` e [link](https://…). </small>}
       {dica && <small className="campo-dica">{dica}</small>}
     </div>
   );
@@ -212,6 +215,41 @@ export function SeletorArquivo({ rotulo, dica, valor, onChange, aceitar = "appli
             <ConfirmarExclusao rotulo="este arquivo" className="admin-botao admin-botao-texto admin-botao-pequeno" ariaLabel="Remover arquivo" onConfirmar={() => onChange("")}><FaTrash aria-hidden="true" /> Remover</ConfirmarExclusao>
           )}
           <input ref={entrada} type="file" accept={aceitar} hidden onChange={aoEscolher} />
+        </div>
+        {erro && <p className="campo-erro" role="alert">{erro}</p>}
+      </div>
+    </Campo>
+  );
+}
+
+export function SeletorVideo({ rotulo, dica, valor, onChange, limiteMb = 3 }: PropsImagem & { limiteMb?: number }) {
+  const id = useId();
+  const entrada = useRef<HTMLInputElement>(null);
+  const [erro, setErro] = useState("");
+  const [ocupado, setOcupado] = useState(false);
+  const enviado = ehDataUrl(valor);
+  const aoEscolher = (evento: ChangeEvent<HTMLInputElement>) => {
+    const arquivo = evento.target.files?.[0];
+    evento.target.value = "";
+    if (!arquivo) return;
+    if (!arquivo.type.startsWith("video/")) { setErro("Escolha um arquivo de vídeo."); return; }
+    if (arquivo.size > limiteMb * 1024 * 1024) { setErro(`O vídeo tem mais de ${limiteMb} MB. Comprima o arquivo ou use um link.`); return; }
+    setErro(""); setOcupado(true);
+    const leitor = new FileReader();
+    leitor.onload = () => { onChange(String(leitor.result)); setOcupado(false); };
+    leitor.onerror = () => { setErro("Não foi possível ler o vídeo."); setOcupado(false); };
+    leitor.readAsDataURL(arquivo);
+  };
+  return (
+    <Campo rotulo={rotulo} dica={dica} id={id}>
+      <div className="seletor-imagem-controles">
+        {enviado ? <><video className="seletor-video-previa" src={valor} controls preload="metadata" />
+          <p className="seletor-imagem-nota">Vídeo enviado ({tamanhoAproximadoKb(valor)} KB). Será enviado ao site quando você clicar em <strong>Salvar alterações</strong>.</p></> :
+          <input id={id} className="entrada" type="text" value={valor} placeholder="https://… ou caminho do vídeo" onChange={(e) => onChange(e.target.value)} />}
+        <div className="seletor-imagem-botoes">
+          <button type="button" className="admin-botao admin-botao-contorno admin-botao-pequeno" onClick={() => entrada.current?.click()} disabled={ocupado}><FaUpload aria-hidden="true" /> {ocupado ? "Lendo vídeo…" : "Enviar vídeo"}</button>
+          {valor && <ConfirmarExclusao rotulo="este vídeo" className="admin-botao admin-botao-texto admin-botao-pequeno" ariaLabel="Remover vídeo" onConfirmar={() => onChange("")}><FaTrash aria-hidden="true" /> Remover</ConfirmarExclusao>}
+          <input ref={entrada} type="file" accept="video/mp4,video/webm,video/quicktime" hidden onChange={aoEscolher} />
         </div>
         {erro && <p className="campo-erro" role="alert">{erro}</p>}
       </div>

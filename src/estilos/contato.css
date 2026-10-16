@@ -10,7 +10,8 @@
   font-size: clamp(1.5rem, 3.4vw, 2.1rem);
 }
 
-.contato-chamada > p {
+.contato-chamada > p,
+.contato-chamada .contato-texto > p {
   max-width: 460px;
   color: var(--texto-suave);
   font-size: 1.05rem;

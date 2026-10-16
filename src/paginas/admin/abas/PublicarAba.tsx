@@ -27,7 +27,7 @@ export default function PublicarAba({ dados, carregado, alterado, salvoNoNavegad
   const [resultado, setResultado] = useState<{ tipo: "ok" | "erro"; texto: string } | null>(null);
   const arquivoImport = useRef<HTMLInputElement>(null);
   const erros = problemas.filter((p) => p.nivel === "erro");
-  const imagensPendentes = coletarImagens(dados).length;
+  const arquivosPendentes = coletarImagens(dados).length;
 
   const salvar = async () => {
     if (erros.length > 0) return;
@@ -116,7 +116,7 @@ export default function PublicarAba({ dados, carregado, alterado, salvoNoNavegad
       <div className="painel-cartao">
         <h3><FaSave aria-hidden="true" /> Salvar no Supabase</h3>
         <p className="campo-dica">O conteúdo vai direto para o banco e as imagens para o armazenamento do Supabase. As alterações aparecem no site sem novo deploy.</p>
-        {imagensPendentes > 0 && <p className="nota-info">{imagensPendentes} imagem(ns) ou arquivo(s) novo(s) serão enviados ao Supabase junto com o conteúdo.</p>}
+        {arquivosPendentes > 0 && <p className="nota-info">{arquivosPendentes} imagem(ns), vídeo(s) ou arquivo(s) novo(s) serão enviados ao Supabase junto com o conteúdo.</p>}
         <div className="acoes-linha">
           <button type="button" className="admin-botao admin-botao-primario" onClick={salvar} disabled={!carregado || ocupado || erros.length > 0}><FaSave aria-hidden="true" /> {!carregado ? "Carregando…" : ocupado ? "Salvando…" : "Salvar alterações"}</button>
         </div>

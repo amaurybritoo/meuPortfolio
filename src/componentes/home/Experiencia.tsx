@@ -1,6 +1,7 @@
 import { usePortfolio } from "../../contexto/usePortfolio";
 import CabecalhoSecao from "../comuns/CabecalhoSecao";
 import Revelar from "../comuns/Revelar";
+import { Markdown } from "../comuns/Markdown";
 import "../../estilos/secoes.css";
 
 export default function Experiencia() {
@@ -20,7 +21,7 @@ export default function Experiencia() {
             <li key={item.id}><Revelar atraso={i * 80}><article className="linha-tempo-item">
               {item.periodo && <span className="linha-tempo-periodo">{item.periodo}</span>}
               <h3>{item.titulo}</h3>{item.local && <p className="linha-tempo-local">{item.local}</p>}
-              {item.descricao && <p>{item.descricao}</p>}
+              {item.descricao && <Markdown texto={item.descricao} />}
             </article></Revelar></li>
           ))}
         </ol>

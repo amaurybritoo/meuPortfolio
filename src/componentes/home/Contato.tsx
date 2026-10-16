@@ -5,6 +5,7 @@ import { usePortfolio } from "../../contexto/usePortfolio";
 import CabecalhoSecao from "../comuns/CabecalhoSecao";
 import Icone from "../comuns/Icone";
 import Revelar from "../comuns/Revelar";
+import { Markdown } from "../comuns/Markdown";
 import { formatarWhatsAppBrasil } from "../../utilitarios/texto";
 import "../../estilos/contato.css";
 
@@ -53,7 +54,7 @@ export default function Contato() {
 
         <Revelar className="contato-chamada">
             <h3>{contato.titulo}</h3>
-            {contato.texto && <p>{contato.texto}</p>}
+            {contato.texto && <Markdown className="contato-texto" texto={contato.texto} />}
         </Revelar>
 
         <div className="contato-grade">

@@ -2,6 +2,7 @@ import { FaDownload, FaEnvelope, FaMapMarkerAlt, FaWhatsapp } from "react-icons/
 import { usePortfolio } from "../../contexto/usePortfolio";
 import CabecalhoSecao from "../comuns/CabecalhoSecao";
 import Revelar from "../comuns/Revelar";
+import { Markdown } from "../comuns/Markdown";
 import { formatarWhatsAppBrasil } from "../../utilitarios/texto";
 import "../../estilos/secoes.css";
 
@@ -23,7 +24,7 @@ export default function Sobre() {
         <div className={`sobre-grade ${temInfo ? "" : "sobre-sozinho"}`}>
           <Revelar className="sobre-texto">
             {textos.map((p, i) => (
-              <p key={i}>{p}</p>
+              <Markdown key={i} texto={p} />
             ))}
           </Revelar>
           {temInfo && (

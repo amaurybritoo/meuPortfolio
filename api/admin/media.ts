@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import type { IncomingMessage, ServerResponse } from "node:http";
-import { exigirSessao, responderJson } from "../../server/adminAuth";
-import { supabaseAdmin } from "../../server/supabase";
+import { exigirSessao, responderJson } from "../../server/adminAuth.js";
+import { supabaseAdmin } from "../../server/supabase.js";
 
 type Requisicao = IncomingMessage & { body?: unknown };
 const EXTENSOES: Record<string, string> = {

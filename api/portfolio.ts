@@ -1,6 +1,6 @@
 import type { IncomingMessage, ServerResponse } from "node:http";
-import { responderJson } from "../server/adminAuth";
-import { supabaseAdmin } from "../server/supabase";
+import { responderJson } from "../server/adminAuth.js";
+import { supabaseAdmin } from "../server/supabase.js";
 
 export default async function handler(req: IncomingMessage, res: ServerResponse) {
   if (req.method !== "GET") {

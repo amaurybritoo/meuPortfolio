@@ -1,6 +1,6 @@
 import { createHmac, randomBytes, timingSafeEqual } from "node:crypto";
 import type { IncomingMessage, ServerResponse } from "node:http";
-import { sessaoAdminValida } from "../../server/adminAuth";
+import { sessaoAdminValida } from "../../server/adminAuth.js";
 
 const COOKIE = "admin_session";
 const DURACAO_SEGUNDOS = 8 * 60 * 60;

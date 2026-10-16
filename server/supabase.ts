@@ -3,7 +3,8 @@ import { createClient } from "@supabase/supabase-js";
 export function supabaseAdmin() {
   const url = process.env.SUPABASE_URL;
   const chave = process.env.CHAVE_SECRETA;
-  if (!url || !chave) throw new Error("Configure SUPABASE_URL e CHAVE_SECRETA nas variáveis privadas da Vercel.");
+  if (!url) throw new Error("A variável SUPABASE_URL não chegou à função neste deployment. Confira o ambiente da variável e quando este deployment foi criado.");
+  if (!chave) throw new Error("A variável CHAVE_SECRETA não chegou à função neste deployment. Confira o ambiente da variável e quando este deployment foi criado.");
   return createClient(url, chave, { auth: { persistSession: false, autoRefreshToken: false } });
 }
 

@@ -87,6 +87,14 @@ export interface Experiencia {
   descricao: string;
 }
 
+export interface Formacao {
+  id: string;
+  periodo: string;
+  titulo: string;
+  local: string;
+  descricao: string;
+}
+
 export interface ConfigSecao {
   ativa: boolean;
   titulo: string;
@@ -126,6 +134,7 @@ export interface Secoes {
   habilidades: ConfigSecao;
   projetos: ConfigSecao;
   experiencia: ConfigSecao;
+  formacao: ConfigSecao;
   contato: ConfigSecao;
 }
 
@@ -135,6 +144,7 @@ export interface Portfolio {
   estatisticas: Estatistica[];
   habilidades: GrupoHabilidades[];
   experiencias: Experiencia[];
+  formacoes: Formacao[];
   projetos: Projeto[];
   contato: ConfigContato;
   secoes: Secoes;

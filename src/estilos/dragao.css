@@ -1,4 +1,4 @@
-/* O dragão nunca recebe cliques, fica atrás do conteúdo e só se move com transform (leve para o celular). */
+/* O dragão nunca recebe cliques e cruza o fundo com transform, sem interferir no conteúdo. */
 .dragao {
   display: block;
   pointer-events: none;
@@ -12,9 +12,12 @@
   left: 0;
   width: 640px;
   height: 430px;
+  max-width: none;
   will-change: transform;
   transform-origin: 50% 50%;
 }
+
+.dragao-imagem { object-fit: contain; max-width: none; transform-origin: center; }
 
 .dragao-previa {
   width: 100%;

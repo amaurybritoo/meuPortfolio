@@ -1,16 +1,16 @@
 .contato-grade {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  align-items: start;
+  align-items: stretch;
   gap: clamp(24px, 5vw, 64px);
 }
 
-.contato-lado h3 {
+.contato-chamada h3 {
   margin-bottom: 14px;
   font-size: clamp(1.5rem, 3.4vw, 2.1rem);
 }
 
-.contato-lado > p {
+.contato-chamada > p {
   max-width: 460px;
   color: var(--texto-suave);
   font-size: 1.05rem;
@@ -19,7 +19,7 @@
 .contato-canais {
   display: grid;
   gap: 12px;
-  margin-top: 28px;
+  margin-top: 0;
   list-style: none;
 }
 
@@ -95,6 +95,8 @@ li:has(.canal-copiar) .canal {
   border: 1px solid var(--borda);
   border-radius: var(--raio);
   background: linear-gradient(180deg, var(--superficie-forte), var(--superficie));
+  height: 100%;
+  align-content: start;
 }
 
 .contato-form h3 {

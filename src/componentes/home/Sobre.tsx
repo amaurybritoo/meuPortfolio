@@ -1,17 +1,18 @@
-import { FaDownload, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
+import { FaDownload, FaEnvelope, FaMapMarkerAlt, FaWhatsapp } from "react-icons/fa";
 import { usePortfolio } from "../../contexto/usePortfolio";
 import CabecalhoSecao from "../comuns/CabecalhoSecao";
 import Revelar from "../comuns/Revelar";
+import { formatarWhatsAppBrasil } from "../../utilitarios/texto";
 import "../../estilos/secoes.css";
 
 export default function Sobre() {
   const { dados } = usePortfolio();
-  const { perfil, secoes } = dados;
+  const { perfil, secoes, contato } = dados;
   const config = secoes.sobre;
   const textos = perfil.sobre.length > 0 ? perfil.sobre : perfil.resumo ? [perfil.resumo] : [];
   if (!config.ativa || textos.length === 0) return null;
 
-  const temInfo = Boolean(perfil.localizacao || perfil.email || perfil.curriculo || perfil.disponivel);
+  const temInfo = Boolean(perfil.localizacao || perfil.email || perfil.whatsapp || perfil.curriculo || perfil.disponivel);
 
   return (
     <section id="sobre" className="secao" aria-labelledby="titulo-sobre">
@@ -47,6 +48,7 @@ export default function Sobre() {
                       <a href={`mailto:${perfil.email}`}>{perfil.email}</a>
                     </li>
                   )}
+                  {perfil.whatsapp && <li className="sobre-whatsapp"><FaWhatsapp aria-hidden="true" /><a href={`https://wa.me/${perfil.whatsapp}?text=${encodeURIComponent(contato.mensagemWhatsapp)}`} target="_blank" rel="noopener noreferrer" aria-label={`WhatsApp ${formatarWhatsAppBrasil(perfil.whatsapp)}`}>{formatarWhatsAppBrasil(perfil.whatsapp)}</a></li>}
                   {perfil.curriculo && (
                     <li>
                       <FaDownload aria-hidden="true" />

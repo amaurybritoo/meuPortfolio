@@ -250,13 +250,31 @@ button {
 }
 
 .chip-icone {
-  padding: 9px 14px;
+  padding: 11px 16px;
   font-size: 0.9rem;
   color: var(--texto);
 }
 
+.chip-icone svg { width: 1.35em; height: 1.35em; filter: drop-shadow(0 0 7px rgba(var(--cor-primaria-rgb), .32)); animation: brilho-icone 2.8s ease-in-out infinite; }
+@keyframes brilho-icone { 50% { filter: drop-shadow(0 0 12px rgba(var(--cor-primaria-rgb), .72)); } }
+@media (prefers-reduced-motion: reduce) { .chip-icone svg { animation: none; } }
+
 .chip-mais {
   color: var(--texto-fraco);
+}
+
+.logo-pulsante {
+  transform-origin: center;
+  animation: logo-pulso 2.8s ease-in-out infinite;
+}
+
+@keyframes logo-pulso {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(var(--cor-primaria-rgb), .3)); }
+  50% { transform: scale(1.09); filter: drop-shadow(0 0 14px rgba(var(--cor-primaria-rgb), .72)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-pulsante { animation: none; }
 }
 
 /* ---------- animação de entrada ---------- */

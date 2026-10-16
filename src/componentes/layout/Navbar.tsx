@@ -23,7 +23,7 @@ export default function Navbar() {
     if (secoes.sobre.ativa && (perfil.sobre.length > 0 || perfil.resumo)) lista.push({ id: "sobre", rotulo: "Sobre" });
     if (secoes.habilidades.ativa && dados.habilidades.length > 0) lista.push({ id: "habilidades", rotulo: "Habilidades" });
     if (secoes.projetos.ativa && projetos.length > 0) lista.push({ id: "projetos", rotulo: "Projetos" });
-    if (secoes.experiencia.ativa && dados.experiencias.length > 0) lista.push({ id: "experiencia", rotulo: "Formação" });
+    if (secoes.formacao.ativa && dados.formacoes.length > 0) lista.push({ id: "formacao", rotulo: "Formação" });
     if (secoes.contato.ativa) lista.push({ id: "contato", rotulo: "Contato" });
     return lista;
   }, [dados, projetos, perfil, secoes]);
@@ -62,7 +62,7 @@ export default function Navbar() {
       <a className="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
       <div className="navbar-conteudo">
         <Link to="/" className="navbar-marca" aria-label={`${perfil.nome} — página inicial`} onClick={() => setAberto(false)}>
-          {perfil.logo && <img src={perfil.logo} alt="" width={40} height={40} />}
+          {perfil.logo && <img className="logo-pulsante" src={perfil.logo} alt="" width={56} height={56} />}
           <span>{perfil.nome}</span>
         </Link>
 

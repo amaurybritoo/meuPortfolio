@@ -13,6 +13,87 @@
 
 .admin h2, .admin h3 { letter-spacing: -0.01em; }
 
+.admin-login {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: 24px;
+  background: radial-gradient(70% 55% at 50% 0%, rgba(var(--cor-primaria-rgb), .2), transparent 72%), var(--fundo);
+  color: var(--texto);
+}
+
+.admin-login-cartao {
+  display: grid;
+  gap: 14px;
+  width: min(100%, 420px);
+  padding: clamp(24px, 6vw, 40px);
+  border: 1px solid var(--borda-forte);
+  border-radius: var(--raio);
+  background: var(--fundo-elevado);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, .42);
+}
+
+.admin-login-selo {
+  display: grid;
+  width: 52px;
+  height: 52px;
+  place-items: center;
+  border-radius: 16px;
+  background: rgba(var(--cor-primaria-rgb), .16);
+  color: var(--cor-primaria);
+  font-size: 1.25rem;
+}
+
+.admin-login-rotulo {
+  margin: 0;
+  color: var(--cor-primaria);
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.admin-login-cartao h1 {
+  font-family: var(--fonte-titulo);
+  font-size: clamp(1.55rem, 6vw, 2rem);
+}
+
+.admin-login-cartao > p:not(.admin-login-rotulo):not(.admin-login-mensagem) {
+  margin: 0;
+  color: var(--texto-suave);
+}
+
+.admin-login-cartao label {
+  margin-top: 4px;
+  color: var(--texto-suave);
+  font-size: .9rem;
+  font-weight: 600;
+}
+
+.admin-login-cartao input {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 14px;
+  border: 1px solid var(--borda-forte);
+  border-radius: var(--raio-pequeno);
+  background: rgba(8, 6, 16, .75);
+}
+
+.admin-login-cartao input:focus-visible {
+  outline-color: var(--cor-primaria);
+}
+
+.admin-login-cartao .admin-botao {
+  justify-content: center;
+  min-height: 48px;
+}
+
+.admin-login-mensagem {
+  margin: 0;
+  color: var(--erro);
+  font-size: .9rem;
+}
+
 /* ---------- topo ---------- */
 
 .admin-topo {
@@ -37,6 +118,8 @@
 }
 
 .admin-topo-marca img {
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
   filter: drop-shadow(0 0 8px rgba(var(--cor-primaria-rgb), 0.7));
 }

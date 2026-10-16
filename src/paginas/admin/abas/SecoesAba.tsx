@@ -6,7 +6,7 @@ const NOMES: Array<{ chave: keyof Secoes; nome: string; nota: string }> = [
   { chave: "sobre", nome: "Sobre mim", nota: "Só aparece se houver texto (abas Perfil/Sobre)." },
   { chave: "habilidades", nome: "Habilidades", nota: "Só aparece se houver grupos com itens." },
   { chave: "projetos", nome: "Projetos", nota: "Só aparece se houver projeto visível." },
-  { chave: "experiencia", nome: "Formação e experiência", nota: "Só aparece se houver itens." },
+  { chave: "formacao", nome: "Formação", nota: "Só aparece se houver formações." },
   { chave: "contato", nome: "Contato", nota: "" },
 ];
 

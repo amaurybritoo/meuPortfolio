@@ -29,7 +29,7 @@ export default function PerfilAba({ dados, atualizar }: PropsAba) {
 
       <Bloco titulo="Imagens" resumo="Foto e logo" aberto>
         <SeletorImagem rotulo="Foto do topo" dica="Ideal: foto com fundo transparente (PNG/WebP), de corpo ou meio corpo." maxLado={1200} valor={p.foto} onChange={(v) => atualizar((d) => { d.perfil.foto = v; })} />
-        <SeletorImagem rotulo="Logo" dica="Aparece no menu, no rodapé e esmaecida atrás da foto." maxLado={512} valor={p.logo} onChange={(v) => atualizar((d) => { d.perfil.logo = v; })} />
+        <SeletorImagem rotulo="Logo" dica="Aparece pulsando no menu e no rodapé." maxLado={512} valor={p.logo} onChange={(v) => atualizar((d) => { d.perfil.logo = v; })} />
       </Bloco>
 
       <Bloco titulo="Disponibilidade e currículo">

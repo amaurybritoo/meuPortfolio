@@ -3,7 +3,7 @@
 // se faltar algum campo, ele é preenchido com um valor seguro (o site nunca quebra).
 
 import type {
-  Aparencia, ConfigContato, ConfigDragao, ConfigSecao, Estatistica, Experiencia, GrupoHabilidades,
+  Aparencia, ConfigContato, ConfigDragao, ConfigSecao, Estatistica, Experiencia, Formacao, GrupoHabilidades,
   Habilidade, Midia, Perfil, Portfolio, Projeto, Rede, Secoes, Seo, Teste,
 } from "../tipos";
 import { gerarId, limitar, slugify } from "../utilitarios/texto";
@@ -28,7 +28,8 @@ export const SECOES_PADRAO: Secoes = {
   sobre: { ativa: true, titulo: "Sobre mim", subtitulo: "" },
   habilidades: { ativa: true, titulo: "Habilidades", subtitulo: "" },
   projetos: { ativa: true, titulo: "Projetos", subtitulo: "" },
-  experiencia: { ativa: true, titulo: "Formação e experiência", subtitulo: "" },
+  experiencia: { ativa: true, titulo: "Experiência profissional", subtitulo: "" },
+  formacao: { ativa: true, titulo: "Formação", subtitulo: "" },
   contato: { ativa: true, titulo: "Contato", subtitulo: "" },
 };
 
@@ -108,6 +109,11 @@ function normalizarExperiencia(v: unknown): Experiencia {
   };
 }
 
+function normalizarFormacao(v: unknown): Formacao {
+  const o = objeto(v);
+  return { id: texto(o.id) || gerarId("form"), periodo: texto(o.periodo), titulo: texto(o.titulo), local: texto(o.local), descricao: texto(o.descricao) };
+}
+
 function normalizarPerfil(v: unknown): Perfil {
   const o = objeto(v);
   return {
@@ -166,6 +172,8 @@ export function normalizarPortfolio(entrada: unknown): Portfolio {
   const o = objeto(entrada);
   const s = objeto(o.secoes);
   const projetos = lista(o.projetos, normalizarProjeto);
+  const itensAntigos = lista(o.experiencias, normalizarExperiencia);
+  const formacoesAntigas = itensAntigos.filter((i) => /forma[cç][aã]o|p[oó]s-gradua[cç][aã]o|tecn[oó]logo|gradua[cç][aã]o/i.test(`${i.periodo} ${i.titulo}`));
   // garante slugs únicos (dois projetos com o mesmo endereço quebrariam a página)
   const usados = new Set<string>();
   projetos.forEach((p) => {
@@ -180,7 +188,8 @@ export function normalizarPortfolio(entrada: unknown): Portfolio {
     perfil: normalizarPerfil(o.perfil),
     estatisticas: lista(o.estatisticas, normalizarEstatistica),
     habilidades: lista(o.habilidades, normalizarGrupo),
-    experiencias: lista(o.experiencias, normalizarExperiencia),
+    experiencias: itensAntigos.filter((i) => !formacoesAntigas.some((f) => f.id === i.id)),
+    formacoes: Array.isArray(o.formacoes) ? lista(o.formacoes, normalizarFormacao) : formacoesAntigas.map(normalizarFormacao),
     projetos,
     contato: normalizarContato(o.contato),
     secoes: {
@@ -188,6 +197,7 @@ export function normalizarPortfolio(entrada: unknown): Portfolio {
       habilidades: normalizarSecao(s.habilidades, SECOES_PADRAO.habilidades),
       projetos: normalizarSecao(s.projetos, SECOES_PADRAO.projetos),
       experiencia: normalizarSecao(s.experiencia, SECOES_PADRAO.experiencia),
+      formacao: normalizarSecao(s.formacao, SECOES_PADRAO.formacao),
       contato: normalizarSecao(s.contato, SECOES_PADRAO.contato),
     },
     aparencia: normalizarAparencia(o.aparencia),
@@ -210,3 +220,4 @@ export const novaHabilidade = (): Habilidade => ({ id: gerarId("hab"), nome: "",
 export const novoGrupo = (): GrupoHabilidades => ({ id: gerarId("grupo"), titulo: "Novo grupo", itens: [] });
 export const novaEstatistica = (): Estatistica => ({ id: gerarId("num"), valor: "", rotulo: "" });
 export const novaExperiencia = (): Experiencia => ({ id: gerarId("exp"), periodo: "", titulo: "", local: "", descricao: "" });
+export const novaFormacao = (): Formacao => ({ id: gerarId("form"), periodo: "", titulo: "", local: "", descricao: "" });

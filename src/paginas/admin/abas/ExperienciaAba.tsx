@@ -7,7 +7,7 @@ import type { PropsAba } from "../tiposAdmin";
 export default function ExperienciaAba({ dados, atualizar }: PropsAba) {
   return (
     <>
-      <TituloAba titulo="Formação e experiência" descricao="Linha do tempo com cursos, formações e trabalhos. Sem itens, a seção não aparece." />
+      <TituloAba titulo="Experiência profissional" descricao="Gerencie seus cargos e experiências de trabalho." />
       {dados.experiencias.map((e, i) => (
         <div key={e.id} className="cartao-item cartao-item-grande">
           <div className="grade-campos">
@@ -16,7 +16,7 @@ export default function ExperienciaAba({ dados, atualizar }: PropsAba) {
           </div>
           <CampoTexto rotulo="Título / cargo / curso" valor={e.titulo} onChange={(v) => atualizar((d) => { d.experiencias[i].titulo = v; })} />
           <CampoArea rotulo="Descrição" linhas={3} valor={e.descricao} onChange={(v) => atualizar((d) => { d.experiencias[i].descricao = v; })} />
-          <BotoesItem indice={i} total={dados.experiencias.length} rotuloItem={`item ${i + 1}`} onMover={(p) => atualizar((d) => moverItem(d.experiencias, i, p))} onRemover={() => atualizar((d) => removerItem(d.experiencias, i))} />
+          <BotoesItem indice={i} total={dados.experiencias.length} rotuloItem={`experiência ${i + 1}`} onMover={(p) => atualizar((d) => moverItem(d.experiencias, i, p))} onRemover={() => atualizar((d) => removerItem(d.experiencias, i))} />
         </div>
       ))}
       <button type="button" className="admin-botao admin-botao-contorno" onClick={() => atualizar((d) => { d.experiencias.push(novaExperiencia()); })}>

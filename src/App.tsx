@@ -5,6 +5,7 @@ import PortfolioProvider from "./contexto/PortfolioProvider";
 import Home from "./paginas/Home";
 import NaoEncontrado from "./paginas/NaoEncontrado";
 import Projeto from "./paginas/Projeto";
+import Curriculo from "./paginas/Curriculo";
 
 // O painel de administração só é baixado quando alguém abre /admin (mantém o site público leve).
 const Admin = lazy(() => import("./paginas/Admin"));
@@ -18,6 +19,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/projeto/:slug" element={<Projeto />} />
+            <Route path="/curriculo" element={<Curriculo />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="*" element={<NaoEncontrado />} />
           </Routes>

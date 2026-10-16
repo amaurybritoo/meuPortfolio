@@ -133,7 +133,7 @@
       ]
     }
   ],
-  "experiencias": [
+  "formacoes": [
     {
       "id": "exp-ebac",
       "periodo": "Formação",
@@ -149,15 +149,59 @@
       "descricao": ""
     }
   ],
+  "experiencias": [
+    {
+      "id": "exp-cetam",
+      "periodo": "Jul 2026 – atual",
+      "titulo": "Analista de suporte de TI",
+      "local": "CETAM – Centro de Ensino Tecnológico do Amazonas",
+      "descricao": ""
+    },
+    {
+      "id": "exp-hospital",
+      "periodo": "Ago 2025 – Dez 2025",
+      "titulo": "Auxiliar Administrativo · período integral",
+      "local": "Hospital Rio Negro, Manaus – AM",
+      "descricao": ""
+    },
+    {
+      "id": "exp-superg",
+      "periodo": "Dez 2024 – Jul 2025",
+      "titulo": "Desenvolvedor de sistemas · período integral",
+      "local": "Super Guindastes (Super G), Manaus – AM",
+      "descricao": ""
+    },
+    {
+      "id": "exp-tre",
+      "periodo": "Set 2024 – Nov 2024",
+      "titulo": "Multiplicador · temporário",
+      "local": "Tribunal Regional Eleitoral (TRE), Manaus – AM",
+      "descricao": ""
+    },
+    {
+      "id": "exp-ssp",
+      "periodo": "Ago 2023 – Out 2023",
+      "titulo": "Suporte Técnico · meio período",
+      "local": "Secretaria de Estado de Segurança Pública (SSP), Manaus – AM",
+      "descricao": ""
+    },
+    {
+      "id": "exp-sema",
+      "periodo": "Dez 2021 – Ago 2023",
+      "titulo": "Suporte Técnico · meio período",
+      "local": "Secretaria de Estado do Meio Ambiente (SEMA), Manaus – AM",
+      "descricao": ""
+    }
+  ],
   "projetos": [
     {
       "id": "proj-ebac",
       "slug": "curso-qa-ebac",
-      "nome": "Curso de QA da EBAC",
+      "nome": "Testes E2E - EBAC Shop",
       "categoria": "QA / Testes",
       "ano": "",
-      "resumo": "Automação de testes end-to-end com Cypress na loja EBAC Shop, simulando o comportamento real do usuário.",
-      "descricao": "Projeto de automação de testes end-to-end desenvolvido com Cypress para validação das funcionalidades da loja EBAC Shop, simulando o comportamento real do usuário.",
+      "resumo": "Automação de testes end-to-end para validar os fluxos da loja EBAC Shop com Cypress.",
+      "descricao": "Projeto de qualidade de software com testes automatizados end-to-end na EBAC Shop, simulando ações reais de navegação e compra para validar os principais fluxos da loja. Desenvolvido em JavaScript com Cypress.",
       "capa": "/Projetos/curso-ebac/img/banner-ebac.webp",
       "banner": "/Projetos/curso-ebac/img/banner-ebac.webp",
       "tecnologias": [
@@ -169,7 +213,7 @@
       "testes": [],
       "desafios": [],
       "solucoes": [],
-      "github": "",
+      "github": "https://github.com/amaurybritoo/testes-e2e-ebac-shop",
       "site": "",
       "destaque": true,
       "visivel": true
@@ -231,6 +275,66 @@
       "site": "",
       "destaque": false,
       "visivel": false
+    },
+    {
+      "ano": "",
+      "slug": "demasi-boutique-links",
+      "nome": "Demasi Boutique Links",
+      "github": "https://github.com/amaurybritoo/demasi-boutique-links",
+      "testes": [],
+      "id": "proj-demasi-links",
+      "solucoes": [],
+      "banner": "",
+      "prints": [],
+      "destaque": false,
+      "descricao": "Página digital da Demasi Boutique criada para centralizar e apresentar os canais e links da marca.",
+      "visivel": true,
+      "capa": "",
+      "tecnologias": [],
+      "site": "",
+      "desafios": [],
+      "resumo": "Página de links da Demasi Boutique para reunir os canais digitais da marca.",
+      "categoria": "Front-end"
+    },
+    {
+      "ano": "",
+      "slug": "demasi-boutique",
+      "nome": "Demasi Boutique",
+      "github": "https://github.com/amaurybritoo/demasi-boutique",
+      "testes": [],
+      "id": "proj-demasi-boutique",
+      "solucoes": [],
+      "banner": "",
+      "prints": [],
+      "destaque": false,
+      "descricao": "Site da Demasi Boutique desenvolvido para apresentar a marca e seus conteúdos em uma experiência web própria.",
+      "visivel": true,
+      "capa": "",
+      "tecnologias": [],
+      "site": "",
+      "desafios": [],
+      "resumo": "Projeto web da Demasi Boutique, apresentando a marca em uma experiência digital própria.",
+      "categoria": "Front-end"
+    },
+    {
+      "ano": "",
+      "slug": "casa-oito-del-mare",
+      "nome": "Casa Oito Del Mare",
+      "github": "https://github.com/amaurybritoo/Casa-oito-del-mare",
+      "testes": [],
+      "id": "proj-casa-oito-del-mare",
+      "solucoes": [],
+      "banner": "",
+      "prints": [],
+      "destaque": false,
+      "descricao": "Projeto digital da Casa Oito Del Mare, desenvolvido para apresentar o espaço e suas informações em uma interface web.",
+      "visivel": true,
+      "capa": "",
+      "tecnologias": [],
+      "site": "",
+      "desafios": [],
+      "resumo": "Projeto web para apresentar a Casa Oito Del Mare e suas informações.",
+      "categoria": "Front-end"
     }
   ],
   "contato": {
@@ -257,8 +361,13 @@
     },
     "experiencia": {
       "ativa": true,
-      "titulo": "Formação e experiência",
+      "titulo": "Experiência profissional",
       "subtitulo": "Meu caminho até aqui"
+    },
+    "formacao": {
+      "ativa": true,
+      "titulo": "Formação",
+      "subtitulo": "Conhecimentos e estudos que construí ao longo do caminho"
     },
     "contato": {
       "ativa": true,

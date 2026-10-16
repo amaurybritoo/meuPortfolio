@@ -22,8 +22,8 @@
 }
 
 .rodape-marca img {
-  width: 44px;
-  height: 44px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   filter: drop-shadow(0 0 10px rgba(var(--cor-primaria-rgb), 0.6));
 }
@@ -76,3 +76,5 @@
 .rodape-base p {
   margin: 0;
 }
+
+.rodape-nome-destaque { color: #fff; font-family: var(--fonte-titulo); font-size: 1.08em; text-shadow: 0 0 16px rgba(var(--cor-primaria-rgb), .42); }

@@ -35,33 +35,25 @@ export default function Hero() {
     <section className="hero" aria-labelledby="titulo-hero">
       <div className="container hero-grade">
         <div className="hero-texto">
-          {perfil.disponivel && (
-            <p className="hero-disponivel">
-              <span className="hero-ponto" aria-hidden="true" />
-              {perfil.textoDisponibilidade}
-            </p>
-          )}
           <p className="hero-ola">Olá, eu sou</p>
           <h1 id="titulo-hero">{perfil.nome}</h1>
           <CargosAlternando cargos={perfil.cargos} />
           {perfil.frase && <p className="hero-frase">{perfil.frase}</p>}
 
           <div className="hero-acoes">
-            {temProjetos && (
-              <LinkSecao id="projetos" className="botao botao-primario">
-                Ver projetos <FaArrowRight aria-hidden="true" />
-              </LinkSecao>
-            )}
-            {secoes.contato.ativa && (
-              <LinkSecao id="contato" className="botao botao-contorno">
-                Falar comigo
-              </LinkSecao>
-            )}
-            {perfil.curriculo && (
-              <a className="botao botao-texto" href={perfil.curriculo} target="_blank" rel="noopener noreferrer">
-                <FaDownload aria-hidden="true" /> Currículo
-              </a>
-            )}
+            <div className="hero-acoes-principais">
+              {temProjetos && (
+                <LinkSecao id="projetos" className="botao botao-primario">
+                  Ver projetos <FaArrowRight aria-hidden="true" />
+                </LinkSecao>
+              )}
+              {secoes.contato.ativa && (
+                <LinkSecao id="contato" className="botao botao-contorno">
+                  Falar comigo
+                </LinkSecao>
+              )}
+            </div>
+            <a className="botao botao-contorno hero-curriculo" href="/curriculo?imprimir=1" target="_blank" rel="noopener noreferrer"><FaDownload aria-hidden="true" /> Exportar currículo em PDF</a>
           </div>
 
           {perfil.redes.length > 0 && (
@@ -79,13 +71,8 @@ export default function Hero() {
 
         <div className="hero-visual">
           <div className="hero-aura" aria-hidden="true" />
-          {perfil.logo && <img className="hero-marca" src={perfil.logo} alt="" aria-hidden="true" width={420} height={420} />}
           {perfil.foto && <img className="hero-foto" src={perfil.foto} alt={`Foto de ${perfil.nome}`} width={520} height={560} fetchPriority="high" />}
-          {destaques.map((h, i) => (
-            <span key={h.id} className={`hero-chip hero-chip-${i + 1}`} aria-hidden="true">
-              <Icone nome={h.icone} /> {h.nome}
-            </span>
-          ))}
+          {destaques.map((h, i) => <span key={h.id} className={`hero-chip hero-chip-${i + 1}`} aria-hidden="true"><Icone nome={h.icone} /> {h.nome}</span>)}
         </div>
       </div>
 

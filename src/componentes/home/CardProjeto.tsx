@@ -67,8 +67,8 @@ export default function CardProjeto({ projeto }: { projeto: Projeto }) {
           </span>
           <div className="card-externos">
             {projeto.site && (
-              <a href={projeto.site} target="_blank" rel="noopener noreferrer" aria-label={`Abrir o site de ${projeto.nome}`} title="Abrir o site">
-                <FaExternalLinkAlt aria-hidden="true" />
+              <a className="card-botao-site" href={projeto.site} target="_blank" rel="noopener noreferrer" aria-label={`Abrir o site de ${projeto.nome}`}>
+                Ver site <FaExternalLinkAlt aria-hidden="true" />
               </a>
             )}
             {projeto.github && (

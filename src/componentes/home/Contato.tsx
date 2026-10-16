@@ -5,6 +5,7 @@ import { usePortfolio } from "../../contexto/usePortfolio";
 import CabecalhoSecao from "../comuns/CabecalhoSecao";
 import Icone from "../comuns/Icone";
 import Revelar from "../comuns/Revelar";
+import { formatarWhatsAppBrasil } from "../../utilitarios/texto";
 import "../../estilos/contato.css";
 
 export default function Contato() {
@@ -50,11 +51,13 @@ export default function Contato() {
           <CabecalhoSecao id="titulo-contato" rotulo="05" titulo={config.titulo} subtitulo={config.subtitulo} />
         </Revelar>
 
-        <div className="contato-grade">
-          <Revelar className="contato-lado">
+        <Revelar className="contato-chamada">
             <h3>{contato.titulo}</h3>
             {contato.texto && <p>{contato.texto}</p>}
+        </Revelar>
 
+        <div className="contato-grade">
+          <Revelar className="contato-lado">
             <ul className="contato-canais">
               {perfil.email && (
                 <li>
@@ -72,7 +75,7 @@ export default function Contato() {
                 <li>
                   <a className="canal" href={`https://wa.me/${perfil.whatsapp}?text=${encodeURIComponent(contato.mensagemWhatsapp)}`} target="_blank" rel="noopener noreferrer">
                     <span className="canal-icone"><FaWhatsapp aria-hidden="true" /></span>
-                    <span><small>WhatsApp</small>Chamar agora</span>
+                    <span><small>WhatsApp</small><strong>{formatarWhatsAppBrasil(perfil.whatsapp)}</strong></span>
                   </a>
                 </li>
               )}

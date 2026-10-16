@@ -338,6 +338,7 @@
   font-family: var(--fonte-titulo);
   font-size: 1.1rem;
   font-weight: 600;
+  overflow-wrap: anywhere;
 }
 
 .projeto-nav-prox {
@@ -360,7 +361,23 @@
 
 @media (max-width: 520px) {
   .projeto-navegacao {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .projeto-nav-link {
+    min-width: 0;
+    padding: 14px 12px;
+  }
+
+  .projeto-nav-link small {
+    gap: 5px;
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+  }
+
+  .projeto-nav-link span {
+    font-size: 0.92rem;
   }
 
   .projeto-acoes .botao {

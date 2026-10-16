@@ -12,7 +12,7 @@ export default function Rodape() {
     <footer className="rodape">
       <div className="container rodape-conteudo">
         <Link to="/" className="rodape-marca" aria-label="Voltar ao início">
-          {perfil.logo && <img src={perfil.logo} alt="" width={44} height={44} loading="lazy" />}
+          {perfil.logo && <img className="logo-pulsante" src={perfil.logo} alt="" width={56} height={56} loading="lazy" />}
           <span>
             <strong>{perfil.nome}</strong>
             <small>{perfil.cargos.join(" · ")}</small>
@@ -33,7 +33,7 @@ export default function Rodape() {
       </div>
       <div className="container rodape-base">
         <p>{perfil.rodape}</p>
-        <p>© {ANO_ATUAL} {perfil.nome}. Todos os direitos reservados.</p>
+        <p>© {ANO_ATUAL} <strong className="rodape-nome-destaque">{perfil.nome}</strong>. Todos os direitos reservados.</p>
       </div>
     </footer>
   );

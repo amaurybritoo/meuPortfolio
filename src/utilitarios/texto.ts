@@ -37,6 +37,17 @@ export function somenteDigitos(valor: string): string {
   return valor.replace(/\D/g, "");
 }
 
+export function formatarWhatsAppBrasil(valor: string): string {
+  const numeros = somenteDigitos(valor);
+  if (numeros.startsWith("55") && numeros.length === 13) {
+    return `+55 (${numeros.slice(2, 4)}) ${numeros.slice(4, 9)}-${numeros.slice(9)}`;
+  }
+  if (numeros.startsWith("55") && numeros.length === 12) {
+    return `+55 (${numeros.slice(2, 4)}) ${numeros.slice(4, 8)}-${numeros.slice(8)}`;
+  }
+  return numeros ? `+${numeros}` : "";
+}
+
 export function hexParaRgb(hex: string): string {
   const limpo = hex.replace("#", "");
   const completo = limpo.length === 3 ? limpo.split("").map((c) => c + c).join("") : limpo;

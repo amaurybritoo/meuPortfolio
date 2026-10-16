@@ -63,8 +63,15 @@ public/
 
 ## Painel de administração
 
-Abra **`/admin`** (ex.: `https://seusite.com.br/admin`). Não há link para ele no site e ele pede `noindex` para
-buscadores.
+Abra **`/admin`** (ex.: `https://seusite.com.br/admin`). O painel pede um código de acesso validado no servidor,
+e não há link para ele no site. A sessão fica em cookie `HttpOnly` por até 8 horas; o código não é salvo no código
+do site nem no navegador.
+
+Antes de usar no Vercel, cadastre `ADMIN_ACCESS_CODE` e `ADMIN_SESSION_SECRET` em **Project → Settings → Environment Variables** e faça um
+novo deploy. `ADMIN_ACCESS_CODE` é o código de entrada; `ADMIN_SESSION_SECRET` deve ser uma chave aleatória forte
+(por exemplo, gerada com `node -e "console.log(require('node:crypto').randomBytes(32).toString('base64url'))"`). Guarde ambos somente nas variáveis privadas do projeto; não os coloque em arquivos `.env` enviados
+ao GitHub, `portfolio.json` ou no código do frontend. Para desenvolvimento local, use `vercel dev` com essas variáveis
+definidas no ambiente do terminal, pois o Vite sozinho não executa a função de autenticação.
 
 | Aba | O que edita |
 |---|---|
@@ -85,7 +92,7 @@ buscadores.
 2. **Pré-visualizar** abre o site real mostrando o rascunho (inclusive projetos em rascunho). Uma faixa amarela avisa
    que é prévia e há o botão "Sair da prévia".
 3. **Publicar** grava o conteúdo no seu repositório do GitHub; a Vercel percebe o commit e atualiza o site sozinha
-   em 1 a 2 minutos. Não existe servidor próprio.
+   em 1 a 2 minutos. A função serverless do Vercel só valida o acesso administrativo.
 4. Antes de publicar o admin confere erros comuns (projeto sem nome, endereço repetido, link sem `https://`, e-mail
    inválido) e explica em português o que corrigir.
 

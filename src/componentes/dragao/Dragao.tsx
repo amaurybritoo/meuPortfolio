@@ -9,18 +9,20 @@ interface Props {
   modo?: "fundo" | "previa";
 }
 
-const VELOCIDADE_BASE = 95; // pixels por segundo
+const VELOCIDADE_BASE = 210; // pixels por segundo
 const INTERVALO_QUADROS = 1000 / 30; // o desenho roda a ~30 quadros por segundo (economiza bateria)
 
 interface Voo {
   direcao: 1 | -1;
   inicio: number;
   duracao: number;
-  centroY: number;
+  xInicio: number;
+  xFim: number;
+  yInicio: number;
+  yFim: number;
   amplitude: number;
   ondas: number;
   fase: number;
-  escala: number;
 }
 
 const sorteio = (min: number, max: number): number => min + Math.random() * (max - min);
@@ -43,8 +45,10 @@ export default function Dragao({ config, modo = "fundo" }: Props) {
   }, [config]);
 
   useEffect(() => {
+    if (!config.ativo || reduzirMovimento) return;
+
     const canvas = canvasRef.current;
-    if (!canvas || !config.ativo || reduzirMovimento) return;
+    if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
@@ -56,6 +60,8 @@ export default function Dragao({ config, modo = "fundo" }: Props) {
     let raf = 0;
     let ultimoDesenho = 0;
     let voo: Voo | null = null;
+    let larguraAnterior = window.innerWidth;
+    let alturaAnterior = window.innerHeight;
     let direcaoAnterior: 1 | -1 = -1;
     let proximoInicio = performance.now() + 1500; // primeiro voo logo depois de abrir a página
 
@@ -64,26 +70,40 @@ export default function Dragao({ config, modo = "fundo" }: Props) {
       const largura = window.innerWidth;
       const altura = window.innerHeight;
       const base = Math.min(0.9, Math.max(0.42, largura / 1500));
-      const escala = base * cfg.tamanho * sorteio(0.88, 1.1);
+      const escala = base * cfg.tamanho;
+      const diagonal = Math.random() < 0.38;
+      const direcao: 1 | -1 = diagonal ? (Math.random() < 0.5 ? -1 : 1) : (direcaoAnterior === 1 ? -1 : 1);
+      if (!diagonal) direcaoAnterior = direcao;
       const larguraTela = LARGURA_DRAGAO * escala;
-      const direcao: 1 | -1 = direcaoAnterior === 1 ? -1 : 1; // alterna: ida e volta
-      direcaoAnterior = direcao;
-      const percurso = largura + larguraTela + 80;
+      const xInicio = direcao === 1 ? -larguraTela / 2 - 40 : largura + larguraTela / 2 + 40;
+      const xFim = xInicio + direcao * (largura + larguraTela + 80);
+      const yInicio = altura * (diagonal ? sorteio(0.12, 0.34) : sorteio(0.2, 0.5));
+      const yFim = diagonal ? altura * sorteio(0.48, 0.76) : yInicio;
+      const distancia = Math.hypot(xFim - xInicio, yFim - yInicio);
       return {
         direcao,
         inicio: agora,
-        duracao: (percurso / (VELOCIDADE_BASE * cfg.velocidade)) * 1000,
-        centroY: altura * sorteio(0.18, 0.66),
-        amplitude: altura * sorteio(0.04, 0.09),
-        ondas: sorteio(1.1, 2),
+        duracao: (distancia / (VELOCIDADE_BASE * cfg.velocidade)) * 1000,
+        xInicio,
+        xFim,
+        yInicio,
+        yFim,
+        amplitude: altura * sorteio(0.012, 0.024),
+        ondas: sorteio(1.1, 1.7),
         fase: sorteio(0, Math.PI * 2),
-        escala,
       };
     };
 
     const quadro = (agora: number) => {
       raf = requestAnimationFrame(quadro);
       if (document.hidden) return;
+      if (modo === "fundo" && (window.innerWidth !== larguraAnterior || window.innerHeight !== alturaAnterior)) {
+        larguraAnterior = window.innerWidth;
+        alturaAnterior = window.innerHeight;
+        voo = null;
+        canvas.style.visibility = "hidden";
+        proximoInicio = agora + 250;
+      }
       const cfg = configRef.current;
 
       if (modo === "previa") {
@@ -107,18 +127,15 @@ export default function Dragao({ config, modo = "fundo" }: Props) {
         return;
       }
 
-      const largura = window.innerWidth;
-      const larguraTela = LARGURA_DRAGAO * voo.escala;
-      const percurso = largura + larguraTela + 80;
-      const xInicial = voo.direcao === 1 ? -larguraTela / 2 - 40 : largura + larguraTela / 2 + 40;
-      const centroX = xInicial + voo.direcao * percurso * progresso;
+      const suavizado = progresso * progresso * (3 - 2 * progresso);
+      const centroX = voo.xInicio + (voo.xFim - voo.xInicio) * progresso;
       const argumento = progresso * Math.PI * 2 * voo.ondas + voo.fase;
-      const centroY = voo.centroY + voo.amplitude * Math.sin(argumento);
-      // inclina o dragão para onde ele está subindo/descendo
-      const subida = voo.amplitude * Math.cos(argumento) * Math.PI * 2 * voo.ondas;
-      const angulo = voo.direcao * Math.atan2(subida, percurso) * 3;
+      // Alterna travessias niveladas com diagonais em 2D. A escala e a orientação do corpo ficam constantes.
+      const centroY = voo.yInicio + (voo.yFim - voo.yInicio) * progresso + voo.amplitude * Math.sin(argumento);
 
-      canvas.style.transform = `translate3d(${(centroX - LARGURA_DRAGAO / 2).toFixed(1)}px, ${(centroY - ALTURA_DRAGAO / 2).toFixed(1)}px, 0) rotate(${angulo.toFixed(3)}rad) scale(${voo.direcao * voo.escala}, ${voo.escala})`;
+      canvas.style.opacity = String(cfg.opacidade);
+      canvas.style.filter = `drop-shadow(0 0 ${Math.round(14 * suavizado)}px ${cfg.cor})`;
+      canvas.style.transform = `translate3d(${(centroX - LARGURA_DRAGAO / 2).toFixed(1)}px, ${(centroY - ALTURA_DRAGAO / 2).toFixed(1)}px, 0) scaleX(${voo.direcao}) scale(${Math.min(0.9, Math.max(0.42, window.innerWidth / 1500)) * cfg.tamanho})`;
 
       if (agora - ultimoDesenho >= INTERVALO_QUADROS) {
         ultimoDesenho = agora;
@@ -135,7 +152,7 @@ export default function Dragao({ config, modo = "fundo" }: Props) {
   return (
     <canvas
       ref={canvasRef}
-      className={modo === "fundo" ? "dragao dragao-fundo" : "dragao dragao-previa"}
+      className={`dragao ${modo === "fundo" ? "dragao-fundo" : "dragao-previa"}`}
       style={{ opacity: config.opacidade }}
       aria-hidden="true"
       data-testid="dragao"

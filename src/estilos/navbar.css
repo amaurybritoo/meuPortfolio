@@ -36,8 +36,8 @@
 }
 
 .navbar-marca img {
-  width: 40px;
-  height: 40px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   object-fit: cover;
   filter: drop-shadow(0 0 10px rgba(var(--cor-primaria-rgb), 0.7));

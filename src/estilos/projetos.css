@@ -29,7 +29,7 @@
   color: #fff;
 }
 
-/* ---------- grade de cards (sem rolagem lateral: no celular vira uma coluna) ---------- */
+/* ---------- grade de cards ---------- */
 
 .projetos-grade {
   display: grid;
@@ -45,6 +45,34 @@
 .projetos-grade > li > .revelar {
   display: flex;
   width: 100%;
+}
+
+@media (max-width: 700px) {
+  .projetos-grade {
+    display: flex;
+    flex-flow: row nowrap;
+    width: 100%;
+    gap: 16px;
+    margin: 0;
+    padding: 0 0 18px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 0;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(var(--cor-primaria-rgb), 0.55) transparent;
+  }
+
+  .projetos-grade > li {
+    flex: 0 0 min(86vw, 390px);
+    width: min(86vw, 390px);
+    min-width: min(86vw, 390px);
+    scroll-snap-align: start;
+  }
+
+  .projetos-grade > li > .revelar {
+    min-width: 0;
+  }
 }
 
 .card-projeto {
@@ -224,6 +252,21 @@
   border-color: var(--cor-primaria);
   color: #fff;
   background: rgba(var(--cor-primaria-rgb), 0.25);
+}
+
+.card-externos .card-botao-site {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: auto;
+  height: 38px;
+  padding: 0 13px;
+  border-radius: 999px;
+  color: var(--texto);
+  font-size: 0.82rem;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
 .card-rascunho {

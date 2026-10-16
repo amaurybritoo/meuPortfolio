@@ -53,7 +53,7 @@ function normalizarMidia(v: unknown): Midia {
 
 function normalizarTeste(v: unknown): Teste {
   const o = objeto(v);
-  return { nome: texto(o.nome), descricao: texto(o.descricao), imagem: texto(o.imagem) };
+  return { nome: texto(o.nome), descricao: texto(o.descricao), imagem: texto(o.imagem), video: texto(o.video) };
 }
 
 function normalizarProjeto(v: unknown, indice: number): Projeto {
@@ -213,7 +213,7 @@ export const PUBLICADO: Portfolio = normalizarPortfolio(dadosPublicados);
 export function novoProjeto(): Projeto {
   return normalizarProjeto({ id: gerarId("proj"), nome: "Novo projeto", slug: "novo-projeto", visivel: false }, 0);
 }
-export const novoTeste = (): Teste => ({ nome: "", descricao: "", imagem: "" });
+export const novoTeste = (): Teste => ({ nome: "", descricao: "", imagem: "", video: "" });
 export const novaMidia = (): Midia => ({ tipo: "img", src: "", legenda: "" });
 export const novaRede = (): Rede => ({ id: gerarId("rede"), rotulo: "", url: "", icone: "globo" });
 export const novaHabilidade = (): Habilidade => ({ id: gerarId("hab"), nome: "", icone: "codigo" });

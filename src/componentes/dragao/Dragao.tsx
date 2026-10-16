@@ -97,9 +97,16 @@ export default function Dragao({ config, modo = "fundo" }: Props) {
     const quadro = (agora: number) => {
       raf = requestAnimationFrame(quadro);
       if (document.hidden) return;
-      if (modo === "fundo" && (window.innerWidth !== larguraAnterior || window.innerHeight !== alturaAnterior)) {
-        larguraAnterior = window.innerWidth;
-        alturaAnterior = window.innerHeight;
+      // Em celulares a barra do navegador altera innerHeight durante o scroll.
+      // Tratar essa mudança como redimensionamento reiniciava o voo e escondia o dragão.
+      const alturaAtual = window.innerHeight;
+      const larguraAtual = window.innerWidth;
+      const mudouOrientacaoOuTamanho =
+        Math.abs(larguraAtual - larguraAnterior) > 40 ||
+        Math.abs(alturaAtual - alturaAnterior) > Math.max(140, alturaAnterior * 0.22);
+      if (modo === "fundo" && mudouOrientacaoOuTamanho) {
+        larguraAnterior = larguraAtual;
+        alturaAnterior = alturaAtual;
         voo = null;
         canvas.style.visibility = "hidden";
         proximoInicio = agora + 250;

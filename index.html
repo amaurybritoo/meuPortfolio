@@ -7,6 +7,18 @@
     <meta name="description" content="Portfólio de Amaury Brito: desenvolvimento front-end com React e TypeScript, automação de testes com Cypress e foco em qualidade e performance." />
     <meta name="theme-color" content="#07060d" />
     <meta name="color-scheme" content="dark" />
+    <style>
+      html, body { min-height: 100%; margin: 0; background: #07060d; }
+      .inicio-carregando { min-height: 100vh; display: grid; place-items: center; padding: 24px; color: #ecebf5; font: 600 1rem/1.5 system-ui, sans-serif; background: radial-gradient(70% 60% at 70% 30%, #211238 0%, #07060d 72%); }
+      .inicio-carregando-conteudo { display: grid; justify-items: center; gap: 18px; text-align: center; }
+      .inicio-carregando-logo { width: clamp(76px, 15vw, 112px); height: clamp(76px, 15vw, 112px); object-fit: contain; animation: logo-pulso-inicial 1.7s ease-in-out infinite; filter: drop-shadow(0 0 14px #a855f788); }
+      .inicio-carregando-status { color: #d9c6ff; font: 600 clamp(.9rem, 2.8vw, 1.1rem)/1.4 "Orbitron", "Share Tech Mono", ui-monospace, monospace; letter-spacing: .16em; text-transform: uppercase; text-shadow: 0 0 14px #a855f7aa; }
+      .inicio-carregando-ponto { display: inline-block; animation: ponto-carregando 1.2s steps(4, end) infinite; }
+      .inicio-carregando-ponto::after { content: "..."; }
+      @keyframes logo-pulso-inicial { 0%, 100% { transform: scale(.96); opacity: .82; filter: drop-shadow(0 0 10px #a855f766); } 50% { transform: scale(1.06); opacity: 1; filter: drop-shadow(0 0 24px #c084fcdd); } }
+      @keyframes ponto-carregando { 0%, 25% { opacity: .25; } 75%, 100% { opacity: 1; } }
+      @media (prefers-reduced-motion: reduce) { .inicio-carregando-logo, .inicio-carregando-ponto { animation: none; } }
+    </style>
 
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="pt_BR" />
@@ -24,11 +36,21 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" /></noscript>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div class="inicio-carregando" role="status" aria-label="Carregando portfólio">
+        <div class="inicio-carregando-conteudo">
+          <img class="inicio-carregando-logo" src="/logo.webp" width="112" height="112" alt="Logo de Amaury Brito" />
+          <span class="inicio-carregando-status">Carregando<span class="inicio-carregando-ponto" aria-hidden="true"></span></span>
+        </div>
+      </div>
+    </div>
     <noscript>Este portfólio precisa de JavaScript para funcionar. Ative o JavaScript no navegador e recarregue a página.</noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>

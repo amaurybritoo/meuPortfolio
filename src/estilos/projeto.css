@@ -205,12 +205,45 @@
   background: linear-gradient(180deg, var(--superficie-forte), var(--superficie));
 }
 
-.teste-card img {
+.teste-card-clicavel {
   width: 100%;
-  aspect-ratio: 16 / 10;
-  margin-bottom: 4px;
-  border-radius: var(--raio-pequeno);
-  object-fit: cover;
+  align-items: flex-start;
+  color: var(--texto);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.teste-card-clicavel:hover,
+.teste-card-clicavel:focus-visible {
+  transform: translateY(-3px);
+  border-color: rgba(var(--cor-primaria-rgb), 0.65);
+  box-shadow: var(--sombra-neon);
+  outline: none;
+}
+
+.teste-card-conteudo {
+  display: grid;
+  gap: 9px;
+}
+
+.teste-card-conteudo strong {
+  font-family: var(--fonte-titulo);
+  font-size: 1.12rem;
+}
+
+.teste-descricao {
+  color: var(--texto-suave);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.teste-ver {
+  margin-top: 3px;
+  color: var(--cor-primaria);
+  font-size: 0.82rem;
+  font-weight: 700;
 }
 
 .teste-icone {

@@ -13,6 +13,7 @@ export interface Teste {
   nome: string;
   descricao: string;
   imagem: string; // opcional (pode ficar vazio)
+  video?: string; // opcional, evidência em vídeo
 }
 
 export interface Projeto {

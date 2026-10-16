@@ -1,11 +1,14 @@
+import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { FaArrowLeft, FaArrowRight, FaExternalLinkAlt, FaGithub, FaVial } from "react-icons/fa";
+import { FaArrowLeft, FaArrowRight, FaExternalLinkAlt, FaGithub, FaPlay, FaSearchPlus, FaVial } from "react-icons/fa";
 import { usePortfolio } from "../contexto/usePortfolio";
 import CabecalhoSecao from "../componentes/comuns/CabecalhoSecao";
 import Revelar from "../componentes/comuns/Revelar";
 import { useSeo } from "../componentes/comuns/useSeo";
 import PaginaBase from "../componentes/layout/PaginaBase";
 import GaleriaProjeto from "../componentes/projeto/GaleriaProjeto";
+import Lightbox from "../componentes/projeto/Lightbox";
+import type { Midia, Teste as TipoTeste } from "../tipos";
 import { paragrafos } from "../utilitarios/texto";
 import NaoEncontrado from "./NaoEncontrado";
 import "../estilos/projeto.css";
@@ -99,11 +102,7 @@ export default function Projeto() {
                 {projeto.testes.map((teste, i) => (
                   <li key={`${teste.nome}-${i}`}>
                     <Revelar atraso={(i % 3) * 80}>
-                      <article className="teste-card">
-                        {teste.imagem ? <img src={teste.imagem} alt={`Evidência do teste: ${teste.nome}`} loading="lazy" decoding="async" /> : <span className="teste-icone" aria-hidden="true"><FaVial /></span>}
-                        <h3>{teste.nome}</h3>
-                        {teste.descricao && <p>{teste.descricao}</p>}
-                      </article>
+                      <CartaoTeste teste={teste} />
                     </Revelar>
                   </li>
                 ))}
@@ -154,5 +153,32 @@ export default function Projeto() {
         )}
       </article>
     </PaginaBase>
+  );
+}
+
+function CartaoTeste({ teste }: { teste: TipoTeste }) {
+  const [aberto, setAberto] = useState(false);
+  const src = teste.video || teste.imagem;
+  const midia: Midia = { tipo: teste.video ? "video" : "img", src, legenda: teste.nome };
+  return (
+    <>
+      {src ? (
+        <button type="button" className="teste-card teste-card-clicavel" onClick={() => setAberto(true)} aria-label={`Clique para ver a evidência: ${teste.nome}`}>
+          <span className="teste-icone" aria-hidden="true">{teste.video ? <FaPlay /> : <FaSearchPlus />}</span>
+          <span className="teste-card-conteudo">
+            <strong>{teste.nome}</strong>
+            {teste.descricao && <span className="teste-descricao">{teste.descricao}</span>}
+            <span className="teste-ver">Clique para ver {teste.video ? "o vídeo" : "a imagem"}</span>
+          </span>
+        </button>
+      ) : (
+        <article className="teste-card">
+          <span className="teste-icone" aria-hidden="true"><FaVial /></span>
+          <h3>{teste.nome}</h3>
+          {teste.descricao && <p>{teste.descricao}</p>}
+        </article>
+      )}
+      {aberto && <Lightbox itens={[midia]} indice={0} onMudar={() => {}} onFechar={() => setAberto(false)} />}
+    </>
   );
 }

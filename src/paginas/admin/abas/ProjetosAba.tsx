@@ -133,7 +133,12 @@ export default function ProjetosAba({ dados, atualizar, projetoSelecionado: sele
                 <div key={i} className="cartao-item cartao-item-grande">
                   <CampoTexto rotulo="Nome do teste" valor={t.nome} onChange={(v) => alterar((p) => { p.testes[i].nome = v; })} />
                   <CampoArea rotulo="Descrição" linhas={2} valor={t.descricao} onChange={(v) => alterar((p) => { p.testes[i].descricao = v; })} />
-                  <SeletorImagem rotulo="Evidência (opcional)" maxLado={1400} valor={t.imagem} onChange={(v) => alterar((p) => { p.testes[i].imagem = v; })} />
+                  <SeletorOpcao rotulo="Tipo de evidência" valor={t.video ? "video" : "img"} opcoes={[{ valor: "img", rotulo: "Imagem" }, { valor: "video", rotulo: "Vídeo" }]} onChange={(v) => alterar((p) => { if (v === "video") p.testes[i].imagem = ""; else p.testes[i].video = ""; })} />
+                  {t.video ? (
+                    <CampoTexto rotulo="Vídeo de evidência" dica="Cole um link direto para um vídeo (MP4/WebM) ou um caminho do site." valor={t.video} onChange={(v) => alterar((p) => { p.testes[i].video = v; })} />
+                  ) : (
+                    <SeletorImagem rotulo="Imagem de evidência (opcional)" maxLado={1400} valor={t.imagem} onChange={(v) => alterar((p) => { p.testes[i].imagem = v; })} />
+                  )}
                   <BotoesItem indice={i} total={projeto.testes.length} rotuloItem={`teste ${i + 1}`} onMover={(passo) => alterar((p) => moverItem(p.testes, i, passo))} onRemover={() => alterar((p) => removerItem(p.testes, i))} />
                 </div>
               ))}

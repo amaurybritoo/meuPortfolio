@@ -26,7 +26,7 @@ export default function Projetos() {
   // Ao trocar a categoria, a nova lista começa pelo primeiro card, sem herdar
   // o deslocamento horizontal da lista anterior.
   useEffect(() => {
-    if (gradeRef.current) gradeRef.current.scrollTo({ left: 0, behavior: "instant" });
+    if (gradeRef.current) gradeRef.current.scrollTo({ left: 0, behavior: "auto" });
   }, [filtroAtual, lista.length]);
 
   useEffect(() => {

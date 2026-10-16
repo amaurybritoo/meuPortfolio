@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { FaArrowLeft, FaArrowRight, FaExternalLinkAlt, FaGithub, FaPlay, FaSearchPlus, FaVial } from "react-icons/fa";
 import { usePortfolio } from "../contexto/usePortfolio";
@@ -14,6 +14,11 @@ import NaoEncontrado from "./NaoEncontrado";
 import "../estilos/projeto.css";
 
 export default function Projeto() {
+  // Deixa a lista da página inicial pronta antes de o usuário voltar do projeto.
+  useEffect(() => {
+    void import("../componentes/home/HomeAbaixoDaDobra");
+  }, []);
+
   const { slug = "" } = useParams();
   const { dados, projetos: visiveis } = usePortfolio();
   const indice = visiveis.findIndex((p) => p.slug === slug);

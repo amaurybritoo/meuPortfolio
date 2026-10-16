@@ -4,9 +4,8 @@ import { useSeo } from "../componentes/comuns/useSeo";
 import Hero from "../componentes/home/Hero";
 import PaginaBase from "../componentes/layout/PaginaBase";
 
-// Baixa as seções abaixo da primeira dobra em paralelo, sem atrasar o Hero.
-const secoesPromise = import("../componentes/home/HomeAbaixoDaDobra");
-const HomeAbaixoDaDobra = lazy(() => secoesPromise);
+// Carrega o restante da página sem bloquear a apresentação inicial.
+const HomeAbaixoDaDobra = lazy(() => import("../componentes/home/HomeAbaixoDaDobra"));
 
 export default function Home() {
   const { dados } = usePortfolio();

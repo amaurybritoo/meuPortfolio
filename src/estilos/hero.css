@@ -372,7 +372,7 @@
   }
 
   .hero-visual {
-    width: clamp(216px, 58vw, 270px);
+    width: clamp(250px, 70vw, 330px);
   }
 
   .hero-ola { margin-bottom: 4px; font-size: 0.95rem; }
@@ -417,7 +417,7 @@
 }
 
 @media (max-width: 768px) and (max-height: 700px) {
-  .hero-visual { width: clamp(204px, 54vw, 245px); }
+  .hero-visual { width: clamp(230px, 64vw, 300px); }
   .hero { padding-top: calc(var(--nav-altura) + 4px); padding-bottom: 12px; }
   .hero-grade { gap: 7px; }
   .hero-frase { margin-top: 6px; }

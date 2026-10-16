@@ -75,7 +75,7 @@ export default function Projeto() {
 
         {textos.length > 0 && (
           <section className="secao secao-projeto" aria-labelledby="proj-sobre">
-            <div className="container container-estreito">
+            <div className="container">
               <Revelar>
                 <CabecalhoSecao id="proj-sobre" titulo="Sobre o projeto" />
                 <div className="projeto-texto">

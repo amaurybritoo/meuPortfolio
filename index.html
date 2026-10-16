@@ -10,6 +10,8 @@
     <style>
       html, body { min-height: 100%; margin: 0; background: #07060d; }
       .inicio-carregando { min-height: 100vh; min-height: 100svh; display: grid; place-items: center; padding: 24px; color: #ecebf5; font: 600 1rem/1.5 system-ui, sans-serif; background: radial-gradient(65% 58% at 50% 46%, #211238 0%, #07060d 76%); }
+      #tela-carregamento-inicial { position: fixed; inset: 0; z-index: 9999; opacity: 1; transition: opacity .22s ease; }
+      #tela-carregamento-inicial.pronta { opacity: 0; pointer-events: none; }
       .inicio-carregando-conteudo { display: grid; justify-items: center; gap: 28px; text-align: center; transform: translateY(-2vh); }
       .inicio-carregando-logo { display: block; width: clamp(132px, 24vw, 190px); height: clamp(132px, 24vw, 190px); object-fit: contain; animation: logo-pulso-coracao 1.45s ease-in-out infinite; filter: drop-shadow(0 0 18px #a855f788); }
       .inicio-carregando-status { display: inline-block; min-height: 1.5em; color: #e5d4ff; font: 600 clamp(1rem, 3vw, 1.25rem)/1.4 "Orbitron", "Share Tech Mono", ui-monospace, monospace; letter-spacing: .2em; text-transform: uppercase; animation: carregando-neon 1.15s ease-in-out infinite; }
@@ -42,12 +44,11 @@
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" /></noscript>
   </head>
   <body>
-    <div id="root">
-      <div class="inicio-carregando" role="status" aria-label="Carregando portfólio">
-        <div class="inicio-carregando-conteudo">
-          <img class="inicio-carregando-logo" src="/logo.webp" width="190" height="190" alt="Logo de Amaury Brito" />
-          <span class="inicio-carregando-status" aria-label="Carregando">Carregando</span>
-        </div>
+    <div id="root"></div>
+    <div id="tela-carregamento-inicial" class="inicio-carregando" role="status" aria-label="Carregando portfólio">
+      <div class="inicio-carregando-conteudo">
+        <img class="inicio-carregando-logo" src="/logo.webp" width="190" height="190" alt="Logo de Amaury Brito" />
+        <span class="inicio-carregando-status" aria-label="Carregando">Carregando</span>
       </div>
     </div>
     <noscript>Este portfólio precisa de JavaScript para funcionar. Ative o JavaScript no navegador e recarregue a página.</noscript>

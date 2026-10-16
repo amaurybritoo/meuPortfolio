@@ -3,12 +3,17 @@ import type { ReactNode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./estilos/global.css";
+import { ocultarTelaCarregamento } from "./utilitarios/telaCarregamento";
 
 class LimiteDeErro extends Component<{ children: ReactNode }, { falhou: boolean }> {
   state = { falhou: false };
 
   static getDerivedStateFromError() {
     return { falhou: true };
+  }
+
+  componentDidCatch() {
+    ocultarTelaCarregamento();
   }
 
   render() {

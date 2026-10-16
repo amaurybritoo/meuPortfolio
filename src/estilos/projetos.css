@@ -57,7 +57,10 @@
     padding: 0 0 8px;
     overflow-x: auto;
     overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
     scroll-snap-type: x mandatory;
+    scroll-snap-stop: always;
     scroll-padding-inline: 0;
     scrollbar-width: none;
     cursor: grab;
@@ -72,9 +75,9 @@
   }
 
   .projetos-grade > li {
-    flex: 0 0 min(80vw, 370px);
-    width: min(80vw, 370px);
-    min-width: min(80vw, 370px);
+    flex: 0 0 min(76vw, 350px);
+    width: min(76vw, 350px);
+    min-width: min(76vw, 350px);
     scroll-snap-align: start;
   }
 
@@ -106,6 +109,14 @@
 .projetos-carrossel-instrucao svg {
   color: var(--cor-primaria);
   font-size: 0.72rem;
+}
+
+.projetos-carrossel-instrucao.final {
+  color: var(--texto-suave);
+}
+
+.projetos-carrossel-instrucao.final svg {
+  color: var(--sucesso);
 }
 
 .projetos-carrossel-trilho {

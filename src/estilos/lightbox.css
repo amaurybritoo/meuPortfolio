@@ -85,6 +85,7 @@
 
 .lightbox-palco.zoomavel {
   cursor: zoom-in;
+  touch-action: none;
 }
 
 .lightbox-palco.ampliado {
@@ -138,6 +139,10 @@
 }
 
 @media (max-width: 600px) {
+  .lightbox-zoom {
+    display: none;
+  }
+
   .lightbox-seta {
     top: auto;
     bottom: 64px;

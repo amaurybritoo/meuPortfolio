@@ -64,9 +64,34 @@ function PaginaPronta({ children }: { children: ReactNode }) {
   return children;
 }
 
+function BloquearZoomNaHome() {
+  useEffect(() => {
+    const bloquearGestos = (evento: Event) => {
+      if (window.location.pathname !== "/" || (evento.target instanceof Element && evento.target.closest(".lightbox"))) return;
+      if (evento.cancelable) evento.preventDefault();
+    };
+    const bloquearPinça = (evento: TouchEvent) => {
+      if (evento.touches.length > 1) bloquearGestos(evento);
+    };
+    const conteudo = document.querySelector("#conteudo");
+    conteudo?.classList.add("zoom-home-bloqueado");
+    document.addEventListener("touchmove", bloquearPinça, { passive: false });
+    document.addEventListener("gesturestart", bloquearGestos, { passive: false });
+    document.addEventListener("gesturechange", bloquearGestos, { passive: false });
+    return () => {
+      conteudo?.classList.remove("zoom-home-bloqueado");
+      document.removeEventListener("touchmove", bloquearPinça);
+      document.removeEventListener("gesturestart", bloquearGestos);
+      document.removeEventListener("gesturechange", bloquearGestos);
+    };
+  }, []);
+  return null;
+}
+
 export default function App() {
   return (
     <BrowserRouter>
+      <BloquearZoomNaHome />
       <PortfolioProvider>
         <ScrollAoTrocarRota />
         <Suspense fallback={<TelaCarregamento />}>

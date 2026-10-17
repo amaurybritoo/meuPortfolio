@@ -28,7 +28,7 @@ function CargosAlternando({ cargos }: { cargos: string[] }) {
 
 export default function Hero() {
   const { dados, projetos } = usePortfolio();
-  const { perfil, estatisticas, habilidades, secoes } = dados;
+  const { perfil, habilidades, secoes } = dados;
   const destaques = habilidades.slice(0, 3).map((g) => g.itens[0]).filter((h) => h !== undefined);
   const temProjetos = secoes.projetos.ativa && projetos.length > 0;
 
@@ -77,18 +77,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {estatisticas.length > 0 && (
-        <div className="container">
-          <ul className="hero-numeros">
-            {estatisticas.map((e) => (
-              <li key={e.id}>
-                <strong>{e.valor}</strong>
-                <span>{e.rotulo}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
     </section>
   );
 }

@@ -18,13 +18,10 @@ export default function Contato() {
   const [copiado, setCopiado] = useState(false);
   if (!config.ativa) return null;
 
-  const montarTexto = () => {
-    const assinatura = nome.trim() ? `\n\n— ${nome.trim()}` : "";
-    return `${mensagem.trim() || contato.mensagemWhatsapp}${assinatura}`;
-  };
+  const montarTexto = () => `${nome.trim() ? `Me chamo ${nome.trim()}.` : "Olá!"}\n\n${mensagem.trim() || contato.mensagemWhatsapp}`;
   const linkWhatsapp = perfil.whatsapp ? `https://wa.me/${perfil.whatsapp}?text=${encodeURIComponent(montarTexto())}` : "";
   const linkEmail = perfil.email
-    ? `mailto:${perfil.email}?subject=${encodeURIComponent(`Contato pelo portfólio${nome.trim() ? ` — ${nome.trim()}` : ""}`)}&body=${encodeURIComponent(montarTexto())}`
+    ? `mailto:${perfil.email}?subject=${encodeURIComponent(`Contato pelo portfólio${nome.trim() ? ` — ${nome.trim()}` : ""}`)}&body=${encodeURIComponent(montarTexto().replace(/\n/g, "\r\n"))}`
     : "";
 
   const copiarEmail = async () => {

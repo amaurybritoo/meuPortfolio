@@ -77,4 +77,8 @@
   margin: 0;
 }
 
-.rodape-nome-destaque { color: #fff; font-family: var(--fonte-titulo); font-size: 1.08em; text-shadow: 0 0 16px rgba(var(--cor-primaria-rgb), .42); }
+.rodape-nome-destaque { color: #fff; font-family: var(--fonte-titulo); font-size: 1.08em; text-shadow: 0 0 5px #fff, 0 0 12px rgba(var(--cor-primaria-rgb), .9), 0 0 24px rgba(var(--cor-primaria-rgb), .72); }
+
+@media (max-width: 640px) {
+  .rodape-nome-destaque { text-shadow: 0 0 5px #fff, 0 0 12px rgba(var(--cor-primaria-rgb), 1), 0 0 26px rgba(var(--cor-primaria-rgb), .85); }
+}

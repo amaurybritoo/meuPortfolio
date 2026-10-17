@@ -96,6 +96,14 @@ button, input, textarea, select {
   color: inherit;
 }
 
+@media (max-width: 768px) {
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
+
 button {
   cursor: pointer;
 }

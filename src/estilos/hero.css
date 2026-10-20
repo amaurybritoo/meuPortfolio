@@ -368,7 +368,7 @@
   }
 
   .hero-grade {
-    gap: clamp(8px, 2vh, 16px);
+    gap: clamp(8px, 2svh, 16px);
   }
 
   .hero-visual {
@@ -416,7 +416,7 @@
   .hero-chip-3 { bottom: 9%; left: -5%; }
 }
 
-@media (max-width: 768px) and (max-height: 700px) {
+@media (max-width: 768px) and (orientation: landscape) {
   .hero-visual { width: clamp(270px, 74vw, 350px); }
   .hero { padding-top: calc(var(--nav-altura) + 4px); padding-bottom: 12px; }
   .hero-grade { gap: 7px; }

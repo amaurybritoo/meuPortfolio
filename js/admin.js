@@ -7,7 +7,7 @@ const $=id=>document.getElementById(id);
 let token=null,settings={},links=[],products=[];
 let editingProduct=null,pendingDeleteRow=null,pendingDeleteProduct=null;
 
-function authHeaders(){return{apikey:SUPABASE_KEY,Authorization:`Bearer ${token||SUPABASE_KEY}`,'Content-Type':'application/json'}}
+function authHeaders(){return{apikey:SUPABASE_KEY,...(token?{Authorization:`Bearer ${token}`}:{ }),'Content-Type':'application/json'}}
 async function api(path,opt={}){const r=await fetch(`${SUPABASE_URL}/rest/v1/${path}`,{...opt,headers:{...authHeaders(),...(opt.headers||{})}});let data=null;try{data=await r.json()}catch{}if(!r.ok)throw new Error(data?.message||data?.hint||`HTTP ${r.status}`);return data}
 async function signIn(email,password){
   let response;

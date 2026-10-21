@@ -79,3 +79,6 @@ body:not(.catalog-page) .site-footer .footer-main{min-height:65px;padding:0 0 15
 body:not(.catalog-page) .site-footer .footer-contact:after{content:none!important}
 .link-card{grid-template-columns:47px minmax(0,1fr) auto!important}
 @media(max-width:640px){body:not(.catalog-page) .site-footer{margin-top:23px!important;padding:18px 14px 15px!important;border-radius:16px!important}.link-card{grid-template-columns:42px minmax(0,1fr) auto!important}}
+
+/* Ícone oficial de WhatsApp consistente nos cards e no botão flutuante. */
+.link-icon svg.wa-svg{width:22px;height:22px;fill:currentColor;stroke:none;stroke-width:0}

@@ -117,7 +117,7 @@
 .catalog-shell>.catalog-site-footer .footer-brand small{font-size:8px;letter-spacing:.15em}
 .catalog-shell>.catalog-site-footer .footer-signoff{font-size:22px;line-height:1.18}
 .catalog-shell>.catalog-site-footer .footer-contact{justify-self:end;display:inline-flex;align-items:center;gap:12px;padding:13px 18px;border:1px solid #96652f72;border-radius:0;background:#543524;color:#fff8ee;font-size:9px;letter-spacing:.08em;text-transform:uppercase}
-.catalog-shell>.catalog-site-footer .footer-contact:after{content:"↗";font-size:14px}
+.catalog-shell>.catalog-site-footer .footer-contact:after{content:none}
 .catalog-shell>.catalog-site-footer .footer-navigation{padding:14px 0!important;border-top:1px solid #96652f38!important;border-bottom:1px solid #96652f38!important}
 .catalog-shell>.catalog-site-footer .footer-navigation>span{font-size:8px;letter-spacing:.2em;color:#795537}
 .catalog-shell>.catalog-site-footer .footer-navigation nav{gap:clamp(16px,3vw,34px)}
@@ -129,3 +129,10 @@
 @media(max-width:760px){.catalog-hero{border-radius:0!important}.catalog-shell>.catalog-site-footer{margin-top:30px!important;padding:24px 18px 18px!important}.catalog-shell>.catalog-site-footer .footer-main{grid-template-columns:1fr auto;gap:14px;padding-bottom:17px!important}.catalog-shell>.catalog-site-footer .footer-brand{grid-column:1;grid-row:1}.catalog-shell>.catalog-site-footer .footer-contact{grid-column:2;grid-row:1;padding:11px 12px;font-size:8px}.catalog-shell>.catalog-site-footer .footer-signoff{grid-column:1/-1;grid-row:2;text-align:left;font-size:21px}.catalog-shell>.catalog-site-footer .footer-navigation{align-items:flex-start;flex-direction:column;gap:12px}.catalog-shell>.catalog-site-footer .footer-navigation nav{gap:18px}.catalog-shell>.catalog-site-footer .footer-bottom{flex-wrap:wrap;gap:7px 14px}.catalog-shell>.catalog-site-footer .footer-bottom small{font-size:7px}}
 @media(max-width:640px){.catalog-hero,.catalog-hero .hero-shade{border-radius:0!important}}
 @media(prefers-reduced-motion:reduce){.featured-slide,.featured-image img{transition:none!important}}
+
+
+/* Rodapé de catálogo ocupa a largura inteira e termina junto à página. */
+.catalog-shell>.catalog-site-footer{width:100vw;max-width:none;margin:40px 0 -50px calc((100% - 100vw)/2)!important;padding-bottom:26px!important;border-radius:0!important}
+.catalog-shell>.catalog-site-footer .footer-contact:after{content:none!important}
+.carousel-arrow{display:none!important}
+@media(max-width:760px){.catalog-shell>.catalog-site-footer{margin:30px 0 -34px calc((100% - 100vw)/2)!important;padding-bottom:22px!important}}

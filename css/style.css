@@ -64,9 +64,18 @@ body:not(.catalog-page) .site-footer .footer-main{min-height:72px;grid-template-
 body:not(.catalog-page) .site-footer .footer-signoff{text-align:left;font-size:clamp(19px,4vw,25px);letter-spacing:.01em}
 body:not(.catalog-page) .site-footer .footer-signoff em{color:#96652f}
 body:not(.catalog-page) .site-footer .footer-contact{justify-self:end;display:inline-flex;align-items:center;gap:12px;padding:12px 17px;border:1px solid #96652f72;border-radius:0;background:#543524;color:#fff8ee;font-size:9px;letter-spacing:.08em;text-transform:uppercase;transition:background .2s,transform .2s}
-body:not(.catalog-page) .site-footer .footer-contact:after{content:"↗";font-size:14px}
+body:not(.catalog-page) .site-footer .footer-contact:after{content:none}
 body:not(.catalog-page) .site-footer .footer-contact:hover{background:#765039;transform:translateY(-2px)}
 body:not(.catalog-page) .site-footer .footer-bottom{padding:13px 0 0!important;border-top:1px solid #96652f38!important;align-items:center;color:#765a43}
 body:not(.catalog-page) .site-footer .footer-bottom small{font-size:8px;letter-spacing:.08em;line-height:1.5}
 body:not(.catalog-page) .site-footer .footer-bottom small:last-child{color:#604630}
 @media(max-width:530px){body:not(.catalog-page) .site-footer{margin-top:26px!important;padding:22px 18px 17px!important}body:not(.catalog-page) .site-footer .footer-main{grid-template-columns:1fr auto;gap:12px;padding-bottom:15px!important}body:not(.catalog-page) .site-footer .footer-signoff{grid-column:1;grid-row:1;padding:0;font-size:20px}body:not(.catalog-page) .site-footer .footer-contact{grid-column:2;grid-row:1;padding:11px 12px;font-size:8px}body:not(.catalog-page) .site-footer .footer-bottom{flex-direction:row;flex-wrap:wrap;justify-content:space-between;gap:6px 15px}body:not(.catalog-page) .site-footer .footer-bottom small{font-size:7px}}
+
+
+/* Rodapé de links em formato de card, combinando com as demais seções. */
+body:not(.catalog-page) .site-footer{width:100%;margin:28px 0 0!important;padding:21px 20px 17px!important;border:1px solid #b5825b38!important;border-top:1px solid #b5825b55!important;border-radius:18px!important;background:linear-gradient(120deg,#f4e9dcbd,#fffaf2b8 52%,#ead8c5bd)!important;box-shadow:0 8px 24px #5435240b!important;backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}
+body:not(.catalog-page) .site-footer:before{display:none!important}
+body:not(.catalog-page) .site-footer .footer-main{min-height:65px;padding:0 0 15px!important}
+body:not(.catalog-page) .site-footer .footer-contact:after{content:none!important}
+.link-card{grid-template-columns:47px minmax(0,1fr) auto!important}
+@media(max-width:640px){body:not(.catalog-page) .site-footer{margin-top:23px!important;padding:18px 14px 15px!important;border-radius:16px!important}.link-card{grid-template-columns:42px minmax(0,1fr) auto!important}}

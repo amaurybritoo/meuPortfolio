@@ -1,0 +1,7 @@
+Projeto corrigido a partir do ZIP enviado.
+
+Estrutura: esta pasta é a raiz do projeto Vite/React. A cópia aninhada meuPortfolio-publicacao foi removida do pacote; .git, node_modules e dist não são incluídos.
+
+Alterações: nome do perfil/hero para Amaury Brito; migração do nome antigo no conteúdo remoto corrigida; títulos/descrição SEO atualizados; a lista de projetos mantém a ordem do array em src/data/portfolio.json e reinicia o carrossel no primeiro item quando a ordem ou filtro muda.
+
+O histórico Git local do usuário não foi incluído nem alterado. Copie os arquivos modificados para o repositório existente para preservar seu histórico.

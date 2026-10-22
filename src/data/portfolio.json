@@ -1,7 +1,7 @@
 {
   "versao": 1,
   "perfil": {
-    "nome": "Amaury.dev",
+    "nome": "Amaury Brito",
     "cargos": [
       "Front-end Developer",
       "QA Engineer"
@@ -393,7 +393,7 @@
     }
   },
   "seo": {
-    "titulo": "Amaury.dev | Front-end Developer & QA Engineer",
-    "descricao": "Portfólio de Amaury.dev: desenvolvimento front-end com React e TypeScript, automação de testes com Cypress e foco em qualidade e performance."
+    "titulo": "Amaury Brito | Front-end Developer & QA Engineer",
+    "descricao": "Portfólio de Amaury Brito: desenvolvimento front-end com React e TypeScript, automação de testes com Cypress e foco em qualidade e performance."
   }
 }

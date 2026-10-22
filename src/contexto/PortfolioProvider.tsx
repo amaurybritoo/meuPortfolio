@@ -28,9 +28,9 @@ export default function PortfolioProvider({ children }: { children: ReactNode })
           return;
         }
 
-        // Migra a identidade antiga sem exigir uma edição manual imediata no banco.
-        const conteudoAtualizado = nome === "Amaury Brito"
-          ? { ...conteudo, perfil: { ...perfil, nome: "Amaury.dev" } }
+        // Migra a identidade antiga para o nome real sem exigir edição manual no banco.
+        const conteudoAtualizado = nome === "Amaury.dev"
+          ? { ...conteudo, perfil: { ...perfil, nome: "Amaury Brito" } }
           : conteudo;
         if (ativo) setPublicado(normalizarPortfolio(conteudoAtualizado));
       })

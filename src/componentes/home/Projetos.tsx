@@ -23,13 +23,14 @@ export default function Projetos() {
   const visiveis = projetos.filter((p) => !emConjuntos.has(p.id));
   const categorias = useMemo(() => Array.from(new Set(visiveis.map((p) => p.categoria).filter(Boolean))), [visiveis]);
   const filtroAtual = categorias.includes(filtro) ? filtro : TODOS;
+  // filter preserva a ordem original de dados.projetos; não ordenar por destaque, nome ou ano.
   const lista = filtroAtual === TODOS ? visiveis : visiveis.filter((p) => p.categoria === filtroAtual);
+  const chaveOrdemLista = lista.map((p) => p.id).join("|");
 
-  // Ao trocar a categoria, a nova lista começa pelo primeiro card, sem herdar
-  // o deslocamento horizontal da lista anterior.
+  // Ao trocar o filtro ou reordenar/adicionar projetos, a lista começa sempre pelo primeiro card.
   useEffect(() => {
     if (gradeRef.current) gradeRef.current.scrollTo({ left: 0, behavior: "auto" });
-  }, [filtroAtual, lista.length]);
+  }, [filtroAtual, chaveOrdemLista]);
 
   useEffect(() => {
     const grade = gradeRef.current;
@@ -66,7 +67,7 @@ export default function Projetos() {
       window.removeEventListener("resize", atualizar);
       observador?.disconnect();
     };
-  }, [filtroAtual, lista.length]);
+  }, [filtroAtual, chaveOrdemLista]);
 
   if (!config.ativa || visiveis.length === 0) return null;
 

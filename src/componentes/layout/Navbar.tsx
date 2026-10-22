@@ -63,7 +63,7 @@ export default function Navbar() {
       <div className="navbar-conteudo">
         <Link to="/" className="navbar-marca" aria-label={`${perfil.nome} — página inicial`} onClick={() => setAberto(false)}>
           {perfil.logo && <img className="logo-pulsante" src={perfil.logo} alt="" width={56} height={56} />}
-          <span>{perfil.nome}</span>
+          <span>Amaury.dev</span>
         </Link>
 
         <nav id="menu-principal" className="navbar-menu" aria-label="Principal">

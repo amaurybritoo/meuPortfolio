@@ -1,0 +1,399 @@
+{
+  "versao": 1,
+  "perfil": {
+    "nome": "Amaury.dev",
+    "cargos": [
+      "Front-end Developer",
+      "QA Engineer"
+    ],
+    "frase": "Construindo e testando interfaces modernas com foco em performance.",
+    "resumo": "QA Tester com base em desenvolvimento front-end, focado em qualidade, testes automatizados e melhoria contínua.",
+    "sobre": [
+      "Sou QA Tester com base em desenvolvimento front-end. Gosto de entender o produto dos dois lados: construir interfaces com React e TypeScript e garantir que elas funcionem de verdade para quem usa.",
+      "No dia a dia, penso em qualidade desde o começo: plano de testes, automação de testes end-to-end com Cypress, responsividade, compatibilidade entre navegadores e performance. O objetivo é sempre o mesmo: entregar rápido, com segurança e melhorar a cada versão."
+    ],
+    "foto": "/uploads/ea229e21a9ffed.webp",
+    "logo": "/logo.webp",
+    "localizacao": "",
+    "disponivel": true,
+    "textoDisponibilidade": "Aberto a oportunidades",
+    "curriculo": "",
+    "email": "amaurypb845@gmail.com",
+    "whatsapp": "5592981737451",
+    "redes": [
+      {
+        "id": "rede-github",
+        "rotulo": "GitHub",
+        "url": "https://github.com/amaurybritoo",
+        "icone": "github"
+      },
+      {
+        "id": "rede-linkedin",
+        "rotulo": "LinkedIn",
+        "url": "https://linkedin.com/in/amaurybritoo",
+        "icone": "linkedin"
+      },
+      {
+        "id": "rede-instagram",
+        "rotulo": "Instagram",
+        "url": "https://instagram.com/amaurybritoo",
+        "icone": "instagram"
+      }
+    ],
+    "rodape": "Feito com código, café com leite e visão ☕"
+  },
+  "estatisticas": [],
+  "habilidades": [
+    {
+      "id": "grupo-front",
+      "titulo": "Front-end",
+      "itens": [
+        {
+          "id": "h-react",
+          "nome": "React",
+          "icone": "react"
+        },
+        {
+          "id": "h-ts",
+          "nome": "TypeScript",
+          "icone": "typescript"
+        },
+        {
+          "id": "h-js",
+          "nome": "JavaScript",
+          "icone": "javascript"
+        },
+        {
+          "id": "h-html",
+          "nome": "HTML",
+          "icone": "html5"
+        },
+        {
+          "id": "h-css",
+          "nome": "CSS",
+          "icone": "css3"
+        },
+        {
+          "id": "h-vite",
+          "nome": "Vite",
+          "icone": "vite"
+        }
+      ]
+    },
+    {
+      "id": "grupo-qa",
+      "titulo": "QA e testes",
+      "itens": [
+        {
+          "id": "h-cypress",
+          "nome": "Cypress",
+          "icone": "cypress"
+        },
+        {
+          "id": "h-e2e",
+          "nome": "Testes E2E",
+          "icone": "teste"
+        },
+        {
+          "id": "h-resp",
+          "nome": "Responsividade",
+          "icone": "responsivo"
+        },
+        {
+          "id": "h-cross",
+          "nome": "Cross-browser",
+          "icone": "globo"
+        },
+        {
+          "id": "h-perf",
+          "nome": "Performance",
+          "icone": "raio"
+        }
+      ]
+    },
+    {
+      "id": "grupo-ferramentas",
+      "titulo": "Ferramentas",
+      "itens": [
+        {
+          "id": "h-git",
+          "nome": "Git",
+          "icone": "git"
+        },
+        {
+          "id": "h-github",
+          "nome": "GitHub",
+          "icone": "github"
+        },
+        {
+          "id": "h-vercel",
+          "nome": "Vercel",
+          "icone": "vercel"
+        }
+      ]
+    }
+  ],
+  "formacoes": [
+    {
+      "id": "exp-ebac",
+      "periodo": "Formação",
+      "titulo": "Tecnólogo em Análise e Desenvolvimento de Sistemas (ADS)",
+      "local": "FAMETRO",
+      "descricao": ""
+    },
+    {
+      "id": "exp-6kqebkb8cp",
+      "periodo": "Cursando",
+      "titulo": "Pós-Graduação em QA e Teste de Software",
+      "local": "FACINT",
+      "descricao": ""
+    }
+  ],
+  "experiencias": [
+    {
+      "id": "exp-cetam",
+      "periodo": "Jul 2026 – atual",
+      "titulo": "Analista de suporte de TI",
+      "local": "CETAM – Centro de Ensino Tecnológico do Amazonas",
+      "descricao": ""
+    },
+    {
+      "id": "exp-hospital",
+      "periodo": "Ago 2025 – Dez 2025",
+      "titulo": "Auxiliar Administrativo · período integral",
+      "local": "Hospital Rio Negro, Manaus – AM",
+      "descricao": ""
+    },
+    {
+      "id": "exp-superg",
+      "periodo": "Dez 2024 – Jul 2025",
+      "titulo": "Desenvolvedor de sistemas · período integral",
+      "local": "Super Guindastes (Super G), Manaus – AM",
+      "descricao": ""
+    },
+    {
+      "id": "exp-tre",
+      "periodo": "Set 2024 – Nov 2024",
+      "titulo": "Multiplicador · temporário",
+      "local": "Tribunal Regional Eleitoral (TRE), Manaus – AM",
+      "descricao": ""
+    },
+    {
+      "id": "exp-ssp",
+      "periodo": "Ago 2023 – Out 2023",
+      "titulo": "Suporte Técnico · meio período",
+      "local": "Secretaria de Estado de Segurança Pública (SSP), Manaus – AM",
+      "descricao": ""
+    },
+    {
+      "id": "exp-sema",
+      "periodo": "Dez 2021 – Ago 2023",
+      "titulo": "Suporte Técnico · meio período",
+      "local": "Secretaria de Estado do Meio Ambiente (SEMA), Manaus – AM",
+      "descricao": ""
+    }
+  ],
+  "projetos": [
+    {
+      "id": "proj-ebac",
+      "slug": "curso-qa-ebac",
+      "nome": "Testes E2E - EBAC Shop",
+      "categoria": "QA / Testes",
+      "ano": "",
+      "resumo": "Automação de testes end-to-end para validar os fluxos da loja EBAC Shop com Cypress.",
+      "descricao": "Projeto de qualidade de software com testes automatizados end-to-end na EBAC Shop, simulando ações reais de navegação e compra para validar os principais fluxos da loja. Desenvolvido em JavaScript com Cypress.",
+      "capa": "/Projetos/curso-ebac/img/banner-ebac.webp",
+      "banner": "/Projetos/curso-ebac/img/banner-ebac.webp",
+      "tecnologias": [
+        "Cypress",
+        "Testes E2E",
+        "Automação de testes"
+      ],
+      "prints": [],
+      "testes": [],
+      "desafios": [],
+      "solucoes": [],
+      "github": "https://github.com/amaurybritoo/testes-e2e-ebac-shop",
+      "site": "",
+      "destaque": true,
+      "visivel": true
+    },
+    {
+      "id": "proj-dashboard",
+      "slug": "dashboard",
+      "nome": "Dashboard",
+      "categoria": "Front-end",
+      "ano": "",
+      "resumo": "Painel interativo com gráficos para análise de dados.",
+      "descricao": "Painel interativo com gráficos para análise de dados.",
+      "capa": "",
+      "banner": "",
+      "tecnologias": [
+        "React",
+        "D3.js",
+        "Node.js",
+        "MongoDB"
+      ],
+      "prints": [],
+      "testes": [],
+      "desafios": [
+        "Integrar gráficos dinâmicos e otimizar consultas de dados."
+      ],
+      "solucoes": [
+        "Uso de bibliotecas como D3.js e implementação de caching."
+      ],
+      "github": "",
+      "site": "",
+      "destaque": false,
+      "visivel": false
+    },
+    {
+      "id": "proj-landing",
+      "slug": "landing-page",
+      "nome": "Landing Page",
+      "categoria": "Front-end",
+      "ano": "",
+      "resumo": "Página otimizada para conversão de leads.",
+      "descricao": "Página otimizada para conversão de leads.",
+      "capa": "",
+      "banner": "",
+      "tecnologias": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Google Analytics"
+      ],
+      "prints": [],
+      "testes": [],
+      "desafios": [
+        "Aumentar taxa de conversão e otimizar para motores de busca."
+      ],
+      "solucoes": [
+        "Design focado em CTA e implementação de SEO on-page."
+      ],
+      "github": "",
+      "site": "",
+      "destaque": false,
+      "visivel": false
+    },
+    {
+      "ano": "",
+      "slug": "demasi-boutique-links",
+      "nome": "Demasi Boutique Links",
+      "github": "https://github.com/amaurybritoo/demasi-boutique-links",
+      "testes": [],
+      "id": "proj-demasi-links",
+      "solucoes": [],
+      "banner": "",
+      "prints": [],
+      "destaque": false,
+      "descricao": "Página digital da Demasi Boutique criada para centralizar e apresentar os canais e links da marca.",
+      "visivel": true,
+      "capa": "",
+      "tecnologias": [],
+      "site": "",
+      "desafios": [],
+      "resumo": "Página de links da Demasi Boutique para reunir os canais digitais da marca.",
+      "categoria": "Front-end"
+    },
+    {
+      "ano": "",
+      "slug": "demasi-boutique",
+      "nome": "Demasi Boutique",
+      "github": "https://github.com/amaurybritoo/demasi-boutique",
+      "testes": [],
+      "id": "proj-demasi-boutique",
+      "solucoes": [],
+      "banner": "",
+      "prints": [],
+      "destaque": false,
+      "descricao": "Site da Demasi Boutique desenvolvido para apresentar a marca e seus conteúdos em uma experiência web própria.",
+      "visivel": true,
+      "colecao": true,
+      "projetosRelacionados": [
+        "proj-demasi-links"
+      ],
+      "capa": "",
+      "tecnologias": [],
+      "site": "",
+      "desafios": [],
+      "resumo": "Projeto web da Demasi Boutique, apresentando a marca em uma experiência digital própria.",
+      "categoria": "Front-end"
+    },
+    {
+      "ano": "",
+      "slug": "casa-oito-del-mare",
+      "nome": "Casa Oito Del Mare",
+      "github": "https://github.com/amaurybritoo/Casa-oito-del-mare",
+      "testes": [],
+      "id": "proj-casa-oito-del-mare",
+      "solucoes": [],
+      "banner": "",
+      "prints": [],
+      "destaque": false,
+      "descricao": "Projeto digital da Casa Oito Del Mare, desenvolvido para apresentar o espaço e suas informações em uma interface web.",
+      "visivel": true,
+      "capa": "",
+      "tecnologias": [],
+      "site": "",
+      "desafios": [],
+      "resumo": "Projeto web para apresentar a Casa Oito Del Mare e suas informações.",
+      "categoria": "Front-end"
+    }
+  ],
+  "contato": {
+    "titulo": "Vamos trabalhar juntos?",
+    "texto": "Tem um projeto, uma vaga ou só quer trocar uma ideia sobre qualidade e front-end? Me chama.",
+    "mensagemWhatsapp": "Olá, Amaury! Vi seu portfólio e gostaria de conversar.",
+    "mostrarFormulario": true
+  },
+  "secoes": {
+    "sobre": {
+      "ativa": true,
+      "titulo": "Sobre mim",
+      "subtitulo": "Quem está por trás do código e dos testes"
+    },
+    "habilidades": {
+      "ativa": true,
+      "titulo": "Habilidades",
+      "subtitulo": "Tecnologias e práticas que uso no dia a dia"
+    },
+    "projetos": {
+      "ativa": true,
+      "titulo": "Projetos",
+      "subtitulo": "Alguns trabalhos que mostram como eu penso e entrego"
+    },
+    "experiencia": {
+      "ativa": true,
+      "titulo": "Experiência profissional",
+      "subtitulo": "Meu caminho até aqui"
+    },
+    "formacao": {
+      "ativa": true,
+      "titulo": "Formação",
+      "subtitulo": "Conhecimentos e estudos que construí ao longo do caminho"
+    },
+    "contato": {
+      "ativa": true,
+      "titulo": "Contato",
+      "subtitulo": ""
+    }
+  },
+  "aparencia": {
+    "corPrimaria": "#a855f7",
+    "corSecundaria": "#38bdf8",
+    "brilhoFundo": true,
+    "dragao": {
+      "ativo": true,
+      "opacidade": 0.2,
+      "velocidade": 1,
+      "tamanho": 1,
+      "cor": "#c084fc",
+      "intervalo": 10
+    }
+  },
+  "seo": {
+    "titulo": "Amaury.dev | Front-end Developer & QA Engineer",
+    "descricao": "Portfólio de Amaury.dev: desenvolvimento front-end com React e TypeScript, automação de testes com Cypress e foco em qualidade e performance."
+  }
+}

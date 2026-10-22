@@ -1,0 +1,27 @@
+.curriculo-pagina { min-height: 100vh; padding: 28px 18px 60px; background: #ecebf1; color: #20202a; font: 15px/1.55 Arial, sans-serif; }
+.curriculo-acoes { display: flex; justify-content: space-between; max-width: 850px; margin: 0 auto 18px; }
+.curriculo-acoes a, .curriculo-acoes button { display: inline-flex; align-items: center; gap: 9px; padding: 11px 16px; border: 0; border-radius: 9px; background: #221637; color: #fff; text-decoration: none; cursor: pointer; font: inherit; }
+.curriculo-folha { max-width: 850px; min-height: 1050px; margin: auto; padding: 54px 64px; background: #fff; box-shadow: 0 12px 42px #1c18301c; }
+.curriculo-cabecalho { display: flex; justify-content: space-between; gap: 24px; padding-bottom: 22px; border-bottom: 3px solid #7c3aed; }
+.curriculo-cabecalho h1 { margin: 0; color: #26143b; font-size: 34px; line-height: 1.15; letter-spacing: -.03em; }
+.curriculo-cargos { margin: 8px 0 0; color: #6941a2; font-size: 16px; font-weight: 600; }
+.curriculo-cabecalho address { display: grid; align-content: center; gap: 3px; color: #55515d; font-size: 12px; font-style: normal; text-align: right; }
+.curriculo-pagina a { color: #6033a0; overflow-wrap: anywhere; }
+.curriculo-folha section { margin-top: 23px; break-inside: avoid; }
+.curriculo-folha section h2 { margin: 0 0 10px; padding-bottom: 5px; border-bottom: 1px solid #ddd4eb; color: #542a86; font-size: 15px; letter-spacing: .08em; text-transform: uppercase; }
+.curriculo-folha p { margin: 0 0 8px; }
+.curriculo-item { margin: 0 0 13px; break-inside: avoid; }
+.curriculo-item-topo { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.curriculo-item h3 { margin: 0; font-size: 14px; }
+.curriculo-item-topo span { color: #65438c; font-size: 12px; font-weight: 600; white-space: nowrap; }
+.curriculo-item .curriculo-local { margin: 2px 0 3px; color: #635f69; font-size: 12px; }
+.curriculo-folha footer { display: flex; flex-wrap: wrap; gap: 7px 16px; margin-top: 26px; padding-top: 12px; border-top: 1px solid #ddd4eb; font-size: 11px; }
+@media (max-width: 650px) { .curriculo-folha { padding: 32px 24px; } .curriculo-cabecalho { flex-direction: column; } .curriculo-cabecalho address { text-align: left; } .curriculo-item-topo { align-items: flex-start; flex-direction: column; gap: 2px; } .curriculo-acoes { gap: 10px; } }
+@media print {
+  @page { size: A4; margin: 14mm 16mm; }
+  html, body { margin: 0 !important; background: #fff !important; }
+  .curriculo-pagina { min-height: 0; padding: 0; background: #fff; color: #20202a; font-size: 10.5pt; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .curriculo-acoes { display: none; }
+  .curriculo-folha { max-width: none; min-height: 0; margin: 0; padding: 0; box-shadow: none; }
+  .curriculo-folha section { margin-top: 17px; }
+}

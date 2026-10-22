@@ -1,17 +1,57 @@
 <!doctype html>
 <html lang="pt-BR">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#f1ece6"><meta name="description" content="Espaço Dellas — moda, estilo e essência em Manaus."><link rel="icon" href="assets/logo-dellas-circular.svg" type="image/svg+xml"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Italiana&display=swap" rel="stylesheet"><link rel="preload" as="image" href="assets/dellas-cover-mobile-v4.jpg" media="(max-width: 640px)"><link rel="stylesheet" href="css/style.css?v=20261021-31"><title>Espaço Dellas — links</title></head>
-<body>
-<div class="ticker" aria-label="Moda feminina em Manaus"><div>ESPAÇO DELLAS <i>✳︎</i> SEU ESTILO, DO SEU JEITO <i>✳︎</i> MANAUS · AM <i>✳︎</i> ESPAÇO DELLAS <i>✳︎</i> SEU ESTILO, DO SEU JEITO <i>✳︎</i> MANAUS · AM</div></div>
-<div class="ambient ambient-one" aria-hidden="true"></div><div class="ambient ambient-two" aria-hidden="true"></div>
-<main class="page-shell">
-  <div class="top-actions"><span class="welcome-pill"><i>✦</i> Seja bem-vinda <b>♡</b></span><button id="shareBtn" class="share-button" type="button"><span aria-hidden="true">⌯</span> Compartilhar</button></div>
-  <section class="profile"><div class="logo-wrap"><img id="logo" src="assets/logo-dellas-circular.svg" alt="Espaço Dellas"></div><p class="profile-kicker">MODA FEMININA · MANAUS</p><h1 id="brandName">Espaço Dellas</h1><p id="brandBio">Beleza, autoestima e estilo para ser você.</p><div class="ornament" aria-label="Identidade Espaço Dellas"><span></span><i>DELLAS</i><span></span></div></section>
-  <nav id="links" class="links" aria-label="Links da Espaço Dellas"><a class="link-card catalog-link" href="catalogo.html"><span class="link-icon" aria-hidden="true">♧</span><span class="link-copy"><b>Ver nosso catálogo</b><small>Veja as peças disponíveis</small></span></a></nav>
-  <section class="location-card"><div class="location-copy"><span class="eyebrow">VISITE NOSSA LOJA</span><h2>Esperamos por você</h2><div class="address-box"><span aria-hidden="true">⌖</span><p id="address">Mini Shopping Mindu Center<br>Avenida Tancredo Neves, 6<br>Parque 10 de Novembro<br>Manaus — AM</p></div><a id="mapLink" class="map-button" href="https://www.google.com/maps/search/?api=1&query=Mini%20Shopping%20Mindu%20Center%2C%20Manaus%2C%20AM" target="_blank" rel="noopener">⌖ <span>Abrir no mapa</span></a></div><div class="map-wrap"><iframe id="mapFrame" title="Mapa da Espaço Dellas em Manaus" loading="lazy" referrerpolicy="no-referrer-when-downgrade" data-src="https://maps.google.com/maps?q=Mini%20Shopping%20Mindu%20Center%2C%20Manaus%2C%20AM&z=16&hl=pt-BR&output=embed"></iframe></div></section>
-  <footer class="site-footer"><div class="footer-main"><p class="footer-signoff">Vista-se de você.<br><em>Todos os dias.</em></p><a class="footer-contact whatsapp-link" href="https://wa.me/5592993258071" target="_blank" rel="noopener">Fale com a gente</a></div><div class="footer-bottom"><small>© <span id="year"></span> ESPAÇO DELLAS · MANAUS, AM</small><small>Desenvolvido por <b>Amaury B.</b></small></div></footer>
-</main><script src="js/app.js?v=20261021-34" defer></script></body></html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Amaury.dev | Front-end Developer &amp; QA Engineer</title>
+    <meta name="description" content="Portfólio de Amaury.dev: desenvolvimento front-end com React e TypeScript, automação de testes com Cypress e foco em qualidade e performance." />
+    <meta name="theme-color" content="#07060d" />
+    <meta name="color-scheme" content="dark" />
+    <style>
+      html, body { min-height: 100%; margin: 0; background: #07060d; }
+      .inicio-carregando { min-height: 100vh; min-height: 100svh; display: grid; place-items: center; padding: 24px; color: #ecebf5; font: 600 1rem/1.5 system-ui, sans-serif; background: radial-gradient(65% 58% at 50% 46%, #211238 0%, #07060d 76%); }
+      #tela-carregamento-inicial { position: fixed; inset: 0; z-index: 9999; opacity: 1; transition: opacity .22s ease; }
+      #tela-carregamento-inicial.pronta { opacity: 0; pointer-events: none; }
+      .inicio-carregando-conteudo { display: grid; justify-items: center; gap: 28px; text-align: center; transform: translateY(-2vh); }
+      .inicio-carregando-logo { display: block; width: clamp(132px, 24vw, 190px); height: clamp(132px, 24vw, 190px); object-fit: contain; animation: logo-pulso-coracao 1.45s ease-in-out infinite; filter: drop-shadow(0 0 18px #a855f788); }
+      .inicio-carregando-status { display: inline-block; min-height: 1.5em; color: #e5d4ff; font: 600 clamp(1rem, 3vw, 1.25rem)/1.4 "Orbitron", "Share Tech Mono", ui-monospace, monospace; letter-spacing: .2em; text-transform: uppercase; animation: carregando-neon 1.15s ease-in-out infinite; }
+      @keyframes logo-pulso-coracao { 0%, 100% { transform: scale(1); opacity: .88; filter: drop-shadow(0 0 14px #a855f777); } 14% { transform: scale(1.1); opacity: 1; filter: drop-shadow(0 0 28px #c084fcdd); } 28% { transform: scale(1); } 42% { transform: scale(1.07); filter: drop-shadow(0 0 24px #c084fccc); } 65% { transform: scale(1); opacity: .92; } }
+      @keyframes carregando-neon { 0%, 100% { opacity: .58; text-shadow: 0 0 7px #a855f7aa, 0 0 18px #a855f755; } 50% { opacity: 1; text-shadow: 0 0 12px #c084fc, 0 0 30px #a855f7dd; } }
+      @media (prefers-reduced-motion: reduce) { .inicio-carregando-logo, .inicio-carregando-status { animation: none; opacity: 1; transform: none; } }
+    </style>
 
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:title" content="Amaury.dev | Front-end Developer &amp; QA Engineer" />
+    <meta property="og:description" content="Desenvolvimento front-end com React e TypeScript, automação de testes com Cypress e foco em qualidade e performance." />
+    <meta property="og:image" content="/og-image.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
 
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="preload" as="image" href="/logo.webp" fetchpriority="high" />
 
-
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" /></noscript>
+  </head>
+  <body>
+    <div id="root"></div>
+    <div id="tela-carregamento-inicial" class="inicio-carregando" role="status" aria-label="Carregando portfólio">
+      <div class="inicio-carregando-conteudo">
+        <img class="inicio-carregando-logo" src="/logo.webp" width="190" height="190" alt="Logo de Amaury.dev" />
+        <span class="inicio-carregando-status" aria-label="Carregando">Carregando</span>
+      </div>
+    </div>
+    <noscript>Este portfólio precisa de JavaScript para funcionar. Ative o JavaScript no navegador e recarregue a página.</noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

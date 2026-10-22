@@ -1,0 +1,157 @@
+/* ---------- sobre ---------- */
+
+.sobre-grade {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.8fr);
+  align-items: start;
+  gap: clamp(24px, 5vw, 64px);
+}
+
+.sobre-sozinho {
+  grid-template-columns: minmax(0, 760px);
+}
+
+.sobre-texto p {
+  color: var(--texto-suave);
+  font-size: clamp(1.02rem, 1.8vw, 1.15rem);
+  line-height: 1.8;
+}
+
+.sobre-texto p:first-child {
+  color: var(--texto);
+}
+
+.sobre-cartao {
+  padding: 26px;
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  background: linear-gradient(180deg, var(--superficie-forte), var(--superficie));
+}
+
+.sobre-cartao ul {
+  display: grid;
+  gap: 18px;
+  list-style: none;
+}
+
+.sobre-cartao li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--texto-suave);
+  font-size: 0.97rem;
+  overflow-wrap: anywhere;
+}
+
+.sobre-cartao li > svg {
+  flex: none;
+  color: var(--cor-primaria);
+}
+
+.sobre-cartao a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* ---------- habilidades ---------- */
+
+.habilidades-grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: clamp(16px, 2.4vw, 24px);
+}
+
+.habilidades-grupo {
+  height: 100%;
+  padding: 28px;
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  background: linear-gradient(180deg, var(--superficie-forte), var(--superficie));
+}
+
+.habilidades-grupo h3 {
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+}
+
+.habilidades-grupo ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style: none;
+}
+
+/* ---------- formação / experiência ---------- */
+
+
+.linha-tempo {
+  position: relative;
+  list-style: none;
+  padding-left: 30px;
+}
+
+.linha-tempo::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  left: 6px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--cor-primaria), transparent);
+}
+
+.linha-tempo li {
+  position: relative;
+  padding-bottom: 28px;
+}
+
+.linha-tempo li::before {
+  content: "";
+  position: absolute;
+  top: 28px;
+  left: -30px;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--cor-primaria);
+  border-radius: 50%;
+  background: var(--fundo);
+  box-shadow: 0 0 14px rgba(var(--cor-primaria-rgb), 0.8);
+}
+
+.linha-tempo-item {
+  padding: 22px 26px;
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  background: var(--superficie);
+}
+
+.linha-tempo-periodo {
+  display: inline-block;
+  margin-bottom: 8px;
+  color: var(--cor-primaria);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.linha-tempo-item h3 {
+  font-size: 1.25rem;
+}
+
+.linha-tempo-local {
+  margin: 4px 0 10px;
+  color: var(--texto);
+  font-weight: 500;
+}
+
+.linha-tempo-item p:last-child {
+  margin-bottom: 0;
+  color: var(--texto-suave);
+}
+
+@media (max-width: 860px) {
+  .sobre-grade {
+    grid-template-columns: 1fr;
+  }
+}
